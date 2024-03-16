@@ -1,0 +1,44 @@
+<div class="navbar-area" id="stickymenu">
+    <!-- Menu for Mobile Device -->
+    <div class="mobile-nav">
+        <a href="{{ route('home') }}" class="logo">
+            <img src="{{ asset('uploads/logo.png') }}" alt="" />
+        </a>
+    </div>
+    
+    <!-- Menu for Desktop Device -->
+    <div class="main-nav">
+        <div class="container">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    <img src="{{  asset('uploads/logo.png') }}" alt="" />
+                </a>
+                <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
+                    <ul class="navbar nav ml-auto">
+                        <li class="nav-item {{ Request::is('/') ? active : '' }}">
+                            <a href="{{ route('home') }}" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Find Jobs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Companies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">FAQ</a>
+                        </li>
+                        <li class="nav-item {{ Request::is('/blog') ? active : '' }}">
+                            <a href="{{ route('blog') }}" class="nav-link">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

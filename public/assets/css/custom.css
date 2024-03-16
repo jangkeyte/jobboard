@@ -1,0 +1,22 @@
+.custom-tab .nav-pills .nav-link {
+    background: #d7e3f9;
+    margin-bottom: 5px;
+}
+.custom-tab .nav-pills .nav-link.active {
+    color: #fff!important;
+    background: #6777ef!important;
+}
+
+/* Pagination */
+ul.pagination .active>.page-link, ul.pagination .page-link.active {
+    background-color: #46bc29;
+    border-color: #46bc29;
+}
+
+ul.pagination .page-link {
+    color: #46bc29;
+}
+
+ul.pagination .active>.page-link {
+    color: #fff;
+}

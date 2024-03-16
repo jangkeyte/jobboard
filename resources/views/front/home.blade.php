@@ -1,0 +1,241 @@
+@extends('front.layout.app')
+
+@section('main_content')
+
+@isset($home_page_data)
+
+<div class="slider" style="background-image: url({{ asset('uploads/' . ($home_page_data->background ?? 'background_default.jpg')) }})">
+    <div class="bg"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="item">
+                    <div class="text">
+                        <h2>{{ $home_page_data->heading }}</h2>
+                        <p>
+                            {{ $home_page_data->text }}
+                        </p>
+                    </div>
+                    <div class="search-section">
+                        <form action="#" mothod="post">
+                            @csrf
+                            <div class="inner">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <input type="text" name="job_title" class="form-control" placeholder="{{ $home_page_data->job_title }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <select name="job_location" class="form-select select2">
+                                                <option value="">{{ $home_page_data->job_location }}</option>
+                                                <option value="">TP.Hồ Chí Minh</option>
+                                                <option value="">Hà Nội</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <select name="job_category" class="form-select select2">
+                                                <option value="">{{ $home_page_data->job_category }}</option>
+                                                @foreach ($job_categories as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> {{ $home_page_data->search }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if($home_page_data->job_category_status == 'Show')
+<div class="job-category">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h2>{{ $home_page_data->job_category_heading }}</h2>
+                    <p>{{ $home_page_data->job_category_subheading }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach($job_categories as $item)
+            <div class="col-md-4">
+                <div class="item">
+                    <div class="icon">
+                        <i class="{{ $item->icon }}"></i>
+                    </div>
+                    <h3>{{ $item->name }}</h3>
+                    <p>({{ $item->id }} Open Positions)</p>
+                    <a href=""></a>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ route('job_categories') }}" class="btn btn-primary">See All Categories</a>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+@if($home_page_data->why_choose_status == 'Show')
+<div class="why-choose" style="background-image: url({{ asset('uploads/' . ($home_page_data->why_choose_background ?? 'background_default.jpg')) }})">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h2>{{ $home_page_data->why_choose_heading }}</h2>
+                    <p>{{ $home_page_data->why_choose_subheading }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach($why_choose_items as $item)
+            <div class="col-md-4">
+                <div class="inner">
+                    <div class="icon">
+                        <i class="{{ $item->icon }}"></i>
+                    </div>
+                    <div class="text">
+                        <h2>{{ $item->heading }}</h2>
+                        <p>{{ nl2br($item->text) }}</p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
+@if($home_page_data->featured_jobs_status == 'Show')
+<div class="job">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h2>{{ $home_page_data->featured_jobs_heading }}</h2>
+                    <p>{{ $home_page_data->featured_jobs_subheading }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @for($i=1; $i<=6; $i++)
+            <div class="col-lg-6 col-md-12">
+                <div class="item d-flex justify-content-start">
+                    <div class="logo">
+                        <img src="{{ asset('uploads/logo1.png') }}" alt="">
+                    </div>
+                    <div class="text">
+                        <h3>
+                            <a href="">Software Engineer, Google</a>
+                        </h3>
+                        <div class="detail-1 d-flex justify-content-start">
+                            <div class="category">Web Development</div>
+                            <div class="location">United States</div>
+                        </div>
+                        <div class="detail-2 d-flex justify-content-start">
+                            <div class="date">3 days ago</div>
+                            <div class="budget">$300-$600</div>
+                            <div class="expired">Expired</div>
+                        </div>
+                        <div class="special d-flex justify-content-start">
+                            <div class="featured">Featured</div>
+                            <div class="type">Full Time</div>
+                            <div class="urgent">Urgent</div>
+                        </div>
+                        <div class="bookmark">
+                            <a href="">
+                                <i class="fas fa-bookmark active"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endfor
+        </div>
+    </div>
+</div>
+@endif
+
+@if($home_page_data->testimonial_status == 'Show')
+<div class="testimonial" style="background-image: url({{ asset('uploads/banner11.jpg') }})">
+    <div class="bg"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="main-header">Our Happy Clients</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="testimonial-carousel owl-carousel">
+                    @foreach($testimonials as $item)
+                    <div class="item">
+                        <div class="photo">
+                            <img src="{{ asset('uploads/' . $item->photo) }}" alt="">
+                        </div>
+                        <div class="text">
+                            <h4>{{ $item->name }}</h4>
+                            <p>{{ $item->designation }}</p>
+                        </div>
+                        <div class="description">{{ nl2br($item->comment) }}</div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+@if($home_page_data->blog_status == 'Show')
+<div class="blog">
+    <div class="container">
+        <div class="row">
+            @foreach($posts as $item)
+            <div class="col-lg-4 col-md-6">
+                <div class="item">
+                    <div class="photo">
+                        <img src="{{ asset('uploads/' . $item->photo) }}" alt="{{ $item->title }}">
+                    </div>
+                    <div class="text">
+                        <h2>
+                            <a href="{{-- route('post', $item->slug) --}}">
+                                {{ $item->title }}
+                            </a>
+                        </h2>
+                        <div class="short-des">
+                            <p>{{ $item->short_description }}</p>
+                        </div>
+                        <div class="button">
+                            <a href="post.html" class="btn btn-primary">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
+@endisset
+
+@endsection
