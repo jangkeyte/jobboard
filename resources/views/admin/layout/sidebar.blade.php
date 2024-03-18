@@ -14,18 +14,37 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="nav-item dropdown {{ Request::is('admin/home-page') ? 'active' : '' }}">
+        <li class="nav-item dropdown {{ Request::is('admin/home-page') || Request::is('admin/faq-page') || Request::is('admin/blog-page') || Request::is('admin/term-page') || Request::is('admin/privacy-page') || Request::is('admin/contact-page') || Request::is('admin/job-category-page') || Request::is('admin/pricing-page') || Request::is('admin/other-page') ? 'active' : '' }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Page Settings</span></a>
             <ul class="dropdown-menu">
                 <li class="{{ Request::is('admin/home-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_home_page') }}"><i class="fas fa-angle-right"></i> Home</a></li>
-                <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i> Terms</a></li>
+                <li class="{{ Request::is('admin/faq-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_faq_page') }}"><i class="fas fa-angle-right"></i> FAQ</a></li>
+                <li class="{{ Request::is('admin/blog-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_blog_page') }}"><i class="fas fa-angle-right"></i> Blog</a></li>
+                <li class="{{ Request::is('admin/term-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_term_page') }}"><i class="fas fa-angle-right"></i> Terms of Use</a></li>
+                <li class="{{ Request::is('admin/privacy-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_privacy_page') }}"><i class="fas fa-angle-right"></i> Privacy Policy</a></li>
+                <li class="{{ Request::is('admin/contact-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_contact_page') }}"><i class="fas fa-angle-right"></i> Contact</a></li>
+                <li class="{{ Request::is('admin/job-category-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_job_category_page') }}"><i class="fas fa-angle-right"></i> Job Category</a></li>
+                <li class="{{ Request::is('admin/pricing-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_pricing_page') }}"><i class="fas fa-angle-right"></i> Pricing</a></li>
+                <li class="{{ Request::is('admin/other-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_other_page') }}"><i class="fas fa-angle-right"></i> Other</a></li>
             </ul>
         </li>
-        <li class="nav-item dropdown {{ Request::is('admin/job-category/*') ? 'active' : '' }}">
+        <li class="nav-item dropdown {{ Route::is('admin/job-category/*') || Route::is('admin/job-location/*') || Route::is('admin/job-type/*') || Route::is('admin/job-experience/*') || Route::is('admin/job-gender/*') || Route::is('admin/job-salary-range/*') ? 'active' : '' }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Job Section</span></a>
             <ul class="dropdown-menu">
-                <li class="{{ Request::is('admin/job-category/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_job_category') }}"><i class="fas fa-angle-right"></i> Job Category</a></li>
-                <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i> Job Location</a></li>
+                <li class="{{ Route::is('admin/job-category/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_job_category') }}"><i class="fas fa-angle-right"></i> Job Category</a></li>
+                <li class="{{ Route::is('admin/job-location/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_job_location') }}"><i class="fas fa-angle-right"></i> Job Location</a></li>
+                <li class="{{ Route::is('admin/job-type/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_job_type') }}"><i class="fas fa-angle-right"></i> Job Type</a></li>
+                <li class="{{ Route::is('admin/job-experience/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_job_experience') }}"><i class="fas fa-angle-right"></i> Job Experience</a></li>
+                <li class="{{ Route::is('admin/job-gender/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_job_gender') }}"><i class="fas fa-angle-right"></i> Job Gender</a></li>
+                <li class="{{ Route::is('admin/job-salary-range/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_job_salary_range') }}"><i class="fas fa-angle-right"></i> Job Salary Range</a></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown {{ Route::is('admin/company-location/*') || Route::is('admin/company-industry/*') || Route::is('admin/company-size/*') ? 'active' : '' }}">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Company Section</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{ Route::is('admin/company-location/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_company_location') }}"><i class="fas fa-angle-right"></i> Company Location</a></li>
+                <li class="{{ Route::is('admin/company-industry/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_company_industry') }}"><i class="fas fa-angle-right"></i> Company Industry</a></li>
+                <li class="{{ Route::is('admin/company-size/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_company_size') }}"><i class="fas fa-angle-right"></i> Company Size</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown {{ Request::is('admin/why-choose/*') ? 'active' : '' }}">
@@ -41,6 +60,16 @@
         <li class="nav-item dropdown {{ Request::is('admin/post/*') ? 'active' : '' }}">
             <a href="{{ route('admin_post') }}" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Posts">
                 <i class="fas fa-hand-point-right"></i> <span>Posts</span>
+            </a>
+        </li>
+        <li class="nav-item dropdown {{ Request::is('admin/faq/*') ? 'active' : '' }}">
+            <a href="{{ route('admin_faq') }}" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Faqs">
+                <i class="fas fa-hand-point-right"></i> <span>Faqs</span>
+            </a>
+        </li>
+        <li class="nav-item dropdown {{ Request::is('admin/package/*') ? 'active' : '' }}">
+            <a href="{{ route('admin_package') }}" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Packages">
+                <i class="fas fa-hand-point-right"></i> <span>Packages</span>
             </a>
         </li>
     </ul>

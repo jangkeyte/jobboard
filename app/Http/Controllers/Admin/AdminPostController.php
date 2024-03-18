@@ -23,11 +23,10 @@ class AdminPostController extends Controller
     public function store(Request $request)
     {
         $request->validate([            
-            'title' => 'required',
+            'heading' => 'required',
             'slug' => 'required|alpha_dash|unique:posts',
             'short_description' => 'required',
             'description' => 'required',
-            'total_view' => 'required',
             'photo' => 'required|image|mimes:jpg,jpeg,png,gif',
         ]);
 
@@ -38,11 +37,13 @@ class AdminPostController extends Controller
         $request->file('photo')->move(public_path('uploads/'), $final_name);
 
         $obj->photo = $final_name;
-        $obj->title = $request->title;
+        $obj->heading = $request->heading;
         $obj->slug = $request->slug;
         $obj->short_description = $request->short_description;
         $obj->description = $request->description;
-        $obj->total_view = $request->total_view;
+        $obj->total_view = 0;
+        $obj->title = $request->title;
+        $obj->meta_description = $request->meta_description;
         $obj->save();
 
         return redirect()->route('admin_post')->with('success', 'Data is save successfully.');
@@ -59,11 +60,10 @@ class AdminPostController extends Controller
         $obj = Post::where('id', $request->id)->first();
 
         $request->validate([               
-            'title' => 'required',
-            'slug' => ['required', 'alpha_dash', Rule::unique('posts')->ignore($id)],
+            'heading' => 'required',
+            'slug' => ['required', 'alpha_dash', Rule::unique('posts')->ignore($request->id)],
             'short_description' => 'required',
             'description' => 'required',
-            'total_view' => 'required',
         ]);
 
         if($request->hasFile('photo')) {
@@ -81,11 +81,12 @@ class AdminPostController extends Controller
             $obj->photo = $final_name;
         }
 
-        $obj->title = $request->title;
+        $obj->heading = $request->heading;
         $obj->slug = $request->slug;
         $obj->short_description = $request->short_description;
         $obj->description = $request->description;
-        $obj->total_view = $request->total_view;
+        $obj->title = $request->title;
+        $obj->meta_description = $request->meta_description;
         $obj->update();
 
         return redirect()->route('admin_post')->with('success', 'Data is updated successfully.');

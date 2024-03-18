@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
 
-    <link rel="icon" type="image/png" href="uploads/favicon.png">
-    
-    <title>Admin Panel</title>
+    <meta name="description" content="@yield('seo_meta_description')">
+    <title>@yield('seo_title')</title>
 
+    <link rel="icon" type="image/png" href="uploads/favicon.png">    
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 
-    @include('admin.layout.styles')
+    @include('front.layout.styles')
 
-    @include('admin.layout.scripts')
+    @include('front.layout.scripts')
 
 </head>
 <body>

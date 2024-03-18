@@ -18,8 +18,8 @@
                         @csrf
                         <input type="hidden" name="id" value="{{ $post_single->id }}">
                         <div class="form-group mb-3">
-                            <label>Title *</label>
-                            <input type="text" class="form-control" name="title" value="{{ $post_single->title }}">
+                            <label>Heading *</label>
+                            <input type="text" class="form-control" name="heading" value="{{ $post_single->heading }}">
                         </div>
                         <div class="form-group mb-3">
                             <label>Slug *</label>
@@ -34,16 +34,21 @@
                             <textarea name="description" class="form-control editor" cols="30" rows="15">{{ $post_single->description }}</textarea>
                         </div>
                         <div class="form-group mb-3">
-                            <label>Total View *</label>
-                            <input type="text" class="form-control" name="total_view" value="{{ $post_single->total_view }}">
-                        </div>
-                        <div class="form-group mb-3">
                             <label>Existing Photo</label>
                             <div><img src="{{ asset('uploads/' . $post_single->photo) }}" alt="" class="" style="width:150px"></div>
                         </div>
                         <div class="form-group mb-3">
                             <label>Change Photo *</label>
                             <input type="file" class="form-control" name="photo">
+                        </div>
+                        <h4 class="seo_section">SEO Section</h5>
+                        <div class="form-group mb-3">
+                            <label>Title</label>
+                            <input type="text" class="form-control" name="title" value="{{ $post_single->title }}">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Meta Description *</label>
+                            <textarea name="meta_description" class="form-control" cols="30" rows="15">{{ $post_single->meta_description }}</textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Update</button>

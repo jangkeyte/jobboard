@@ -17,8 +17,8 @@
                     <form method="POST" action="{{ route('admin_post_store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group mb-3">
-                            <label>Title *</label>
-                            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                            <label>Heading *</label>
+                            <input type="text" class="form-control" name="heading" value="{{ old('heading') }}">
                         </div>
                         <div class="form-group mb-3">
                             <label>Slug *</label>
@@ -33,12 +33,17 @@
                             <textarea name="description" class="form-control editor" cols="30" rows="10">{{ old('description') }}</textarea>
                         </div>
                         <div class="form-group mb-3">
-                            <label>Total View *</label>
-                            <input type="text" class="form-control" name="total_view" value="{{ old('total_view') }}">
-                        </div>
-                        <div class="form-group mb-3">
                             <label>Photo *</label>
                             <input type="file" class="form-control" name="photo">
+                        </div>
+                        <h4 class="seo_section">SEO Section</h5>
+                        <div class="form-group mb-3">
+                            <label>Title</label>
+                            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Meta Description</label>
+                            <textarea name="meta_description" class="form-control" cols="30" rows="10">{{ old('description') }}</textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>

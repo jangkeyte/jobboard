@@ -19,10 +19,7 @@
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Title</th>
-                                    <th>Slug</th>
-                                    <th>Short_description</th>
-                                    <th>Total View</th>
+                                    <th>Heading</th>
                                     <th>Photo</th>
                                     <th>Action</th>
                                 </tr>
@@ -31,10 +28,7 @@
                                 @foreach($posts as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->title }}</td>
-                                    <td>{{ $item->slug }}</td>
-                                    <td>{{ $item->short_description }}</td>
-                                    <td>{{ $item->total_view }}</td>
+                                    <td>{{ $item->heading }}</td>
                                     <td><img src="{{ asset('uploads/' . $item->photo) }}" alt="" style="width:150px"></td>
                                     <td class="py-1">
                                         <a href="{{ route('admin_post_delete', $item->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');">Delete</a>

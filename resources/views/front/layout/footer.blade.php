@@ -94,7 +94,7 @@
                 <div class="right">
                     <ul>
                         <li><a href="{{ route('terms') }}">Terms of Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -105,3 +105,37 @@
 <div class="scroll-top">
     <i class="fas fa-angle-up"></i>
 </div>
+
+@include('front.layout.scripts_footer')
+
+@if( $errors->any() )
+    @foreach( $errors->all() as $error )    
+        <script>
+            iziToast.error({
+                title: '',
+                position: 'topCenter',
+                message: '{{ $error }}',
+            });
+        </script>
+    @endforeach
+@endif
+
+@if( session()->get('error') )
+    <script>        
+        iziToast.error({
+            title: '',
+            position: 'topRight',
+            message: '{{ session()->get("error") }}',
+        });
+    </script>
+@endif
+
+@if( session()->get('success') )
+    <script>        
+        iziToast.success({
+            title: '',
+            position: 'topRight',
+            message: '{{ session()->get("success") }}',
+        });
+    </script>
+@endif

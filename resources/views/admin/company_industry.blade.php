@@ -1,10 +1,10 @@
 @extends('admin.layout.app')
 
-@section('heading', 'Testimonials')
+@section('heading', 'Company Industries')
 
 @section('button')
 <div>
-    <a href="{{ route('admin_testimonial_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</a>
+    <a href="{{ route('admin_company_industry_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</a>
 </div>
 @endsection
 
@@ -19,22 +19,18 @@
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Photo</th>
                                     <th>Name</th>
-                                    <th>Designation</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($testimonials as $item)
+                                @foreach($company_industries as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td><img src="{{ asset('uploads/' . $item->photo) }}" alt="" style="width:150px"></td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->designation }}</td>
                                     <td class="py-1">
-                                        <a href="{{ route('admin_testimonial_delete', $item->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');">Delete</a>
-                                        <a href="{{ route('admin_testimonial_edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="{{ route('admin_company_industry_edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="{{ route('admin_company_industry_delete', $item->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

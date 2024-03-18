@@ -1,5 +1,8 @@
 @extends('front.layout.app')
 
+@section('seo_title'){{ $home_page_data->title }}@endsection
+@section('seo_meta_description'){{ $home_page_data->meta_description }}@endsection
+
 @section('main_content')
 
 @isset($home_page_data)
@@ -30,8 +33,9 @@
                                         <div class="form-group">
                                             <select name="job_location" class="form-select select2">
                                                 <option value="">{{ $home_page_data->job_location }}</option>
-                                                <option value="">TP.Hồ Chí Minh</option>
-                                                <option value="">Hà Nội</option>
+                                                @foreach ($all_job_locations as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -39,7 +43,7 @@
                                         <div class="form-group">
                                             <select name="job_category" class="form-select select2">
                                                 <option value="">{{ $home_page_data->job_category }}</option>
-                                                @foreach ($job_categories as $item)
+                                                @foreach ($all_job_categories as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
                                                 @endforeach
                                             </select>
@@ -207,6 +211,14 @@
 <div class="blog">
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h2>{{ $home_page_data->blog_heading }}</h2>
+                    <p>{{ $home_page_data->blog_subheading }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             @foreach($posts as $item)
             <div class="col-lg-4 col-md-6">
                 <div class="item">
@@ -215,7 +227,7 @@
                     </div>
                     <div class="text">
                         <h2>
-                            <a href="{{-- route('post', $item->slug) --}}">
+                            <a href="{{ route('post', $item->slug) }}">
                                 {{ $item->title }}
                             </a>
                         </h2>
@@ -223,7 +235,7 @@
                             <p>{{ $item->short_description }}</p>
                         </div>
                         <div class="button">
-                            <a href="post.html" class="btn btn-primary">
+                            <a href="{{ route('post', $item->slug) }}" class="btn btn-primary">
                                 Read More
                             </a>
                         </div>

@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 
-@section('heading', 'Edit Why Choose Items')
+@section('heading', 'Edit Testimonial Items')
 
 @section('button')
 <div>
