@@ -1,7 +1,7 @@
 @extends('front.layout.app')
 
-@section('seo_title'){{ $other_page_item->signup_page_title }}@endsection
-@section('seo_meta_description'){{ $other_page_item->signup_page_meta_description }}@endsection
+@section('seo_title'){{ $other_page_item->signup_page_title ?? 'Title' }}@endsection
+@section('seo_meta_description'){{ $other_page_item->signup_page_meta_description ?? 'Meta Description' }}@endsection
 
 @section('main_content')
 
@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $other_page_item->signup_page_heading }}</h2>
+                <h2>{{ $other_page_item->signup_page_heading ?? 'Page Heading' }}</h2>
             </div>
         </div>
     </div>

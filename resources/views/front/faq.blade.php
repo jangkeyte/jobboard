@@ -1,7 +1,7 @@
 @extends('front.layout.app')
 
-@section('seo_title'){{ $faq_page_item->title }}@endsection
-@section('seo_meta_description'){{ $faq_page_item->meta_description }}@endsection
+@section('seo_title'){{ $faq_page_item->title ?? 'Title' }}@endsection
+@section('seo_meta_description'){{ $faq_page_item->meta_description ?? 'Meta Description' }}@endsection
 
 @section('main_content')
 
@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $faq_page_item->heading }}</h2>
+                <h2>{{ $faq_page_item->heading ?? 'Heading' }}</h2>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center">
-                <div class="accordion" id="accordionExample">
+                <div class="accordion w-100" id="accordionExample">
                     @foreach($faqs as $item)
                     <div class="accordion-item">
                         <h2 class="accordion" id="heading{{ $item->id }}">

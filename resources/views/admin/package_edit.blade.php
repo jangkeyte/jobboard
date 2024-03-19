@@ -35,7 +35,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="">Number of Days *</label>
-                                    <input type="text" class="form-control" name="package_day" value="{{ $package_single->package_day }}">
+                                    <input type="text" class="form-control" name="package_days" value="{{ $package_single->package_days }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
