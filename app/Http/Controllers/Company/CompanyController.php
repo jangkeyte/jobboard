@@ -10,8 +10,11 @@ use App\Models\Company;
 use App\Models\CompanyLocation;
 use App\Models\CompanyIndustry;
 use App\Models\CompanySize;
+use App\Models\CompanyPhoto;
+use App\Models\CompanyVideo;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CompanyController extends Controller
 {
@@ -37,12 +40,11 @@ class CompanyController extends Controller
     public function edit_profile_update(Request $request)
     {
         $obj = Company::where('id', Auth::guard('company')->user()->id)->first();
-        $id = $obj->id;
         $request->validate([
             'company_name' => 'required',
             'person_name' => 'required',
-            'username' => ['required', 'alpha_dash', Rule::unique('companies')->ignore($id)],
-            'email' => ['required', 'email', Rule::unique('companies')->ignore($id)],
+            'username' => ['required', 'alpha_dash', Rule::unique('companies')->ignore(Auth::guard('company')->user()->id)],
+            'email' => ['required', 'email', Rule::unique('companies')->ignore(Auth::guard('company')->user()->id)],
 
         ]);
 
@@ -52,7 +54,9 @@ class CompanyController extends Controller
             ]);
 
             if(Auth::guard('company')->user()->logo != '') {
-                unlink(public_path('uploads/' . $obj->logo));
+                if(file_exists(public_path('uploads/' . $obj->logo))) {
+                    unlink(public_path('uploads/' . $obj->logo));
+                }
             }           
 
             $ext = $request->file('logo')->extension();
@@ -92,9 +96,129 @@ class CompanyController extends Controller
         return redirect()->back()->with('success', 'Profile is updated successfully.');
     }
 
+    public function edit_password()
+    {
+        return view('company.edit_password');
+    }
+    public function edit_password_update(Request $request)
+    {   
+        $obj = Company::where('email', Auth::guard('company')->user()->email)->first();            
+        $request->validate([
+            'password' => 'required',
+            'retype_password' => 'required|same:password'
+        ]);
+        $obj->password = Hash::make($request->password);
+        $obj->update();
+        return redirect()->route('company_logout')->with('success', 'Password has changed successfully. Please relogin with your new password.');
+    }
+
+    public function photos()
+    {
+        // Check if a person buy a package
+        $order_data = Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
+
+        if(!$order_data) {            
+            return redirect()->back()->with('error', 'You have to buy a package first to access this page.');
+        }
+
+        // Check if a person has access to this page under the current package
+        $package_data = Package::where('id', $order_data->package_id)->first();
+
+        if($package_data->total_allowed_photos == 0) {
+            return redirect()->back()->with('error', 'Your current package does not allow to access the photo section.');
+        }
+
+        $photos = CompanyPhoto::where('company_id', Auth::guard('company')->user()->id)->get();
+        return view('company.photos', compact('photos'));
+    }
+
+    public function photos_submit(Request $request)
+    {
+        $order_data = Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
+        $package_data = Package::where('id', $order_data->package_id)->first();
+        $existing_photo_number = CompanyPhoto::where('company_id', Auth::guard('company')->user()->id)->count();
+
+        if($package_data->total_allowed_photos <= $existing_photo_number) {
+            return redirect()->back()->with('error', 'Maximum number of allowed photo are uploaded. So you have to upgrade your package if you want to add more photos');
+        }
+
+        $obj = new CompanyPhoto();
+        $request->validate([
+            'photo' => 'required|image|mimes:jpg,jpeg,png,gif',
+        ]);
+
+        $ext = $request->file('photo')->extension();
+        $final_name = 'company_photo_' . time() . '.' . $ext;
+        $request->file('photo')->move(public_path('uploads/'), $final_name);
+
+        $obj->photo = $final_name;
+        $obj->company_id = Auth::guard('company')->user()->id;
+        $obj->save();
+        
+        return redirect()->back()->with('success', 'Photo is uploaded successfully.');
+    }
+
+    public function photos_delete($id)
+    {
+        $single_data = CompanyPhoto::where('id', $id)->first();
+        if(file_exists(public_path('uploads/' . $single_data->photo))) {
+            unlink(public_path('uploads/' . $single_data->photo));
+        }
+        CompanyPhoto::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'Photo is deleted successfully.');
+    }
+
+    public function videos()
+    {
+        // Check if a person buy a package
+        $order_data = Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
+
+        if(!$order_data) {            
+            return redirect()->back()->with('error', 'You have to buy a package first to access this page.');
+        }
+
+        // Check if a person has access to this page under the current package
+        $package_data = Package::where('id', $order_data->package_id)->first();
+
+        if($package_data->total_allowed_videos == 0) {
+            return redirect()->back()->with('error', 'Your current package does not allow to access the video section.');
+        }
+
+        $videos = CompanyVideo::where('company_id', Auth::guard('company')->user()->id)->get();
+        return view('company.videos', compact('videos'));
+    }
+
+    public function videos_submit(Request $request)
+    {
+        $order_data = Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
+        $package_data = Package::where('id', $order_data->package_id)->first();
+        $existing_video_number = CompanyVideo::where('company_id', Auth::guard('company')->user()->id)->count();
+
+        if($package_data->total_allowed_videos <= $existing_video_number) {
+            return redirect()->back()->with('error', 'Maximum number of allowed video are uploaded. So you have to upgrade your package if you want to add more videos');
+        }
+
+        $request->validate([
+            'video_id' => 'required',
+        ]);
+
+        $obj = new CompanyVideo();
+        $obj->company_id = Auth::guard('company')->user()->id;
+        $obj->video_id = $request->video_id;
+        $obj->save();
+        
+        return redirect()->back()->with('success', 'Video is uploaded successfully.');
+    }
+
+    public function videos_delete($id)
+    {
+        $single_data = CompanyVideo::where('id', $id)->first();
+        CompanyVideo::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'Video is deleted successfully.');
+    }
+
     public function make_payment()
     {
-
         $packages = Package::get();
         $current_plan = Order::with('rPackage')->where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
 
@@ -144,5 +268,10 @@ class CompanyController extends Controller
     public function paypal_cancel(Request $request)
     {
         return redirect()->route('company_make_payment')->with('error', 'Payment is cancelled!');
+    }
+
+    public function jobs_create()
+    {
+        return view('company.jobs_create');
     }
 }
