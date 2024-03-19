@@ -10,8 +10,8 @@
     <li class="list-group-item {{ Route::is('company_jobs_create') ? 'active' : '' }}">
         <a href="{{ route('company_jobs_create') }}">Create Job</a>
     </li>
-    <li class="list-group-item">
-        <a href="">All Jobs</a>
+    <li class="list-group-item {{ Route::is('company_jobs') ? 'active' : '' }}">
+        <a href="{{ route('company_jobs') }}">All Jobs</a>
     </li>
     <li class="list-group-item {{ Route::is('company_photos') ? 'active' : '' }}">
         <a href="{{ route('company_photos') }}">Photos</a>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->integer('company_id');
             $table->text('title');
             $table->text('description');
             $table->text('responsibility')->nullable();
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->text('education')->nullable();
             $table->text('benefit')->nullable();
             $table->text('deadline');
+            $table->integer('vacancy');
             $table->integer('job_category_id');
             $table->integer('job_location_id');
             $table->integer('job_type_id');
