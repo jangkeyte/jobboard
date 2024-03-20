@@ -61,12 +61,13 @@ CREATE TABLE IF NOT EXISTS `candidates` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table laravel.candidates: ~0 rows (approximately)
 /*!40000 ALTER TABLE `candidates` DISABLE KEYS */;
 REPLACE INTO `candidates` (`id`, `name`, `designation`, `username`, `email`, `password`, `token`, `photo`, `biography`, `phone`, `country`, `address`, `state`, `city`, `zip_code`, `gender`, `marital_status`, `date_of_birth`, `website`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 'Jang Keyte', NULL, 'jangkeyte', 'jangkeyte@gmail.com', '$2y$12$VQ7N1WMC/b3oaAcH1tHULutHr5rGBeohGYYUiWwoYAt5medN62PA6', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-03-17 17:52:52', '2024-03-17 18:03:25');
+	(1, 'Jang Keyte', NULL, 'jangkeyte', 'jangkeyte@gmail.com', '$2y$12$VQ7N1WMC/b3oaAcH1tHULutHr5rGBeohGYYUiWwoYAt5medN62PA6', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-03-17 17:52:52', '2024-03-17 18:03:25'),
+	(2, 'Kha Thiết Giang', 'Thợ chụp hình dạo', 'kangmaru', 'ktgiang@vespatopcom.com', '$2y$12$OtyCItGy2XRl3mOYRiwJYOD6ea1qRpIIG2z6ekcVK6SU4oRgtk9/i', '', 'candidate_photo_1710867701.png', 'Ăn ở không đợi kèo chụp hình', '0973333124', 'Việt Nam', '318 Trần Hưng Đạo, phường Nguyễn Cư Trinh, quận 1, TPHCM', 'Hồ Chỉ Minh', 'Hồ Chí Minh', '700000', 'Female', 'Unmarried', '2013-02-15', 'https://jangkeyte.com', 1, '2024-03-19 16:29:31', '2024-03-19 17:07:05');
 /*!40000 ALTER TABLE `candidates` ENABLE KEYS */;
 
 -- Dumping structure for table laravel.companies
@@ -118,9 +119,9 @@ CREATE TABLE IF NOT EXISTS `company_industries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table laravel.company_industries: ~4 rows (approximately)
+-- Dumping data for table laravel.company_industries: ~5 rows (approximately)
 /*!40000 ALTER TABLE `company_industries` DISABLE KEYS */;
 REPLACE INTO `company_industries` (`id`, `name`, `created_at`, `updated_at`) VALUES
 	(1, 'Det May', '2024-03-18 15:46:02', '2024-03-18 15:46:02'),
@@ -136,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `company_locations` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table laravel.company_locations: ~2 rows (approximately)
 /*!40000 ALTER TABLE `company_locations` DISABLE KEYS */;
@@ -145,6 +146,23 @@ REPLACE INTO `company_locations` (`id`, `name`, `created_at`, `updated_at`) VALU
 	(2, 'Quang Ninh', '2024-03-18 15:38:08', '2024-03-18 15:38:08');
 /*!40000 ALTER TABLE `company_locations` ENABLE KEYS */;
 
+-- Dumping structure for table laravel.company_photos
+CREATE TABLE IF NOT EXISTS `company_photos` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table laravel.company_photos: ~2 rows (approximately)
+/*!40000 ALTER TABLE `company_photos` DISABLE KEYS */;
+REPLACE INTO `company_photos` (`id`, `company_id`, `photo`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'company_photo_1710856364.png', '2024-03-19 13:52:44', '2024-03-19 13:52:44'),
+	(2, 1, 'company_photo_1710856370.jpg', '2024-03-19 13:52:50', '2024-03-19 13:52:50');
+/*!40000 ALTER TABLE `company_photos` ENABLE KEYS */;
+
 -- Dumping structure for table laravel.company_sizes
 CREATE TABLE IF NOT EXISTS `company_sizes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -152,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `company_sizes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table laravel.company_sizes: ~9 rows (approximately)
 /*!40000 ALTER TABLE `company_sizes` DISABLE KEYS */;
@@ -167,6 +185,23 @@ REPLACE INTO `company_sizes` (`id`, `name`, `created_at`, `updated_at`) VALUES
 	(8, '500 - 1000', '2024-03-18 15:52:06', '2024-03-18 15:52:06'),
 	(9, '1000+', '2024-03-18 15:52:10', '2024-03-18 15:52:10');
 /*!40000 ALTER TABLE `company_sizes` ENABLE KEYS */;
+
+-- Dumping structure for table laravel.company_videos
+CREATE TABLE IF NOT EXISTS `company_videos` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) NOT NULL,
+  `video_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table laravel.company_videos: ~2 rows (approximately)
+/*!40000 ALTER TABLE `company_videos` DISABLE KEYS */;
+REPLACE INTO `company_videos` (`id`, `company_id`, `video_id`, `created_at`, `updated_at`) VALUES
+	(3, 1, 'KsdnSwu6tkI', '2024-03-19 13:53:56', '2024-03-19 13:53:56'),
+	(4, 1, 'GwCUbhE0TY0', '2024-03-19 13:54:07', '2024-03-19 13:54:07');
+/*!40000 ALTER TABLE `company_videos` ENABLE KEYS */;
 
 -- Dumping structure for table laravel.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -204,6 +239,39 @@ REPLACE INTO `faqs` (`id`, `question`, `answer`, `created_at`, `updated_at`) VAL
 	(5, 'Pretium fusce id velit ut tortor pretium viverra?', 'Pretium fusce id velit ut tortor pretium viverra. Egestas sed tempus urna et pharetra pharetra massa. Ullamcorper malesuada proin libero nunc. Morbi leo urna molestie at. Tellus molestie nunc non blandit massa enim. Risus feugiat in ante metus dictum at. Nunc vel risus commodo viverra maecenas accumsan lacus vel facilisis. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum. Platea dictumst quisque sagittis purus sit.', '2024-03-17 05:54:52', '2024-03-17 05:54:52');
 /*!40000 ALTER TABLE `faqs` ENABLE KEYS */;
 
+-- Dumping structure for table laravel.jobs
+CREATE TABLE IF NOT EXISTS `jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `company_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `responsibility` text COLLATE utf8mb4_unicode_ci,
+  `skill` text COLLATE utf8mb4_unicode_ci,
+  `education` text COLLATE utf8mb4_unicode_ci,
+  `benefit` text COLLATE utf8mb4_unicode_ci,
+  `deadline` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vacancy` int(11) NOT NULL DEFAULT '0',
+  `job_category_id` int(11) NOT NULL,
+  `job_location_id` int(11) NOT NULL,
+  `job_type_id` int(11) NOT NULL,
+  `job_experience_id` int(11) NOT NULL,
+  `job_gender_id` int(11) NOT NULL,
+  `job_salary_range_id` int(11) NOT NULL,
+  `map_code` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_featured` tinyint(4) NOT NULL,
+  `is_urgent` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table laravel.jobs: ~1 rows (approximately)
+/*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
+REPLACE INTO `jobs` (`id`, `company_id`, `title`, `description`, `responsibility`, `skill`, `education`, `benefit`, `deadline`, `vacancy`, `job_category_id`, `job_location_id`, `job_type_id`, `job_experience_id`, `job_gender_id`, `job_salary_range_id`, `map_code`, `is_featured`, `is_urgent`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'Data Analyst', '*According to Decree No.13/2023/ND-CP on protecting personal data (“PDP”), Home Credit Vietnam would apply "Personal Data Processing Agreement" with all candidates to ensure compliance with the decree.\r\n\r\nBy submitting this application to Home Credit Vietnam Finance Company Limited through Vietnamwork, you agree to allow Home Credit to proceed your provided information in accordance with Personal Data Processing Agreement that you have read, fully understood and agreed to the entire content at link https://career.homecredit.vn/vn/article/id/217.', '- Monitor business trends and analyze performance\r\n- Provide business solving solutions for Top Management\r\n- Design visualization dashboard and analytics for both internal and external\r\n- Be in-charged in projects/analytics for Department in-charge\r\n- Data Management and Technology Development', '- Background of Data Analyst or Equivalent Experience\r\n- Knowledge of SQL and visualization tools\r\n- Good at communication and critical thinking\r\n- Good at English skills\r\n- Solid problem-solving skills, logical thinking\r\n- Personality: willing to learn, responsible', 'Công Nghệ Thông Tin/Viễn Thông > Data Engineer/Data Analyst/AI', NULL, '2024-03-31', 5, 4, 2, 1, 2, 1, 2, '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d367.05739861255154!2d106.68560741121166!3d10.757378318198981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fcab7f4d097%3A0x76bcea8f0bff76a6!2zQ8O0bmcgdHkgQ-G7lSBwaOG6p24gVG9wY29tIFPDoGkgR8Oybg!5e0!3m2!1svi!2s!4v1710859553655!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', 0, 1, '2024-03-19 14:47:06', '2024-03-19 16:13:00'),
+	(2, 1, 'PHP Developer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor elit sed vulputate mi sit amet mauris commodo quis. Lorem mollis aliquam ut porttitor leo a diam sollicitudin. Elementum nibh tellus molestie nunc non blandit massa enim nec. In egestas erat imperdiet sed euismod. Nullam eget felis eget nunc. Pharetra vel turpis nunc eget. Accumsan lacus vel facilisis volutpat est velit. In aliquam sem fringilla ut morbi tincidunt augue interdum velit. Sed risus ultricies tristique nulla aliquet enim tortor. Vitae proin sagittis nisl rhoncus. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam.\r\nViverra mauris in aliquam sem fringilla. Duis at tellus at urna condimentum mattis pellentesque. Condimentum id venenatis a condimentum vitae sapien pellentesque habitant morbi. Neque aliquam vestibulum morbi blandit cursus risus at. Tellus elementum sagittis vitae et leo duis ut diam. Pellentesque dignissim enim sit amet venenatis urna cursus eget nunc. Mattis pellentesque id nibh tortor id aliquet. Mi eget mauris pharetra et ultrices neque. Sit amet mattis vulputate enim. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Porttitor leo a diam sollicitudin tempor id. Integer vitae justo eget magna. Cursus mattis molestie a iaculis at. Nulla at volutpat diam ut venenatis tellus. Laoreet non curabitur gravida arcu. Aliquam purus sit amet luctus venenatis lectus magna fringilla. Leo a diam sollicitudin tempor id eu. Ultrices sagittis orci a scelerisque purus semper eget duis.', '- Rhoncus urna neque viverra justo nec ultrices dui sapien eget. Convallis aenean et tortor at.\r\n- In est ante in nibh mauris. Dui nunc mattis enim ut tellus elementum sagittis vitae. \r\n- Ut eu sem integer vitae justo eget. Euismod elementum nisi quis eleifend quam adipiscing. \r\n- Sit amet porttitor eget dolor morbi. Nec nam aliquam sem et tortor. \r\n- Amet purus gravida quis blandit turpis cursus. Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus.', '- Dolor morbi non arcu risus. Non quam lacus suspendisse faucibus interdum. \r\n- Suscipit tellus mauris a diam maecenas sed. Amet facilisis magna etiam tempor. \r\n- Volutpat consequat mauris nunc congue nisi vitae suscipit tellus. \r\n- Diam donec adipiscing tristique risus nec feugiat in fermentum.', '- Aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. \r\n- At lectus urna duis convallis convallis tellus id interdum. - Interdum posuere lorem ipsum dolor. \r\n- Cursus in hac habitasse platea dictumst quisque sagittis purus sit.', NULL, '2024-03-30', 3, 9, 3, 6, 4, 2, 2, '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d367.05739861255154!2d106.68560741121166!3d10.757378318198981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fcab7f4d097%3A0x76bcea8f0bff76a6!2zQ8O0bmcgdHkgQ-G7lSBwaOG6p24gVG9wY29tIFPDoGkgR8Oybg!5e0!3m2!1svi!2s!4v1710859553655!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', 1, 0, '2024-03-19 15:13:06', '2024-03-19 15:13:06');
+/*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
+
 -- Dumping structure for table laravel.job_categories
 CREATE TABLE IF NOT EXISTS `job_categories` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -235,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `job_experiences` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table laravel.job_experiences: ~7 rows (approximately)
 /*!40000 ALTER TABLE `job_experiences` DISABLE KEYS */;
@@ -258,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `job_genders` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table laravel.job_genders: ~3 rows (approximately)
+-- Dumping data for table laravel.job_genders: ~2 rows (approximately)
 /*!40000 ALTER TABLE `job_genders` DISABLE KEYS */;
 REPLACE INTO `job_genders` (`id`, `name`, `created_at`, `updated_at`) VALUES
 	(1, 'Male', '2024-03-18 15:21:35', '2024-03-18 15:21:35'),
@@ -289,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `job_salary_ranges` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table laravel.job_salary_ranges: ~4 rows (approximately)
 /*!40000 ALTER TABLE `job_salary_ranges` DISABLE KEYS */;
@@ -309,7 +377,7 @@ CREATE TABLE IF NOT EXISTS `job_types` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table laravel.job_types: ~5 rows (approximately)
+-- Dumping data for table laravel.job_types: ~4 rows (approximately)
 /*!40000 ALTER TABLE `job_types` DISABLE KEYS */;
 REPLACE INTO `job_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
 	(1, 'Full Time', '2024-03-18 15:04:14', '2024-03-18 15:05:45'),
@@ -325,9 +393,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table laravel.migrations: ~31 rows (approximately)
+-- Dumping data for table laravel.migrations: ~34 rows (approximately)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
@@ -360,7 +428,10 @@ REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(29, '2024_03_18_152332_create_job_salary_ranges_table', 24),
 	(30, '2024_03_18_153157_create_company_locations_table', 25),
 	(31, '2024_03_18_154301_create_company_industries_table', 26),
-	(32, '2024_03_18_154744_create_company_sizes_table', 27);
+	(32, '2024_03_18_154744_create_company_sizes_table', 27),
+	(33, '2024_03_19_035910_create_company_photos_table', 28),
+	(34, '2024_03_19_042555_create_company_videos_table', 28),
+	(35, '2024_03_19_092940_create_jobs_table', 28);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table laravel.orders
@@ -377,15 +448,16 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table laravel.orders: ~4 rows (approximately)
+-- Dumping data for table laravel.orders: ~5 rows (approximately)
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 REPLACE INTO `orders` (`id`, `company_id`, `package_id`, `order_no`, `paid_amount`, `payment_method`, `start_date`, `expire_date`, `currently_active`, `created_at`, `updated_at`) VALUES
-	(1, 1, 3, '1710771818', '49', 'QR Code', '2024-03-18', '2024-06-16', 0, '2024-03-18 14:23:38', '2024-03-18 14:38:01'),
-	(2, 1, 3, '1710772677', '49', 'QR Code', '2024-03-18', '2024-06-16', 0, '2024-03-18 14:37:57', '2024-03-18 14:38:01'),
-	(3, 1, 2, '1710772680', '29', 'QR Code', '2024-03-18', '2024-04-17', 0, '2024-03-18 14:38:00', '2024-03-18 14:38:01'),
-	(4, 1, 1, '1710772681', '19', 'QR Code', '2024-03-18', '2024-03-25', 1, '2024-03-18 14:38:01', '2024-03-18 14:38:01');
+	(1, 1, 3, '1710771818', '49', 'QR Code', '2024-03-18', '2024-06-16', 0, '2024-03-18 14:23:38', '2024-03-19 13:52:29'),
+	(2, 1, 3, '1710772677', '49', 'QR Code', '2024-03-18', '2024-06-16', 0, '2024-03-18 14:37:57', '2024-03-19 13:52:29'),
+	(3, 1, 2, '1710772680', '29', 'QR Code', '2024-03-18', '2024-04-17', 0, '2024-03-18 14:38:00', '2024-03-19 13:52:29'),
+	(4, 1, 1, '1710772681', '19', 'QR Code', '2024-03-18', '2024-03-25', 0, '2024-03-18 14:38:01', '2024-03-19 13:52:29'),
+	(5, 1, 2, '1710856349', '29', 'QR Code', '2024-03-19', '2024-04-18', 1, '2024-03-19 13:52:29', '2024-03-19 13:52:29');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- Dumping structure for table laravel.packages
@@ -407,8 +479,8 @@ CREATE TABLE IF NOT EXISTS `packages` (
 -- Dumping data for table laravel.packages: ~3 rows (approximately)
 /*!40000 ALTER TABLE `packages` DISABLE KEYS */;
 REPLACE INTO `packages` (`id`, `package_name`, `package_price`, `package_days`, `package_display_time`, `total_allowed_jobs`, `total_allowed_featured_jobs`, `total_allowed_photos`, `total_allowed_videos`, `created_at`, `updated_at`) VALUES
-	(1, 'Basic', 19, 7, '1 Week', 5, 0, 0, 0, '2024-03-17 13:24:35', '2024-03-17 13:49:19'),
-	(2, 'Standard', 29, 30, '1 Month', 5, 2, 2, 2, '2024-03-17 13:25:41', '2024-03-17 13:25:41'),
+	(1, 'Basic', 19, 7, '1 Week', 2, 0, 0, 0, '2024-03-17 13:24:35', '2024-03-19 14:49:47'),
+	(2, 'Standard', 29, 30, '1 Month', 4, 2, 2, 2, '2024-03-17 13:25:41', '2024-03-19 14:49:54'),
 	(3, 'Gold', 49, 90, '3 Months', -1, 15, 10, 10, '2024-03-17 13:26:14', '2024-03-17 13:26:14');
 /*!40000 ALTER TABLE `packages` ENABLE KEYS */;
 
