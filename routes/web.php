@@ -9,6 +9,7 @@ use App\Http\Controllers\Front\PostController;
 use App\Http\Controllers\Front\FaqController;
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\PricingController;
+use App\Http\Controllers\Front\JobListingController;
 use App\Http\Controllers\Front\LoginController;
 use App\Http\Controllers\Front\SignupController;
 use App\Http\Controllers\Front\ForgetPasswordController;
@@ -53,6 +54,9 @@ Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact_submit');
 Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
+
+Route::get('/job-listing', [JobListingController::class, 'index'])->name('job_listing');
+Route::get('/job/{id}', [JobListingController::class, 'detail'])->name('job');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/create-account', [SignupController::class, 'index'])->name('signup');

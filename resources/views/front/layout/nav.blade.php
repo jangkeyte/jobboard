@@ -18,8 +18,8 @@
                         <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                             <a href="{{ route('home') }}" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Find Jobs</a>
+                        <li class="nav-item {{ Route::is('job_listing') ? 'active' : '' }}">
+                            <a href="{{ route('job_listing') }}" class="nav-link">Find Jobs</a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">Companies</a>
