@@ -38,12 +38,14 @@
                             <div class="type">{{ $job_single->rJobType->name }}</div>
                             @if($job_single->is_urgent == 1)<div class="urgent">Urgent</div> @endif
                         </div>
+                        @if(!Auth::guard('company')->check())
                         <div class="apply">
                             @if(date('Y-m-d') >= $job_single->deadline)
-                            <a href="" class="btn btn-primary">Apply Now</a>
-                            <a href="" class="btn btn-primary save-job">Bookmark</a>
+                                <a href="{{ route('candidate_apply', $job_single->id) }}" class="btn btn-success">Apply Now</a>
+                                <a href="{{ route('candidate_bookmark_add', $job_single->id) }}" class="btn btn-primary save-job">Bookmark</a>
                             @endif
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -87,43 +89,55 @@
                     <div class="job related-job pt-0 pb-0">
                         <div class="container">
                             <div class="row">
-                                @if(!$jobs_related->count())
-                                    <div class="text-danger">No related job found.</div>
-                                @else
-                                    @foreach($jobs_related as $item)
-                                        <div class="col-md-12">
-                                            <div class="item d-flex justify-content-start">
-                                                <div class="logo">
-                                                    <img src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
+                                @forelse($jobs_related as $item)
+                                    <div class="col-md-12">
+                                        <div class="item d-flex justify-content-start">
+                                            <div class="logo">
+                                                <img src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
+                                            </div>
+                                            <div class="text">
+                                                <h3>
+                                                    <a href="{{ route('job', $item->id) }}">{{ $item->title }}, {{ $item->rCompany->company_name }}</a>
+                                                </h3>
+                                                <div class="detail-1 d-flex justify-content-start">
+                                                    <div class="category">{{ $item->rJobCategory->name }}</div>
+                                                    <div class="location">{{ $item->rJobLocation->name }}</div>
                                                 </div>
-                                                <div class="text">
-                                                    <h3>
-                                                        <a href="{{ route('job', $item->id) }}">{{ $item->title }}, {{ $item->rCompany->company_name }}</a>
-                                                    </h3>
-                                                    <div class="detail-1 d-flex justify-content-start">
-                                                        <div class="category">{{ $item->rJobCategory->name }}</div>
-                                                        <div class="location">{{ $item->rJobLocation->name }}</div>
-                                                    </div>
-                                                    <div class="detail-2 d-flex-justify-content-start">
-                                                        <div class="date">{{ $item->created_at->diffForHumans() }}</div>
-                                                        <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
-                                                        @if(date('Y-m-d') > $item->deadline)
-                                                        <div class="expired">Expired</div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="special d-flex justify-content-start">
-                                                        @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
-                                                        <div class="type">{{ $item->rJobType->name }}</div>
-                                                        @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
-                                                    </div>
-                                                    <div class="bookmark">
-                                                        <a href=""><i class="fas fa-bookmark active"></i></a>
-                                                    </div>
+                                                <div class="detail-2 d-flex-justify-content-start">
+                                                    <div class="date">{{ $item->created_at->diffForHumans() }}</div>
+                                                    <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
+                                                    @if(date('Y-m-d') > $item->deadline)
+                                                    <div class="expired">Expired</div>
+                                                    @endif
                                                 </div>
+                                                <div class="special d-flex justify-content-start">
+                                                    @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
+                                                    <div class="type">{{ $item->rJobType->name }}</div>
+                                                    @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
+                                                </div>
+                                                @if(!Auth::guard('company')->check())
+                                                <div class="bookmark">
+                                                    @if(Auth::guard('candidate')->check())
+                                                        @php
+                                                            $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
+                                                            if($count > 0) {
+                                                                $bookmark_status = 'active';
+                                                            } else {
+                                                                $bookmark_status = '';
+                                                            }
+                                                        @endphp
+                                                    @else
+                                                        @php $bookmark_status = ''; @endphp
+                                                    @endif
+                                                    <a href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fas fa-bookmark {{ $bookmark_status }}"></i></a>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
-                                    @endforeach
-                                @endif
+                                    </div>
+                                @empty                                
+                                    <div class="text-danger">No related job found.</div>
+                                @endforelse
                             </div>
                         </div>
                     </div>

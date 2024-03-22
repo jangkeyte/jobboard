@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Candidate;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Job;
 use App\Models\Candidate;
 use App\Models\CandidateEducation;
 use App\Models\CandidateSkill;
 use App\Models\CandidateWorkExperience;
 use App\Models\CandidateAward;
 use App\Models\CandidateResume;
+use App\Models\CandidateBookmark;
+use App\Models\CandidateApplication;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +21,10 @@ class CandidateController extends Controller
 {
     public function dashboard()
     {
-        return view('candidate.dashboard');
+        $total_applied_jobs = CandidateApplication::where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 'Applied')->count();
+        $total_rejected_jobs = CandidateApplication::where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 'Rejected')->count();
+        $total_approved_jobs = CandidateApplication::where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 'Approved')->count();
+        return view('candidate.dashboard', compact('total_applied_jobs', 'total_rejected_jobs', 'total_approved_jobs'));
     }
     
     public function edit_profile()
@@ -408,7 +414,71 @@ class CandidateController extends Controller
 
     public function bookmark_add($id)
     {
-        echo 'Add bookmark for ' . $id;
+        $existing_bookmark_check = CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $id)->count();
+
+        if($existing_bookmark_check > 0) {
+            return redirect()->back()->with('error', 'This job is already added to bookmark.');
+        }
+
+        $obj = new CandidateBookmark();
+        $obj->candidate_id = Auth::guard('candidate')->user()->id;
+        $obj->job_id = $id;
+        $obj->save();
+
+        return redirect()->back()->with('success', 'Job is added to bookmark section successfully.');
+    }
+
+    public function bookmark_view()
+    {
+        $bookmark_jobs = CandidateBookmark::with('rJob', 'rCandidate')->where('candidate_id', Auth::guard('candidate')->user()->id)->get();
+        return view('candidate.bookmark', compact('bookmark_jobs'));
+    }
+
+    public function bookmark_delete($id)
+    {                                           
+        CandidateBookmark::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'Bookmark item is deleted successfully.');
+    }
+
+    public function apply($id)
+    {                               
+        $existing_apply_check = CandidateApplication::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $id)->count();
+
+        if($existing_apply_check > 0) {
+            return redirect()->back()->with('error', 'You already have applied on this job!');
+        }
+
+        $job_single = Job::where('id', $id)->first();
+
+        return view('candidate.apply', compact('job_single'));
+    }
+
+    public function apply_submit(Request $request)
+    {             
+        $request->validate([         
+            'cover_letter' => 'required',
+        ]);
+
+        $obj = new CandidateApplication();
+        $obj->candidate_id = Auth::guard('candidate')->user()->id;
+        $obj->job_id = $request->id;
+        $obj->cover_letter = $request->cover_letter;
+        $obj->status = 'Applied';
+        $obj->save();
+                  
+        return redirect()->route('job', $request->id)->with('success', 'Your application is sent successfully.');
+    }
+
+    public function apply_view()
+    {                                           
+        $application_jobs = CandidateApplication::with('rJob', 'rCandidate')->where('candidate_id', Auth::guard('candidate')->user()->id)->get();
+        return view('candidate.applications', compact('application_jobs'));
+    }
+
+    public function apply_delete($id)
+    {                                           
+        CandidateApplication::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'Application item is deleted successfully.');
     }
 
 }

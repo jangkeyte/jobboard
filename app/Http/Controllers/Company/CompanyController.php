@@ -19,6 +19,13 @@ use App\Models\JobType;
 use App\Models\JobExperience;
 use App\Models\JobGender;
 use App\Models\JobSalaryRange;
+use App\Models\Candidate;
+use App\Models\CandidateApplication;
+use App\Models\CandidateEducation;
+use App\Models\CandidateSkill;
+use App\Models\CandidateWorkExperience;
+use App\Models\CandidateAward;
+use App\Models\CandidateResume;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -417,4 +424,42 @@ class CompanyController extends Controller
         return redirect()->back()->with('success', 'Job is deleted successfully.');
     }
 
+    public function candidate_applications()
+    {
+        $jobs = Job::with('rJobCategory', 'rJobLocation', 'rJobType', 'rJobGender', 'rJobExperience', 'rJobSalaryRange')->where('company_id', Auth::guard('company')->user()->id)->get();
+        return view('company.applications', compact('jobs'));
+    }
+    
+    public function applicants($id)
+    {
+        $applicants = CandidateApplication::with('rCandidate')->where('job_id', $id)->get();
+
+        $job_single = Job::where('id', $id)->first();
+        return view('company.applicants', compact('applicants', 'job_single'));
+    }
+    
+    public function applicant_resume($id)
+    {
+        $candidate_single = Candidate::where('id', $id)->first();
+        $candidate_educations = CandidateEducation::where('candidate_id', $id)->get();
+        $candidate_skills = CandidateSkill::where('candidate_id', $id)->get();
+        $candidate_work_experiences = CandidateWorkExperience::where('candidate_id', $id)->get();
+        $candidate_awards = CandidateAward::where('candidate_id', $id)->get();
+        $candidate_resumes = CandidateResume::where('candidate_id', $id)->get();
+
+        return view('company.applicant_resume', compact('candidate_single', 'candidate_educations', 'candidate_skills', 'candidate_work_experiences', 'candidate_awards', 'candidate_resumes'));
+    }
+    
+    public function applicant_status_change(Request $request)
+    {
+        $request->validate([            
+            'status' => 'required',
+        ]);
+
+        $obj = CandidateApplication::where('candidate_id', $request->candidate_id)->where('job_id', $request->job_id)->first();
+        $obj->status = $request->status;
+        $obj->update();
+
+        return redirect()->back()->with('success', 'Successfully.');
+    }    
 }

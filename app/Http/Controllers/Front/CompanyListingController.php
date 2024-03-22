@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Job;
 use App\Models\Company;
 use App\Models\CompanyIndustry;
 use App\Models\CompanyLocation;
 use App\Models\CompanySize;
+use App\Models\CompanyPhoto;
+use App\Models\CompanyVideo;
 use App\Mail\Websitemail;
 
 class CompanyListingController extends Controller
@@ -53,23 +56,25 @@ class CompanyListingController extends Controller
     }
 
     public function detail($id)
-    {
+    {        
         $company_single = Company::withCount('rJob')->with('rCompanyIndustry', 'rCompanyLocation', 'rCompanySize')->where('id', $id)->first();
-        $companies_related = Company::with('rCompanyIndustry', 'rCompanyLocation', 'rCompanySize')->where('company_industry_id', $company_single->company_industry_id)->where('id', '<>', $id)->get();
-        return view('front.company', compact('company_single', 'companies_related'));
+
+        $company_photos = CompanyPhoto::where('company_id', $company_single->id)->get();
+        $company_videos = CompanyVideo::where('company_id', $company_single->id)->get();
+        $jobs = Job::with('rCompany', 'rJobCategory', 'rJobLocation', 'rJobType', 'rJobExperience', 'rJobGender', 'rJobSalaryRange')->where('company_id', $company_single->id)->orderBy('id', 'desc')->get();
+        return view('front.company', compact('company_single', 'company_photos', 'company_videos', 'jobs'));
     }
 
     public function send_email(Request $request)
     {        
-        /*
+        
         $request->validate([
             'visitor_name' => 'required',
             'visitor_email' => 'required|email',
-            'visitor_phone' => 'required',
             'visitor_message' => 'required'
         ]);
         
-        $subject = 'Enquery for job: ' . $request->job_title;
+        $subject = 'Contact Form Mesage: ' . $request->job_title;
         $message = 'Visitor Information: <br>';
         $message .= 'Name:' . $request->visitor_name . '<br>';
         $message .= 'Email:' . $request->visitor_email . '<br>';
@@ -79,6 +84,6 @@ class CompanyListingController extends Controller
         \Mail::to($request->company_email)->send(new Websitemail($subject, $message));
 
         return redirect()->back()->with('success', 'Email is sent successfully.');
-        */
+        
     }
 }

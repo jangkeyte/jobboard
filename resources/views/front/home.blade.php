@@ -167,9 +167,23 @@
                             <div class="type">{{ $item->rJobType->name }}</div>
                             @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
                         </div>
+                        @if(!Auth::guard('company')->check())
                         <div class="bookmark">
-                            <a href="{{ route('candidate_bookmark_add') }}"><i class="fas fa-bookmark active"></i></a>
+                            @if(Auth::guard('candidate')->check())
+                                @php
+                                    $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
+                                    if($count > 0) {
+                                        $bookmark_status = 'active';
+                                    } else {
+                                        $bookmark_status = '';
+                                    }
+                                @endphp
+                            @else
+                                @php $bookmark_status = ''; @endphp
+                            @endif
+                            <a href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fas fa-bookmark {{ $bookmark_status }}"></i></a>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

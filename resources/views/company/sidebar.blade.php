@@ -19,8 +19,8 @@
     <li class="list-group-item {{ Route::is('company_videos') ? 'active' : '' }}">
         <a href="{{ route('company_videos') }}">Videos</a>
     </li>
-    <li class="list-group-item">
-        <a href="">Candidate Applications</a>
+    <li class="list-group-item {{ Route::is('company_candidate_applications') ? 'active' : '' }}">
+        <a href="{{ route('company_candidate_applications') }}">Candidate Applications</a>
     </li>
     <li class="list-group-item {{ Route::is('company_edit_profile') ? 'active' : '' }}">
         <a href="{{ route('company_edit_profile') }}">Edit Profile</a>
