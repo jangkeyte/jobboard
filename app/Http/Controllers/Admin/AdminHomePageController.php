@@ -40,7 +40,9 @@ class AdminHomePageController extends Controller
                 'background' => 'image|mimes:jpg,jpeg,png,gif',
             ]);
 
-            unlink(public_path('uploads/' . $home_page_data->background));
+            if(file_exists(public_path('uploads/' . $home_page_data->background))) {
+                unlink(public_path('uploads/' . $home_page_data->background));
+            }
 
             $ext = $request->file('background')->extension();
             $final_name = 'banner_home' . '.' . $ext;

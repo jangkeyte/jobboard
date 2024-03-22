@@ -1,0 +1,124 @@
+@extends('front.layout.app')
+
+@section('main_content')
+
+<div class="page-top" style="background-image: url({{ asset('uploads/banner.jpg') }})">
+    <div class="bg"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Compani
+                    /es Listing</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="company-result">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="company-filter">
+                    <form action="{{ url('company-listing') }}" method="get">
+                        <div class="widget">
+                            <h2>Company Title</h2>
+                            <input type="text" class="form-control" name="name" value="{{  $form_name }}" placeholder="Company Name...">
+                        </div>
+                        <div class="widget">
+                            <h2>Company Industry</h2>
+                            <select name="industry" class="form-control select2">
+                                <option value="">Company Industry</option>
+                                @foreach($company_industries as $item)
+                                <option value="{{ $item->id }}" @if($form_industry == $item->id) selected @endif>{{  $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="widget">
+                            <h2>Company Location</h2>
+                            <select name="location" class="form-control select2">
+                                <option value="">Company Location</option>
+                                @foreach($company_locations as $item)
+                                <option value="{{ $item->id }}" @if($form_location == $item->id) selected @endif>{{  $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="widget">
+                            <h2>Company Size</h2>
+                            <select name="size" class="form-control select2">
+                                <option value="">Company Size</option>
+                                @foreach($company_sizes as $item)
+                                <option value="{{ $item->id }}" @if($form_size == $item->id) selected @endif>{{  $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="widget">
+                            <h2>Founded On</h2>
+                            <select name="founded_on" class="form-control select2">
+                                <option value="">Founded On</option>
+                                @for($i = 1990; $i <= date('Y'); $i++)
+                                <option value="{{ $i }}" @if($form_founded_on == $i) selected @endif>{{  $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+
+                        <div class="filter-button">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fas fa-search"></i> {{ $home_page_data->search ?? 'Filter' }}
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="advertisement">
+                        <a href=""><img src="{{ asset('uploads/ad-2.png') }}" alt=""></a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="company">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="search-result-header">
+                                    <i class="fas fa-search"></i> Search Result for Company Listing
+                                </div>
+                            </div>
+                            @if(!$companies->count())
+                                <div class="text-danger">No result found</div>
+                            @else
+                                @foreach($companies as $item)
+                                    <div class="col-md-12">
+                                        <div class="item d-flex justify-content-start">
+                                            <div class="logo">
+                                                <img src="{{ asset('uploads/' . ($item->rCompany->logo ?? 'default.png') ) }}" alt="{{ $item->company_name }}">
+                                            </div>
+                                            <div class="text">
+                                                <h3>
+                                                    <a href="{{ route('company', $item->id) }}">{{ $item->company_name }}</a>
+                                                </h3>
+                                                <div class="detail-1 d-flex justify-content-start">
+                                                    <div class="category">{{ $item->rCompanyIndustry->name ?? 'Industry' }}</div>
+                                                    <div class="location">{{ $item->rCompanyLocation->name ?? 'Location' }}</div>
+                                                </div>
+                                                <div class="detail-2 d-flex-justify-content-start">
+                                                   {!! substr($item->description, 0, 220) . '...' !!}
+                                                </div>
+                                                <div class="open-position">
+                                                    <span class="badge bg-primary">{{ $item->r_job_count }} Open Positions</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <div class="col-md-12">
+                                    {{ $companies->links() }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

@@ -83,9 +83,9 @@
                     <div class="icon">
                         <i class="{{ $item->icon }}"></i>
                     </div>
-                    <h3>{{ $item->name }}</h3>
-                    <p>({{ $item->id }} Open Positions)</p>
-                    <a href=""></a>
+                    <h3><a href="{{ url('job-listing?category=' . $item->id) }}">{{ $item->name }}</a></h3>
+                    <p>({{ $item->r_job_count }} Open Positions)</p>
+                    
                 </div>
             </div>
             @endforeach
@@ -141,39 +141,44 @@
             </div>
         </div>
         <div class="row">
-            @for($i=1; $i<=6; $i++)
+            @foreach($featured_jobs as $item)
             <div class="col-lg-6 col-md-12">
                 <div class="item d-flex justify-content-start">
                     <div class="logo">
-                        <img src="{{ asset('uploads/logo1.png') }}" alt="">
+                        <img src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
                     </div>
                     <div class="text">
                         <h3>
-                            <a href="">Software Engineer, Google</a>
+                            <a href="{{ route('job', $item->id) }}">{{ $item->title }}, {{ $item->rCompany->company_name }}</a>
                         </h3>
                         <div class="detail-1 d-flex justify-content-start">
-                            <div class="category">Web Development</div>
-                            <div class="location">United States</div>
+                            <div class="category">{{ $item->rJobCategory->name }}</div>
+                            <div class="location">{{ $item->rJobLocation->name }}</div>
                         </div>
-                        <div class="detail-2 d-flex justify-content-start">
-                            <div class="date">3 days ago</div>
-                            <div class="budget">$300-$600</div>
+                        <div class="detail-2 d-flex-justify-content-start">
+                            <div class="date">{{ $item->created_at->diffForHumans() }}</div>
+                            <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
+                            @if(date('Y-m-d') > $item->deadline)
                             <div class="expired">Expired</div>
+                            @endif
                         </div>
                         <div class="special d-flex justify-content-start">
-                            <div class="featured">Featured</div>
-                            <div class="type">Full Time</div>
-                            <div class="urgent">Urgent</div>
+                            @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
+                            <div class="type">{{ $item->rJobType->name }}</div>
+                            @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
                         </div>
                         <div class="bookmark">
-                            <a href="">
-                                <i class="fas fa-bookmark active"></i>
-                            </a>
+                            <a href="{{ route('candidate_bookmark_add') }}"><i class="fas fa-bookmark active"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            @endfor
+            @endforeach
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="all"><a href="{{ route('job_listing') }}" class="btn btn-primary">See All Jobs</a></div>
+            </div>
         </div>
     </div>
 </div>

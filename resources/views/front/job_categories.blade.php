@@ -1,7 +1,7 @@
 @extends('front.layout.app')
 
-@section('seo_title'){{ $job_category_page_item->title }}@endsection
-@section('seo_meta_description'){{ $job_category_page_item->meta_description }}@endsection
+@section('seo_title'){{ $job_category_page_item->title ?? 'Title' }}@endsection
+@section('seo_meta_description'){{ $job_category_page_item->meta_description ?? 'Meta Description' }}@endsection
 
 @section('main_content')
 
@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $job_category_page_item->heading }}</h2>
+                <h2>{{ $job_category_page_item->heading ?? 'Heading' }}</h2>
             </div>
         </div>
     </div>
@@ -25,9 +25,9 @@
                     <div class="icon">
                         <i class="{{ $item->icon }}"></i>
                     </div>
-                    <h3>{{ $item->name }}</h3>
-                    <p>({{ $item->id }} Open Positions)</p>
-                    <a href=""></a>
+                    <h3><a href="{{ url('job-listing?category=' . $item->id) }}">{{ $item->name }}</a></h3>
+                    <p>({{ $item->r_job_count }} Open Positions)</p>
+                    
                 </div>
             </div>
             @endforeach

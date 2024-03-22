@@ -406,4 +406,9 @@ class CandidateController extends Controller
         return redirect()->back()->with('success', 'Resume is deleted successfully.');
     }
 
+    public function bookmark_add($id)
+    {
+        echo 'Add bookmark for ' . $id;
+    }
+
 }

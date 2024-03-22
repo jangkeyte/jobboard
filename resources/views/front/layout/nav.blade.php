@@ -15,25 +15,25 @@
                 </a>
                 <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
                     <ul class="navbar nav ml-auto">
-                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                        <li class="nav-item {{ Route::is('/') ? 'active' : '' }}">
                             <a href="{{ route('home') }}" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item {{ Route::is('job_listing') ? 'active' : '' }}">
                             <a href="{{ route('job_listing') }}" class="nav-link">Find Jobs</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Companies</a>
+                        <li class="nav-item {{ Route::is('company_listing') ? 'active' : '' }}">
+                            <a href="{{ route('company_listing') }}" class="nav-link">Companies</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Pricing</a>
+                        <li class="nav-item {{ Route::is('pricing') ? 'active' : '' }}">
+                            <a href="{{ route('pricing') }}" class="nav-link">Pricing</a>
                         </li>
-                        <li class="nav-item {{ Request::is('faq') ? 'active' : '' }}">
+                        <li class="nav-item {{ Route::is('faq') ? 'active' : '' }}">
                             <a href="{{ route('faq') }}" class="nav-link">FAQ</a>
                         </li>
-                        <li class="nav-item {{ Request::is('blog') || Request::is('post/*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Route::is('blog') || Route::is('post/*') ? 'active' : '' }}">
                             <a href="{{ route('blog') }}" class="nav-link">Blog</a>
                         </li>
-                        <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}">
+                        <li class="nav-item {{ Route::is('contact') ? 'active' : '' }}">
                             <a href="{{ route('contact') }}" class="nav-link">Contact</a>
                         </li>
                     </ul>

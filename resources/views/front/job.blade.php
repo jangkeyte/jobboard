@@ -39,9 +39,11 @@
                             @if($job_single->is_urgent == 1)<div class="urgent">Urgent</div> @endif
                         </div>
                         <div class="apply">
+                            @if(date('Y-m-d') >= $job_single->deadline)
                             <a href="" class="btn btn-primary">Apply Now</a>
+                            <a href="" class="btn btn-primary save-job">Bookmark</a>
+                            @endif
                         </div>
-                        <a href="" class="btn btn-primary save-job">Bookmark</a>
                     </div>
                 </div>
             </div>
@@ -73,28 +75,55 @@
                     <h2><i class="fas fa-file-invoice"></i> Benefits</h2>
                     {!! nl2br($job_single->benefit) !!}
                 </div>
+                @if(date('Y-m-d') >= $job_single->deadline)
                 <div class="left-item">
                     <div class="apply">
                         <a href="" class="btn btn-primary">Apply Now</a>
                     </div>
                 </div>
+                @endif
                 <div class="left-item">
                     <h2><i class="fas fa-file-invoice"></i> Related Jobs</h2>
                     <div class="job related-job pt-0 pb-0">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="item d-flex justify-content-start">
-                                        <div class="logo">
-                                            <img src="" alt="">
+                                @if(!$jobs_related->count())
+                                    <div class="text-danger">No related job found.</div>
+                                @else
+                                    @foreach($jobs_related as $item)
+                                        <div class="col-md-12">
+                                            <div class="item d-flex justify-content-start">
+                                                <div class="logo">
+                                                    <img src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
+                                                </div>
+                                                <div class="text">
+                                                    <h3>
+                                                        <a href="{{ route('job', $item->id) }}">{{ $item->title }}, {{ $item->rCompany->company_name }}</a>
+                                                    </h3>
+                                                    <div class="detail-1 d-flex justify-content-start">
+                                                        <div class="category">{{ $item->rJobCategory->name }}</div>
+                                                        <div class="location">{{ $item->rJobLocation->name }}</div>
+                                                    </div>
+                                                    <div class="detail-2 d-flex-justify-content-start">
+                                                        <div class="date">{{ $item->created_at->diffForHumans() }}</div>
+                                                        <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
+                                                        @if(date('Y-m-d') > $item->deadline)
+                                                        <div class="expired">Expired</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="special d-flex justify-content-start">
+                                                        @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
+                                                        <div class="type">{{ $item->rJobType->name }}</div>
+                                                        @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
+                                                    </div>
+                                                    <div class="bookmark">
+                                                        <a href=""><i class="fas fa-bookmark active"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="text">
-                                            <h3>
-                                                <a href=""></a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -150,18 +179,21 @@
                 <div class="right-item">
                     <h2><i class="fas fa-file-invoice"></i> Enquery Formy</h2>
                     <div class="enquery-form">
-                        <form action="" method="post">
+                        <form action="{{ route('job_enquery_email') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="job_title" value="{{ $job_single->title }}">
+                            <input type="hidden" name="company_email" value="{{ $job_single->rCompany->email }}">
                             <div class="mb-3">
-                                <input type="text" class="form-control" name="name" placeholder="Full Name">
+                                <input type="text" class="form-control" name="visitor_name" placeholder="Full Name">
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                <input type="text" class="form-control" name="visitor_email" placeholder="Email Address">
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control" name="phone" placeholder="Phone Number">
+                                <input type="text" class="form-control" name="visitor_phone" placeholder="Phone Number">
                             </div>
                             <div class="mb-3">
-                                <textarea name="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                <textarea name="visitor_message" cols="30" rows="10" placeholder="Message"></textarea>
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Submit</button>

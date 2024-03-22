@@ -11,6 +11,7 @@ use App\Models\JobType;
 use App\Models\JobExperience;
 use App\Models\JobGender;
 use App\Models\JobSalaryRange;
+use App\Mail\Websitemail;
 
 class JobListingController extends Controller
 {
@@ -18,10 +19,10 @@ class JobListingController extends Controller
     {
         $job_categories = JobCategory::orderBy('name', 'asc')->get();
         $job_locations = JobLocation::orderBy('name', 'asc')->get();
-        $job_types = JobType::orderBy('name', 'asc')->get();
-        $job_experiences = JobExperience::orderBy('name', 'asc')->get();
-        $job_genders = JobGender::orderBy('name', 'asc')->get();
-        $job_salary_ranges = JobSalaryRange::orderBy('name', 'asc')->get();
+        $job_types = JobType::orderBy('id', 'asc')->get();
+        $job_experiences = JobExperience::orderBy('id', 'asc')->get();
+        $job_genders = JobGender::orderBy('id', 'asc')->get();
+        $job_salary_ranges = JobSalaryRange::orderBy('id', 'asc')->get();
 
         $form_title = $request->title;
         $form_category = $request->category;
@@ -64,8 +65,30 @@ class JobListingController extends Controller
     }
 
     public function detail($id)
-    {
+    {        
         $job_single = Job::with('rCompany', 'rJobCategory', 'rJobLocation', 'rJobType', 'rJobExperience', 'rJobGender', 'rJobSalaryRange')->where('id', $id)->first();
-        return view('front.job', compact('job_single'));
+        $jobs_related = Job::with('rCompany', 'rJobCategory', 'rJobLocation', 'rJobType', 'rJobExperience', 'rJobGender', 'rJobSalaryRange')->where('job_category_id', $job_single->job_category_id)->where('id', '<>', $id)->get();
+        return view('front.job', compact('job_single', 'jobs_related'));
+    }
+
+    public function send_email(Request $request)
+    {        
+        $request->validate([
+            'visitor_name' => 'required',
+            'visitor_email' => 'required|email',
+            'visitor_phone' => 'required',
+            'visitor_message' => 'required'
+        ]);
+        
+        $subject = 'Enquery for job: ' . $request->job_title;
+        $message = 'Visitor Information: <br>';
+        $message .= 'Name:' . $request->visitor_name . '<br>';
+        $message .= 'Email:' . $request->visitor_email . '<br>';
+        $message .= 'Phone:' . $request->visitor_phone . '<br>';
+        $message .= 'Message:' . $request->visitor_message;
+
+        \Mail::to($request->company_email)->send(new Websitemail($subject, $message));
+
+        return redirect()->back()->with('success', 'Email is sent successfully.');
     }
 }
