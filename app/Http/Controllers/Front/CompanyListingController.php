@@ -12,6 +12,7 @@ use App\Models\CompanySize;
 use App\Models\CompanyPhoto;
 use App\Models\CompanyVideo;
 use App\Mail\Websitemail;
+use App\Models\Advertisement;
 
 class CompanyListingController extends Controller
 {
@@ -51,8 +52,10 @@ class CompanyListingController extends Controller
         // Get the data from previous request, if don't add here you can add appends($_GET) in pagination links()
         $companies = $companies->appends($request->all());
 
+        $advertisement_data = Advertisement::where('id', 1)->first();
+
         return view('front.company_listing', compact('companies', 'company_industries', 'company_locations', 'company_sizes', 
-                    'form_name', 'form_industry', 'form_location', 'form_size', 'form_founded_on'));
+                    'form_name', 'form_industry', 'form_location', 'form_size', 'form_founded_on', 'advertisement_data'));
     }
 
     public function detail($id)

@@ -14,6 +14,7 @@ use App\Http\Controllers\Front\CompanyListingController;
 use App\Http\Controllers\Front\LoginController;
 use App\Http\Controllers\Front\SignupController;
 use App\Http\Controllers\Front\ForgetPasswordController;
+use App\Http\Controllers\Front\SubscriberController;
 
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Candidate\CandidateController;
@@ -44,6 +45,10 @@ use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\AdminAdvertisementController;
+use App\Http\Controllers\Admin\AdminBannerController;
+use App\Http\Controllers\Admin\AdminSubscriberController;
+
 
 Route::group(['middleware' => 'locale'], function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -69,6 +74,10 @@ Route::group(['middleware' => 'locale'], function() {
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/create-account', [SignupController::class, 'index'])->name('signup');
+
+    Route::post('/subscriber/send-email', [SubscriberController::class, 'send_email'])->name('subscriber_send_email');
+    Route::get('/subscriber/verify/{email}/{token}', [SubscriberController::class, 'verify'])->name('subscriber_verify');
+
     Route::get('/forget-password/company', [ForgetPasswordController::class, 'company_forget_password'])->name('company_forget_password');
     Route::post('/forget-password/company/submit', [ForgetPasswordController::class, 'company_forget_password_submit'])->name('company_forget_password_submit');
     Route::get('/reset-password/company/{token}/{email}', [ForgetPasswordController::class, 'company_reset_password'])->name('company_reset_password');
@@ -342,5 +351,17 @@ Route::group(['middleware' => 'locale'], function() {
         Route::post('/admin/company-size/update', [AdminCompanySizeController::class, 'update'])->name('admin_company_size_update');
         Route::get('/admin/company-size/delete/{id}', [AdminCompanySizeController::class, 'delete'])->name('admin_company_size_delete');
         
+        /* ADVERTISEMENT */
+        Route::get('/admin/advertisement', [AdminAdvertisementController::class, 'index'])->name('admin_advertisement');
+        Route::post('/admin/advertisement/update', [AdminAdvertisementController::class, 'update'])->name('admin_advertisement_update');
+        
+        /* BANNER */
+        Route::get('/admin/banner', [AdminBannerController::class, 'index'])->name('admin_banner');
+        Route::post('/admin/banner/update', [AdminBannerController::class, 'update'])->name('admin_banner_update');
+        
+        Route::get('/admin/all-subscribers', [AdminSubscriberController::class, 'all_subscribers'])->name('admin_all_subscribers');
+        Route::get('/admin/subscribers-send-email', [AdminSubscriberController::class, 'send_email'])->name('admin_subscribers_send_email');
+        Route::post('/admin/subscribers-send-email-submit', [AdminSubscriberController::class, 'send_email_submit'])->name('admin_subscribers_send_email_submit');
+        Route::get('/admin/subscriber-delete/{id}', [AdminSubscriberController::class, 'delete'])->name('admin_subscriber_delete');
     });
 });

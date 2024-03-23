@@ -2,7 +2,7 @@
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/banner.jpg') }})">
+<div class="page-top" style="background-image: url({{ asset('uploads/' . $global_banner_data->banner_job_listing) }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
@@ -83,6 +83,17 @@
                             </button>
                         </div>
                     </form>
+
+                    @if($advertisement_data->job_listing_ad_status == 'Show')
+                        <div class="advertisement">                            
+                            @if($advertisement_data->job_listing_ad_url == null)
+                                <img src="{{ asset('uploads/' . $advertisement_data->job_listing_ad) }}" alt="" class="w-100">
+                            @else
+                                <a href="{{ $advertisement_data->job_listing_ad_url }}" target="_blank"><img src="{{ asset('uploads/' . $advertisement_data->job_listing_ad) }}" alt="" class="w-100"></a>
+                            @endif
+                        </div>
+                    @endif
+
                 </div>
             </div>
 

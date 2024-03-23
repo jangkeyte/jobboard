@@ -12,6 +12,7 @@ use App\Models\JobExperience;
 use App\Models\JobGender;
 use App\Models\JobSalaryRange;
 use App\Mail\Websitemail;
+use App\Models\Advertisement;
 
 class JobListingController extends Controller
 {
@@ -60,8 +61,10 @@ class JobListingController extends Controller
         // Get the data from previous request, if don't add here you can add appends($_GET) in pagination links()
         $jobs = $jobs->appends($request->all());
 
+        $advertisement_data = Advertisement::where('id', 1)->first();
+
         return view('front.job_listing', compact('jobs', 'job_categories', 'job_locations', 'job_types', 'job_experiences', 'job_genders', 'job_salary_ranges', 
-                    'form_title', 'form_category', 'form_location', 'form_type', 'form_experience', 'form_gender', 'form_salary_range'));
+                    'form_title', 'form_category', 'form_location', 'form_type', 'form_experience', 'form_gender', 'form_salary_range', 'advertisement_data'));
     }
 
     public function detail($id)

@@ -2,7 +2,7 @@
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/banner.jpg') }})">
+<div class="page-top" style="background-image: url({{ asset('uploads/' . $global_banner_data->banner_company_panel) }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
@@ -31,9 +31,10 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
-                                <th>Current Status</th>
+                                <th>Status</th>
                                 <th>Action</th>
                                 <th>Detail</th>
+                                <th>CV</th>
                             </tr>
                             @foreach($applicants as $item)
                             <tr>
@@ -66,8 +67,26 @@
                                         </select>
                                     </form>
                                 </td>
-                                <td><a href="{{ route('company_applicant_resume', $item->candidate_id) }}" ><i class="fa fa-eye"></i></a></td>
+                                <td>
+                                    <a href="{{ route('company_applicant_resume', $item->candidate_id) }}" title="Candidate Detail"><i class="fa fa-eye"></i></a>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#coverLetterModal{{ $item->id }}" title="Cover Letter"><i class="fa fa-envelope"></i></a>
+                            </td>
                             </tr>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="coverLetterModal{{ $item->id }}" tabindex="-1" aria-labelledby="coverLetterModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="coverLetterModalLabel">Cover Letter for Job {{ $item->rJob->title }} of {{ $item->rJob->rCompany->company_name }} Company</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {!! nl2br($item->cover_letter) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>
