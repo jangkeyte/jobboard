@@ -74,16 +74,16 @@ class CompanyListingController extends Controller
             'visitor_message' => 'required'
         ]);
         
-        $subject = 'Contact Form Mesage: ' . $request->job_title;
-        $message = 'Visitor Information: <br>';
-        $message .= 'Name:' . $request->visitor_name . '<br>';
-        $message .= 'Email:' . $request->visitor_email . '<br>';
-        $message .= 'Phone:' . $request->visitor_phone . '<br>';
-        $message .= 'Message:' . $request->visitor_message;
+        $subject = __('Contact Form Mesage: ') . $request->job_title;
+        $message = __('Visitor Information: ') . '<br>';
+        $message .= __('Name: ') . $request->visitor_name . '<br>';
+        $message .= __('Email: ') . $request->visitor_email . '<br>';
+        $message .= __('Phone: ') . $request->visitor_phone . '<br>';
+        $message .= __('Message: ') . $request->visitor_message;
 
         \Mail::to($request->company_email)->send(new Websitemail($subject, $message));
 
-        return redirect()->back()->with('success', 'Email is sent successfully.');
+        return redirect()->back()->with('success', __('Email is sent successfully.') );
         
     }
 }

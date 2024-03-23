@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Jobs Listing</h2>
+                <h2>{{ __('Jobs Listing') }}</h2>
             </div>
         </div>
     </div>
@@ -19,58 +19,58 @@
                 <div class="job-filter">
                     <form action="{{ url('job-listing') }}" method="get">
                         <div class="widget">
-                            <h2>Job Title</h2>
-                            <input type="text" class="form-control" name="title" value="{{  $form_title }}">
+                            <h2>{{ __('Job Title') }}</h2>
+                            <input type="text" class="form-control" name="title" value="{{  $form_title }}" placeholder="{{ __('Job Title') }}">
                         </div>
                         <div class="widget">
-                            <h2>Job Category</h2>
+                            <h2>{{ __('Job Category') }}</h2>
                             <select name="category" class="form-control select2">
-                                <option value="">Job Category</option>
+                                <option value="">{{ __('Job Category') }}</option>
                                 @foreach($job_categories as $item)
                                 <option value="{{ $item->id }}" @if($form_category == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
-                            <h2>Job Location</h2>
+                            <h2>{{ __('Job Location') }}</h2>
                             <select name="location" class="form-control select2">
-                                <option value="">Job Location</option>
+                                <option value="">{{ __('Job Location') }}</option>
                                 @foreach($job_locations as $item)
                                 <option value="{{ $item->id }}" @if($form_location == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
-                            <h2>Job Type</h2>
+                            <h2>{{ __('Job Type') }}</h2>
                             <select name="type" class="form-control select2">
-                                <option value="">Job Type</option>
+                                <option value="">{{ __('Job Type') }}</option>
                                 @foreach($job_types as $item)
                                 <option value="{{ $item->id }}" @if($form_type == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
-                            <h2>Experience</h2>
+                            <h2>{{ __('Experience') }}</h2>
                             <select name="experience" class="form-control select2">
-                                <option value="">Experience</option>
+                                <option value="">{{ __('Experience') }}</option>
                                 @foreach($job_experiences as $item)
                                 <option value="{{ $item->id }}" @if($form_experience == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
-                            <h2>Gender</h2>
+                            <h2>{{ __('Gender') }}</h2>
                             <select name="gender" class="form-control select2">
-                                <option value="">Gender</option>
+                                <option value="">{{ __('Gender') }}</option>
                                 @foreach($job_genders as $item)
                                 <option value="{{ $item->id }}" @if($form_gender == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
-                            <h2>Salary Range</h2>
+                            <h2>{{ __('Salary Range') }}</h2>
                             <select name="salary_range" class="form-control select2">
-                                <option value="">Salary Range</option>
+                                <option value="">{{ __('Salary Range') }}</option>
                                 @foreach($job_salary_ranges as $item)
                                 <option value="{{ $item->id }}" @if($form_salary_range == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
@@ -79,7 +79,7 @@
 
                         <div class="filter-button">
                             <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fas fa-search"></i> {{ $home_page_data->search ?? 'Filter' }}
+                                <i class="fas fa-search"></i> {{ $home_page_data->search ?? __('Filter') }}
                             </button>
                         </div>
                     </form>
@@ -92,11 +92,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="search-result-header">
-                                    <i class="fas fa-search"></i> Search Result for Job Listing
+                                    <i class="fas fa-search"></i> {{ __('Search Result for Job Listing') }}
                                 </div>
                             </div>
                             @if(!$jobs->count())
-                                <div class="text-danger">No result found</div>
+                                <div class="text-danger">{{ __('No result found') }}</div>
                             @else
                                 @foreach($jobs as $item)
                                     <div class="col-md-12">
@@ -116,13 +116,13 @@
                                                     <div class="date">{{ $item->created_at->diffForHumans() }}</div>
                                                     <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
                                                     @if(date('Y-m-d') > $item->deadline)
-                                                    <div class="expired">Expired</div>
+                                                    <div class="expired badge text-bg-warning">{{ __('Expired') }}</div>
                                                     @endif
                                                 </div>
                                                 <div class="special d-flex justify-content-start">
-                                                    @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
+                                                    @if($item->is_featured == 1)<div class="featured badge text-bg-primary">{{ __('Featured') }}</div> @endif
                                                     <div class="type">{{ $item->rJobType->name }}</div>
-                                                    @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
+                                                    @if($item->is_urgent == 1)<div class="urgent badge text-bg-danger">{{ __('Urgent') }}</div> @endif
                                                 </div>
                                                 @if(!Auth::guard('company')->check())
                                                 <div class="bookmark">

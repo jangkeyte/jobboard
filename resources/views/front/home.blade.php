@@ -1,6 +1,6 @@
 @extends('front.layout.app')
 
-@section('seo_title'){{ $home_page_data->title ?? 'Title' }}@endsection
+@section('seo_title'){{ $home_page_data->title ?? __('Title') }}@endsection
 @section('seo_meta_description'){{ $home_page_data->meta_description ?? 'Meta Description' }}@endsection
 
 @section('main_content')
@@ -14,9 +14,9 @@
             <div class="col-md-12">
                 <div class="item">
                     <div class="text">
-                        <h2>{{ $home_page_data->heading ?? 'Heading' }}</h2>
+                        <h2>{{ $home_page_data->heading ?? __('Heading') }}</h2>
                         <p>
-                            {{ $home_page_data->text ?? 'Text' }}
+                            {{ $home_page_data->text ?? __('Text') }}
                         </p>
                     </div>
                     <div class="search-section">

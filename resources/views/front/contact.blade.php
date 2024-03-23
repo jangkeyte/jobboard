@@ -24,19 +24,19 @@
                     <form action="{{ route('contact_submit') }}" method="post">
                         @csrf
                         <div class="mb-3">
-                            <label for="" class="form-label">Name</label>
+                            <label for="" class="form-label">{{ __('Name') }}</label>
                             <input type="text" class="form-control" name="person_name">
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Email Address</label>
+                            <label for="" class="form-label">{{ __('Email Address') }}</label>
                             <input type="text" class="form-control" name="person_email">
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Message</label>
+                            <label for="" class="form-label">{{ __('Message') }}</label>
                             <textarea name="person_message" id="" cols="30" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primary bg-website">Send Message</button>
+                            <button type="submit" class="btn btn-primary bg-website">{{ __('Send Message') }}</button>
                         </div>
                     </form>
                 </div>

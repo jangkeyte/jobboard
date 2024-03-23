@@ -7,8 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Compani
-                    /es Listing</h2>
+                <h2>{{ __('Companies Listing') }}</h2>
             </div>
         </div>
     </div>
@@ -20,40 +19,40 @@
                 <div class="company-filter">
                     <form action="{{ url('company-listing') }}" method="get">
                         <div class="widget">
-                            <h2>Company Title</h2>
-                            <input type="text" class="form-control" name="name" value="{{  $form_name }}" placeholder="Company Name...">
+                            <h2>{{ __('Company Title') }}</h2>
+                            <input type="text" class="form-control" name="name" value="{{  $form_name }}" placeholder="{{ __('Company Name') }}...">
                         </div>
                         <div class="widget">
-                            <h2>Company Industry</h2>
+                            <h2>{{ __('Company Industry') }}</h2>
                             <select name="industry" class="form-control select2">
-                                <option value="">Company Industry</option>
+                                <option value="">{{ __('Company Industry') }}</option>
                                 @foreach($company_industries as $item)
                                 <option value="{{ $item->id }}" @if($form_industry == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
-                            <h2>Company Location</h2>
+                            <h2>{{ __('Company Location') }}</h2>
                             <select name="location" class="form-control select2">
-                                <option value="">Company Location</option>
+                                <option value="">{{ __('Company Location') }}</option>
                                 @foreach($company_locations as $item)
                                 <option value="{{ $item->id }}" @if($form_location == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
-                            <h2>Company Size</h2>
+                            <h2>{{ __('Company Size') }}</h2>
                             <select name="size" class="form-control select2">
-                                <option value="">Company Size</option>
+                                <option value="">{{ __('Company Size') }}</option>
                                 @foreach($company_sizes as $item)
                                 <option value="{{ $item->id }}" @if($form_size == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
-                            <h2>Founded On</h2>
+                            <h2>{{ __('Founded On') }}</h2>
                             <select name="founded_on" class="form-control select2">
-                                <option value="">Founded On</option>
+                                <option value="">{{ __('Founded On') }}</option>
                                 @for($i = 1990; $i <= date('Y'); $i++)
                                 <option value="{{ $i }}" @if($form_founded_on == $i) selected @endif>{{  $i }}</option>
                                 @endfor
@@ -62,7 +61,7 @@
 
                         <div class="filter-button">
                             <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fas fa-search"></i> {{ $home_page_data->search ?? 'Filter' }}
+                                <i class="fas fa-search"></i> {{ $home_page_data->search ?? __('Filter') }}
                             </button>
                         </div>
                     </form>
@@ -80,11 +79,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="search-result-header">
-                                    <i class="fas fa-search"></i> Search Result for Company Listing
+                                    <i class="fas fa-search"></i> {{ __('Search Result for Company Listing') }}
                                 </div>
                             </div>
                             @if(!$companies->count())
-                                <div class="text-danger">No result found</div>
+                                <div class="text-danger">{{ __('No result found') }}</div>
                             @else
                                 @foreach($companies as $item)
                                     <div class="col-md-12">

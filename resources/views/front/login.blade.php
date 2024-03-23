@@ -23,10 +23,10 @@
                 <div class="login-form">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><i class="far fa-user"></i> Candidate</button>
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><i class="far fa-user"></i> {{ __('Candidate') }}</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true"><i class="far fa-user"></i> Company</button>
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true"><i class="far fa-user"></i> {{ __('Company') }}</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
@@ -34,16 +34,16 @@
                             <form action="{{ route('candidate_login_submit') }}" method="post">                          
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Username *</label>
+                                    <label for="" class="form-label">{{ __('Username') }} *</label>
                                     <input type="text" class="form-control" name="username">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Password *</label>
+                                    <label for="" class="form-label">{{ __('Password') }} *</label>
                                     <input type="password" class="form-control" name="password">
                                 </div>
                                 <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary bg-website">Login</button>
-                                    <a href="{{ route('candidate_forget_password') }}" class="primary-color">Forget Password</a>
+                                    <button type="submit" class="btn btn-primary bg-website">{{ __('Login') }}</button>
+                                    <a href="{{ route('candidate_forget_password') }}" class="primary-color">{{ __('Forget Password') }}</a>
                                 </div>
                             </form>
                         </div>
@@ -51,23 +51,23 @@
                             <form action="{{ route('company_login_submit') }}" method="post">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Username *</label>
+                                    <label for="" class="form-label">{{ __('Username') }} *</label>
                                     <input type="text" class="form-control" name="username">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Password *</label>
+                                    <label for="" class="form-label">{{ __('Password') }} *</label>
                                     <input type="password" class="form-control" name="password">
                                 </div>
                                 <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary bg-website">Login</button>
-                                    <a href="{{ route('company_forget_password') }}" class="primary-color">Forget Password</a>
+                                    <button type="submit" class="btn btn-primary bg-website">{{ __('Login') }}</button>
+                                    <a href="{{ route('company_forget_password') }}" class="primary-color">{{ __('Forget Password') }}</a>
                                 </div>
                             </form>
                         </div>
                     </div>
                     
                     <div class="mb-3">
-                        <a href="{{ route('signup') }}" class="primary-color">Don't have an account? Create Account</a>
+                        <a href="{{ route('signup') }}" class="primary-color">{{ __('Do not have an account? Create acount') }}</a>
                     </div>
                 </div>
             </div>

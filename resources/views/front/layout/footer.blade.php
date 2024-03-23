@@ -3,29 +3,29 @@
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="item">
-                    <h2 class="heading">For Candidates</h2>
+                    <h2 class="heading">{{ __('For Candidates') }}</h2>
                     <ul class="useful-links">
-                        <li><a href="#">Browser Jobs</a></li>
-                        <li><a href="#">Browse Candidates</a></li>
-                        <li><a href="#">Candidate Dashboard</a></li>
-                        <li><a href="#">Saved Jobs</a></li>
+                        <li><a href="#">{{ __('Browser Jobs') }}</a></li>
+                        <li><a href="#">{{ __('Browse Candidates') }}</a></li>
+                        <li><a href="#">{{ __('Candidate Dashboard') }}</a></li>
+                        <li><a href="#">{{ __('Saved Jobs') }}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="item">
-                    <h2 class="heading">For Companies</h2>
+                    <h2 class="heading">{{ __('For Companies') }}</h2>
                     <ul class="useful-links">
-                        <li><a href="#">Post Job</a></li>
-                        <li><a href="#">Browse Jobs</a></li>
-                        <li><a href="#">Company Dashboard</a></li>
-                        <li><a href="#">Applications</a></li>
+                        <li><a href="#">{{ __('Post Job') }}</a></li>
+                        <li><a href="#">{{ __('Browse Jobs') }}</a></li>
+                        <li><a href="#">{{ __('Company Dashboard') }}</a></li>
+                        <li><a href="#">{{ __('Applications') }}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="item">
-                    <h2 class="heading">Contact</h2>
+                    <h2 class="heading">{{ __('Contact') }}</h2>
                     
                     <div class="list-item">
                         <div class="left">
@@ -63,9 +63,9 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="item">
-                    <h2 class="heading">Newsletter</h2>
+                    <h2 class="heading">{{ __('Newsletter') }}</h2>
                     <p>
-                        To get the latest news from our website, please subscribe us
+                        {{ __('To get the latest news from our website, please subscribe us') }}
                     </p>
                     <form action="#" method="post">
                         @csrf
@@ -73,7 +73,7 @@
                             <input type="text" name="" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Subscribe Now">
+                            <input type="submit" class="btn btn-primary" value="{{ __('Subscribe Now') }}">
                         </div>
                     </form>
                 </div>
@@ -87,14 +87,14 @@
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="copyright">
-                    Copyright 2024, JangKeyte. All Rights Reserved.
+                    {{ __('Copyright 2024, JangKeyte. All Rights Reserved.') }}
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="right">
                     <ul>
-                        <li><a href="{{ route('terms') }}">Terms of Use</a></li>
-                        <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
+                        <li><a href="{{ route('terms') }}">{{ __('Terms of Use') }}</a></li>
+                        <li><a href="{{ route('privacy') }}">{{ __('Privacy Policy') }}</a></li>
                     </ul>
                 </div>
             </div>

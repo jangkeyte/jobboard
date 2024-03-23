@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'company' => \App\Http\Middleware\Company::class,
         'candidate' => \App\Http\Middleware\Candidate::class,
+        'locale' => \App\Http\Middleware\Locale::class, //Thêm vào dòng này
     ];
 }

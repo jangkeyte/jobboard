@@ -28,4 +28,11 @@ class HomeController extends Controller
         $posts = Post::orderBy('created_at', 'desc')->take(4)->get();
         return view('front.home', compact(['home_page_data', 'job_categories', 'all_job_categories', 'all_job_locations', 'why_choose_items', 'testimonials', 'posts', 'featured_jobs']));
     }
+
+    public function switchLanguage($language)
+    {
+        session()->put('website_language', $language);
+
+        return redirect()->back();
+    }
 }
