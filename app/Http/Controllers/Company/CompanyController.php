@@ -26,9 +26,11 @@ use App\Models\CandidateSkill;
 use App\Models\CandidateWorkExperience;
 use App\Models\CandidateAward;
 use App\Models\CandidateResume;
+use App\Mail\Websitemail;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class CompanyController extends Controller
 {
@@ -456,9 +458,22 @@ class CompanyController extends Controller
             'status' => 'required',
         ]);
 
-        $obj = CandidateApplication::where('candidate_id', $request->candidate_id)->where('job_id', $request->job_id)->first();
+        $obj = CandidateApplication::with('rCandidate')->where('candidate_id', $request->candidate_id)->where('job_id', $request->job_id)->first();
         $obj->status = $request->status;
         $obj->update();
+
+        if($request->status == 'Approved') {
+
+            // Sending email to candidates
+            $candidate_email = $obj->rCandidate->email;            
+            $detail_link = route('candidate_applications');
+            
+            $subject = __('Congratulation! Your application is approved');
+            $message = __('Please check the detail:') . '<br>';
+            $message .= '<a href="' . $detail_link . '"> ' . __('Click here to see the detail') . '</a>';
+
+            Mail::to($request->email)->send(new Websitemail($subject, $message));
+        }
 
         return redirect()->back()->with('success', 'Successfully.');
     }    

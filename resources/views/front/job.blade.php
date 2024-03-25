@@ -1,5 +1,8 @@
 @extends('front.layout.app')
 
+@section('seo_title'){{ $other_page_item->job_listing_page_title ?? __('SEO Title') }}@endsection
+@section('seo_meta_description'){{ $other_page_item->job_listing_page_meta_description ?? __('SEO Meta Description') }}@endsection
+
 @section('main_content')
 
 <div class="page-top" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_job_detail ?? 'banner_default.jpg')) }})">

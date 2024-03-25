@@ -11,14 +11,14 @@ use App\Models\CompanyLocation;
 use App\Models\CompanySize;
 use App\Models\CompanyPhoto;
 use App\Models\CompanyVideo;
-use App\Mail\Websitemail;
 use App\Models\Advertisement;
+use App\Models\PageOtherItem;
+use App\Mail\Websitemail;
 
 class CompanyListingController extends Controller
 {
     public function index(Request $request)
     {
-        
         $company_industries = CompanyIndustry::orderBy('name', 'asc')->get();
         $company_locations = CompanyLocation::orderBy('name', 'asc')->get();
         $company_sizes = CompanySize::orderBy('id', 'asc')->get();
@@ -53,9 +53,10 @@ class CompanyListingController extends Controller
         $companies = $companies->appends($request->all());
 
         $advertisement_data = Advertisement::where('id', 1)->first();
-
+        $other_page_item = PageOtherItem::where('id', 1)->first();
+        
         return view('front.company_listing', compact('companies', 'company_industries', 'company_locations', 'company_sizes', 
-                    'form_name', 'form_industry', 'form_location', 'form_size', 'form_founded_on', 'advertisement_data'));
+                    'form_name', 'form_industry', 'form_location', 'form_size', 'form_founded_on', 'advertisement_data', 'other_page_item'));
     }
 
     public function detail($id)
@@ -65,7 +66,8 @@ class CompanyListingController extends Controller
         $company_photos = CompanyPhoto::where('company_id', $company_single->id)->get();
         $company_videos = CompanyVideo::where('company_id', $company_single->id)->get();
         $jobs = Job::with('rCompany', 'rJobCategory', 'rJobLocation', 'rJobType', 'rJobExperience', 'rJobGender', 'rJobSalaryRange')->where('company_id', $company_single->id)->orderBy('id', 'desc')->get();
-        return view('front.company', compact('company_single', 'company_photos', 'company_videos', 'jobs'));
+        $other_page_item = PageOtherItem::where('id', 1)->first();
+        return view('front.company', compact('company_single', 'company_photos', 'company_videos', 'jobs', 'other_page_item'));
     }
 
     public function send_email(Request $request)

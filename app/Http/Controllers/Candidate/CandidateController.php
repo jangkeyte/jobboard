@@ -13,9 +13,11 @@ use App\Models\CandidateAward;
 use App\Models\CandidateResume;
 use App\Models\CandidateBookmark;
 use App\Models\CandidateApplication;
+use App\Mail\Websitemail;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class CandidateController extends Controller
 {
@@ -363,7 +365,7 @@ class CandidateController extends Controller
         $obj->file = $final_name;
         $obj->save();
         
-        return redirect()->route('candidate_resume')->with('success', 'Resume is created successfully.');
+        return redirect()->route('candidate_resume')->with('success', __('Resume is created successfully.'));
     }
     
     public function resume_edit($id)
@@ -397,7 +399,7 @@ class CandidateController extends Controller
         $obj->name = $request->name;
         $obj->update();
         
-        return redirect()->route('candidate_resume')->with('success', 'Resume is edited successfully.');
+        return redirect()->route('candidate_resume')->with('success', __('Resume is edited successfully.'));
     }
     
     public function resume_delete($id)
@@ -409,7 +411,7 @@ class CandidateController extends Controller
         }
 
         CandidateResume::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Resume is deleted successfully.');
+        return redirect()->back()->with('success', __('Resume is deleted successfully.'));
     }
 
     public function bookmark_add($id)
@@ -417,7 +419,7 @@ class CandidateController extends Controller
         $existing_bookmark_check = CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $id)->count();
 
         if($existing_bookmark_check > 0) {
-            return redirect()->back()->with('error', 'This job is already added to bookmark.');
+            return redirect()->back()->with('error', __('This job is already added to bookmark.'));
         }
 
         $obj = new CandidateBookmark();
@@ -425,7 +427,7 @@ class CandidateController extends Controller
         $obj->job_id = $id;
         $obj->save();
 
-        return redirect()->back()->with('success', 'Job is added to bookmark section successfully.');
+        return redirect()->back()->with('success', __('Job is added to bookmark section successfully.'));
     }
 
     public function bookmark_view()
@@ -445,7 +447,7 @@ class CandidateController extends Controller
         $existing_apply_check = CandidateApplication::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $id)->count();
 
         if($existing_apply_check > 0) {
-            return redirect()->back()->with('error', 'You already have applied on this job!');
+            return redirect()->back()->with('error', __('You already have applied on this job!'));
         }
 
         $job_single = Job::where('id', $id)->first();
@@ -465,8 +467,19 @@ class CandidateController extends Controller
         $obj->cover_letter = $request->cover_letter;
         $obj->status = 'Applied';
         $obj->save();
-                  
-        return redirect()->route('job', $request->id)->with('success', 'Your application is sent successfully.');
+        
+        // Sending email to company
+        $job_single = Job::with('rCompany')->where('id', $request->id);
+        $company_email = $job_single->rCompany->email;
+        $applicants_list = route('company_applicants', $request->id);
+        
+        $subject = __('A candidate applied to a job');
+        $message = __('Please check the application:') . '<br>';
+        $message .= '<a href="' . $applicants_list . '"> ' . __('Click here to see applicants list for this job') . '</a>';
+
+        Mail::to($request->email)->send(new Websitemail($subject, $message));
+
+        return redirect()->route('job', $request->id)->with('success', __('Your application is sent successfully.'));
     }
 
     public function apply_view()
@@ -478,7 +491,7 @@ class CandidateController extends Controller
     public function apply_delete($id)
     {                                           
         CandidateApplication::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Application item is deleted successfully.');
+        return redirect()->back()->with('success', __('Application item is deleted successfully.'));
     }
 
 }

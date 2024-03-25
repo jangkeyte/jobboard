@@ -11,8 +11,9 @@ use App\Models\JobType;
 use App\Models\JobExperience;
 use App\Models\JobGender;
 use App\Models\JobSalaryRange;
-use App\Mail\Websitemail;
+use App\Models\PageOtherItem;
 use App\Models\Advertisement;
+use App\Mail\Websitemail;
 
 class JobListingController extends Controller
 {
@@ -62,16 +63,18 @@ class JobListingController extends Controller
         $jobs = $jobs->appends($request->all());
 
         $advertisement_data = Advertisement::where('id', 1)->first();
-
+        $other_page_item = PageOtherItem::where('id', 1)->first();
+        
         return view('front.job_listing', compact('jobs', 'job_categories', 'job_locations', 'job_types', 'job_experiences', 'job_genders', 'job_salary_ranges', 
-                    'form_title', 'form_category', 'form_location', 'form_type', 'form_experience', 'form_gender', 'form_salary_range', 'advertisement_data'));
+                    'form_title', 'form_category', 'form_location', 'form_type', 'form_experience', 'form_gender', 'form_salary_range', 'advertisement_data', 'other_page_item'));
     }
 
     public function detail($id)
     {        
         $job_single = Job::with('rCompany', 'rJobCategory', 'rJobLocation', 'rJobType', 'rJobExperience', 'rJobGender', 'rJobSalaryRange')->where('id', $id)->first();
         $jobs_related = Job::with('rCompany', 'rJobCategory', 'rJobLocation', 'rJobType', 'rJobExperience', 'rJobGender', 'rJobSalaryRange')->where('job_category_id', $job_single->job_category_id)->where('id', '<>', $id)->get();
-        return view('front.job', compact('job_single', 'jobs_related'));
+        $other_page_item = PageOtherItem::where('id', 1)->first();
+        return view('front.job', compact('job_single', 'jobs_related', 'other_page_item'));
     }
 
     public function send_email(Request $request)

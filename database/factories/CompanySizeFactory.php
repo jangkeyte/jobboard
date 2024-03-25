@@ -16,8 +16,15 @@ class CompanySizeFactory extends Factory
      */
     public function definition(): array
     {
+        $random_array = array(
+            '2 - 5 Persons', 
+            '5 - 10 Persons', 
+            '10 - 20 Persons', 
+            '20 - 50 Persons', 
+            '50 - 100 Persons', 
+            '100+ Persons');
         return [
-            'name' => fake()->unique()->randomElement(['2 - 5 Persons', '5 - 10 Persons', '10 - 20 Persons', '20 - 50 Persons', '50 - 100 Persons', '100+ Persons']),
+            'name' => fake()->unique()->randomElement($random_array),
         ];
     }
 }

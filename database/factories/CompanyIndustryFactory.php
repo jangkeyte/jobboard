@@ -16,8 +16,45 @@ class CompanyIndustryFactory extends Factory
      */
     public function definition(): array
     {
+        $random_array = array(
+            'Accounting Firm', 
+            'Software Company', 
+            'IT Company', 
+            'Real Estate Company', 
+            'Law Firm', 
+            'Health Care', 
+            'Agriculture', 
+            'Construction', 
+            'Education', 
+            'Entertainment', 
+            'Manufacturing', 
+            'Mining', 
+            'Pharmaceutical', 
+            'Enery', 
+            'Hospitality', 
+            'Media', 
+            'Computer', 
+            'Electronics', 
+            'Food Industry', 
+            'Insurance', 
+            'Transportation', 
+            'Aerospace', 
+            'Computer Industry', 
+            'Retail', 
+            'Telecommunication', 
+            'Advertising & Marketing', 
+            'Banking', 
+            'Economic Sector', 
+            'Food & Beverage', 
+            'Agriculture', 
+            'Forestry', 
+            'Fishing & Hunting', 
+            'Logging', 
+            'Apartment Rental', 
+            'Commercial Leasing', 
+            'Land Leasing');
         return [
-            'name' => fake()->unique()->randomElement(['Accounting Firm', 'Software Company', 'IT Company', 'Real Estate Company', 'Law Firm', 'Health Care', 'Agriculture', 'Construction', 'Education', 'Entertainment', 'Manufacturing', 'Mining', 'Pharmaceutical', 'Enery', 'Hospitality', 'Media', 'Computer', 'Electronics', 'Food Industry', 'Insurance', 'Transportation', 'Aerospace', 'Computer Industry', 'Retail', 'Telecommunication', 'Advertising & Marketing', 'Banking', 'Economic Sector', 'Food & Beverage', 'Agriculture', 'Forestry', 'Fishing & Hunting', 'Logging', 'Apartment Rental', 'Commercial Leasing', 'Land Leasing']),
+            'name' => fake()->unique()->randomElement($random_array),
         ];
     }
 }
