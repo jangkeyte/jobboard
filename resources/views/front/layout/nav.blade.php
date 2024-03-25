@@ -1,13 +1,13 @@
 <div class="navbar-area" id="stickymenu">
     <!-- Menu for Mobile Device -->
-    <div class="mobile-nav">
+    <div class="mobile-nav d-md-none text-center">
         <a href="{{ route('home') }}" class="logo">
             <img src="{{ asset('uploads/logo.png') }}" alt="" />
         </a>
     </div>
     
     <!-- Menu for Desktop Device -->
-    <div class="main-nav">
+    <div class="main-nav d-none d-md-block">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand" href="{{ route('home') }}">

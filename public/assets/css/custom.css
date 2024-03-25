@@ -35,3 +35,13 @@ a{
 .list-group-item.active a{
     color: #fff !important;
 }
+
+img{
+    max-width: 100%;
+}
+.navbar-brand>img{max-width:200px}
+
+.page-top {
+    min-height: 100px;
+    background-size: cover;
+}

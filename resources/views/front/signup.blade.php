@@ -1,16 +1,16 @@
 @extends('front.layout.app')
 
-@section('seo_title'){{ $other_page_item->signup_page_title ?? __('Title') }}@endsection
-@section('seo_meta_description'){{ $other_page_item->signup_page_meta_description ?? __('Meta Description') }}@endsection
+@section('seo_title'){{ $other_page_item->signup_page_title ?? __('SEO Title') }}@endsection
+@section('seo_meta_description'){{ $other_page_item->signup_page_meta_description ?? __('SEO Meta Description') }}@endsection
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_signup ?? 'default_banner.jpg')) }})">
+<div class="page-top" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_signup ?? 'banner_default.jpg')) }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $other_page_item->signup_page_heading ?? __('Page Heading') }}</h2>
+                <h2>{{ $other_page_item->signup_page_heading ?? __('SEO Heading') }}</h2>
             </div>
         </div>
     </div>

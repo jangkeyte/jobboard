@@ -1,7 +1,7 @@
 @extends('front.layout.app')
 
-@section('seo_title'){{ $pricing_page_item->title ?? __('Title') }}@endsection
-@section('seo_meta_description'){{ $pricing_page_item->meta_description ?? __('Meta Description') }}@endsection
+@section('seo_title'){{ $pricing_page_item->title ?? __('SEO Title') }}@endsection
+@section('seo_meta_description'){{ $pricing_page_item->meta_description ?? __('SEO Meta Description') }}@endsection
 
 @section('main_content')
 
@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $pricing_page_item->heading ?? __('Heading') }}</h2>
+                <h2>{{ $pricing_page_item->heading ?? __('SEO Heading') }}</h2>
             </div>
         </div>
     </div>
