@@ -5,12 +5,12 @@
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/banner.jpg') }})">
+<div class="page-top" style="background-image: url({{ asset('uploads/banner_default.jpg') }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Reset Password</h2>
+                <h2>{{ __('Reset Password') }}</h2>
             </div>
         </div>
     </div>
@@ -26,15 +26,15 @@
                         <input type="hidden" name="token" value="{{ $token }}">
                         <input type="hidden" name="email" value="{{ $email }}">
                         <div class="mb-3">
-                            <label for="" class="form-label">Password</label>
+                            <label for="" class="form-label">{{ __('Password') }}</label>
                             <input type="password" class="form-control" name="password">
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Retype Password</label>
+                            <label for="" class="form-label">{{ __('Retype Password') }}</label>
                             <input type="password" class="form-control" name="retype_password">
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primry bg-website">Submit</button>
+                            <button type="submit" class="btn btn-primry bg-website">{{ __('Submit') }}</button>
                         </div>
                     </form>
                 </div>

@@ -2,17 +2,18 @@
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/' . $global_banner_data->banner_company_detail) }})">
+<div class="page-top" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_company_detail ?? 'banner_default.jpg')) }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Job Title</h2>
+                <h2>{{ __('Job Title') }}</h2>
             </div>
         </div>
     </div>
 </div>
 
+@isset($company_single)
 <div class="page-top page-top-company-single" style="background-image: url({{ asset('uploads/banner.jpg') }}">
     <div class="bg"></div>
     <div class="container">
@@ -296,5 +297,6 @@
         </div>
     </div>
 </div>
+@endisset
 
 @endsection

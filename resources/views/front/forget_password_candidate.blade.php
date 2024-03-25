@@ -1,16 +1,16 @@
 @extends('front.layout.app')
 
-@section('seo_title'){{ $other_page_item->forget_password_page_title }}@endsection
-@section('seo_meta_description'){{ $other_page_item->forget_password_page_meta_description }}@endsection
+@section('seo_title'){{ $other_page_item->forget_password_page_title ?? __('SEO Title') }}@endsection
+@section('seo_meta_description'){{ $other_page_item->forget_password_page_meta_description ?? __('SEO Meta Description') }}@endsection
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/' . $global_banner_data->banner_forget_password) }})">
+<div class="page-top" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_forget_password ?? 'banner_default.jpg')) }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $other_page_item->forget_password_page_heading }}</h2>
+                <h2>{{ $other_page_item->forget_password_page_heading ?? __('SEO Heading') }}</h2>
             </div>
         </div>
     </div>
@@ -24,12 +24,12 @@
                     <form action="{{ route('candidate_forget_password_submit') }}" method="post">
                         @csrf
                         <div class="mb-3">
-                            <label for="" class="form-label">Email Address</label>
+                            <label for="" class="form-label">{{ __('Email Address') }}</label>
                             <input type="text" class="form-control" name="email">
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primry bg-website">Submit</button>
-                            <a href="{{ route('login') }}" class="primary-color">Back to Login Page</a>
+                            <button type="submit" class="btn btn-primary bg-website">{{ __('Submit') }}</button>
+                            <a href="{{ route('login') }}" class="btn btn-link">{{ __('Back to Login Page') }}</a>
                         </div>
                     </form>
                 </div>

@@ -1,16 +1,16 @@
 @extends('front.layout.app')
 
-@section('seo_title'){{ $contact_page_item->title }}@endsection
-@section('seo_meta_description'){{ $contact_page_item->meta_description }}@endsection
+@section('seo_title'){{ $contact_page_item->title ?? __('SEO Title') }}@endsection
+@section('seo_meta_description'){{ $contact_page_item->meta_description ?? __('SEO Meta Description') }}@endsection
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/' . $global_banner_data->banner_contact) }})">
+<div class="page-top" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_contact ?? 'banner_default.jpg')) }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $contact_page_item->heading }}</h2>
+                <h2>{{ $contact_page_item->heading ?? __('SEO Heading') }}</h2>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="map">
-                    {{ $contact_page_item->map_code }}
+                    {{ $contact_page_item->map_code ?? '' }}
                 </div>
             </div>
         </div>
