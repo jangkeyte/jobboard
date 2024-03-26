@@ -12,20 +12,20 @@
                         @csrf
                         <div class="form-group mb-3">
                             <label>Heading *</label>
-                            <input type="text" class="form-control" name="heading" value="{{ $page_term_data->heading }}">
+                            <input type="text" class="form-control" name="heading" value="{{ $page_term_data?->heading }}">
                         </div>
                         <div class="form-group mb-3">
                             <label>Content *</label>
-                            <textarea name="content" class="form-control editor" cols="30" rows="5">{{ $page_term_data->content }}</textarea>
+                            <textarea name="content" class="form-control editor" cols="30" rows="5">{{ $page_term_data?->content }}</textarea>
                         </div>
                         <h4 class="seo_section">SEO Section</h4>
                         <div class="form-group mb-3">
                             <label>Title *</label>
-                            <input type="text" class="form-control" name="title" value="{{ $page_term_data->title }}">
+                            <input type="text" class="form-control" name="title" value="{{ $page_term_data?->title }}">
                         </div>
                         <div class="form-group mb-3">
                             <label>Meta Description *</label>
-                            <textarea name="meta_description" class="form-control" cols="30" rows="5">{{ $page_term_data->meta_description }}</textarea>
+                            <textarea name="meta_description" class="form-control" cols="30" rows="5">{{ $page_term_data?->meta_description }}</textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Update</button>

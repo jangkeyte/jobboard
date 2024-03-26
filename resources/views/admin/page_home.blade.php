@@ -30,23 +30,23 @@
                                             <div class="col-md-12">
                                                 <div class="mb-4">
                                                     <label class="form-control">Heading *</label>
-                                                    <input type="text" class="form-control @error('heading') is-invalid @enderror" name="heading" value="{{ $page_home_data->heading ?? '' }}">
+                                                    <input type="text" class="form-control @error('heading') is-invalid @enderror" name="heading" value="{{ $page_home_data?->heading }}">
                                                 </div>
                                                 <div class="mb-4">
                                                     <label class="form-control">Text *</label>
-                                                    <textarea class="form-control" name="text" cols="30" rows="10">{{ $page_home_data->text ?? '' }}</textarea>
+                                                    <textarea class="form-control" name="text" cols="30" rows="10">{{ $page_home_data?->text }}</textarea>
                                                 </div> 
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="mb-4">
                                                             <label class="form-control">Job Title *</label>
-                                                            <input type="text" class="form-control" name="job_title" value="{{ $page_home_data->job_title ?? '' }}">
+                                                            <input type="text" class="form-control" name="job_title" value="{{ $page_home_data?->job_title }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">                                        
                                                         <div class="mb-4">
                                                             <label class="form-control">Job Location *</label>
-                                                            <input type="text" class="form-control" name="job_location" value="{{ $page_home_data->job_location ?? '' }}">
+                                                            <input type="text" class="form-control" name="job_location" value="{{ $page_home_data?->job_location }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -54,20 +54,20 @@
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="mb-4">
                                                             <label class="form-control">Job Category *</label>
-                                                            <input type="text" class="form-control" name="job_category" value="{{ $page_home_data->job_category ?? '' }}">
+                                                            <input type="text" class="form-control" name="job_category" value="{{ $page_home_data?->job_category }}">
                                                         </div>                                        
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="mb-4">
                                                             <label class="form-control">Search *</label>
-                                                            <input type="text" class="form-control" name="search" value="{{ $page_home_data->search ?? '' }}">
+                                                            <input type="text" class="form-control" name="search" value="{{ $page_home_data?->search }}">
                                                         </div>                                        
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <label class="form-control">Existing Background *</label>
                                                     <div>
-                                                        <img src="{{ asset('uploads/' . ($page_home_data->background ?? 'background_default.jpg') ) }}" alt="" class="w-50">
+                                                        <img src="{{ asset('uploads/' . ($page_home_data?->background ?? 'background_default.jpg') ) }}" alt="" class="w-50">
                                                     </div>
                                                 </div>               
                                                 <div class="mb-4">
@@ -88,17 +88,17 @@
                                             <div class="col-md-12">
                                                 <div class="mb-4">
                                                     <label class="form-control">Heading *</label>
-                                                    <input type="text" class="form-control" name="job_category_heading" value="{{ $page_home_data->job_category_heading ?? '' }}">
+                                                    <input type="text" class="form-control" name="job_category_heading" value="{{ $page_home_data?->job_category_heading }}">
                                                 </div>     
                                                 <div class="mb-4">
                                                     <label class="form-control">Sub Heading</label>
-                                                    <input type="text" class="form-control" name="job_category_subheading" value="{{ $page_home_data->job_category_subheading ?? '' }}">
+                                                    <input type="text" class="form-control" name="job_category_subheading" value="{{ $page_home_data?->job_category_subheading }}">
                                                 </div>      
                                                 <div class="mb-4">
                                                     <label class="form-control">Status *</label>
                                                     <select name="job_category_status" class="form-control">
-                                                        <option value="Show" @if($page_home_data->job_category_status == 'Show') selected @endif >Show</option>
-                                                        <option value="Hide" @if($page_home_data->job_category_status == 'Hide') selected @endif >Hide</option>
+                                                        <option value="Show" @if($page_home_data?->job_category_status == 'Show') selected @endif >Show</option>
+                                                        <option value="Hide" @if($page_home_data?->job_category_status == 'Hide') selected @endif >Hide</option>
                                                     </select>
                                                 </div>     
                                             </div>
@@ -113,16 +113,16 @@
                                             <div class="col-md-12">
                                                 <div class="mb-4">
                                                     <label class="form-control">Heading *</label>
-                                                    <input type="text" class="form-control" name="why_choose_heading" value="{{ $page_home_data->why_choose_heading ?? '' }}">
+                                                    <input type="text" class="form-control" name="why_choose_heading" value="{{ $page_home_data?->why_choose_heading }}">
                                                 </div>     
                                                 <div class="mb-4">
                                                     <label class="form-control">Sub Heading</label>
-                                                    <input type="text" class="form-control" name="why_choose_subheading" value="{{ $page_home_data->why_choose_subheading ?? '' }}">
+                                                    <input type="text" class="form-control" name="why_choose_subheading" value="{{ $page_home_data?->why_choose_subheading }}">
                                                 </div>      
                                                 <div class="mb-4">
                                                     <label class="form-control">Existing Background *</label>
                                                     <div>
-                                                        <img src="{{ asset('uploads/' . $page_home_data->why_choose_background ) }}" alt="" class="w-50">
+                                                        <img src="{{ asset('uploads/' . $page_home_data?->why_choose_background ) }}" alt="" class="w-50">
                                                     </div>
                                                 </div>               
                                                 <div class="mb-4">
@@ -134,8 +134,8 @@
                                                 <div class="mb-4">
                                                     <label class="form-control">Status *</label>
                                                     <select name="why_choose_status" class="form-control">
-                                                        <option value="Show" @if($page_home_data->why_choose_status == 'Show') selected @endif>Show</option>
-                                                        <option value="Hide" @if($page_home_data->why_choose_status == 'Hide') selected @endif>Hide</option>
+                                                        <option value="Show" @if($page_home_data?->why_choose_status == 'Show') selected @endif>Show</option>
+                                                        <option value="Hide" @if($page_home_data?->why_choose_status == 'Hide') selected @endif>Hide</option>
                                                     </select>
                                                 </div>     
                                             </div>
@@ -150,17 +150,17 @@
                                             <div class="col-md-12">
                                                 <div class="mb-4">
                                                     <label class="form-control">Heading *</label>
-                                                    <input type="text" class="form-control" name="featured_jobs_heading" value="{{ $page_home_data->featured_jobs_heading ?? '' }}">
+                                                    <input type="text" class="form-control" name="featured_jobs_heading" value="{{ $page_home_data?->featured_jobs_heading }}">
                                                 </div>     
                                                 <div class="mb-4">
                                                     <label class="form-control">Sub Heading</label>
-                                                    <input type="text" class="form-control" name="featured_jobs_subheading" value="{{ $page_home_data->featured_jobs_subheading ?? '' }}">
+                                                    <input type="text" class="form-control" name="featured_jobs_subheading" value="{{ $page_home_data?->featured_jobs_subheading }}">
                                                 </div>      
                                                 <div class="mb-4">
                                                     <label class="form-control">Status *</label>
                                                     <select name="featured_jobs_status" class="form-control">
-                                                        <option value="Show" @if($page_home_data->featured_jobs_status == 'Show') selected @endif>Show</option>
-                                                        <option value="Hide" @if($page_home_data->featured_jobs_status == 'Hide') selected @endif>Hide</option>
+                                                        <option value="Show" @if($page_home_data?->featured_jobs_status == 'Show') selected @endif>Show</option>
+                                                        <option value="Hide" @if($page_home_data?->featured_jobs_status == 'Hide') selected @endif>Hide</option>
                                                     </select>
                                                 </div>     
                                             </div>
@@ -175,16 +175,16 @@
                                             <div class="col-md-12">
                                                 <div class="mb-4">
                                                     <label class="form-control">Heading *</label>
-                                                    <input type="text" class="form-control" name="testimonial_heading" value="{{ $page_home_data->testimonial_heading ?? '' }}">
+                                                    <input type="text" class="form-control" name="testimonial_heading" value="{{ $page_home_data?->testimonial_heading }}">
                                                 </div>     
                                                 <div class="mb-4">
                                                     <label class="form-control">Sub Heading</label>
-                                                    <input type="text" class="form-control" name="testimonial_subheading" value="{{ $page_home_data->testimonial_subheading ?? '' }}">
+                                                    <input type="text" class="form-control" name="testimonial_subheading" value="{{ $page_home_data?->testimonial_subheading }}">
                                                 </div>      
                                                 <div class="mb-4">
                                                     <label class="form-control">Existing Background *</label>
                                                     <div>
-                                                        <img src="{{ asset('uploads/' . $page_home_data->testimonial_background ) }}" alt="" class="w-50">
+                                                        <img src="{{ asset('uploads/' . $page_home_data?->testimonial_background ) }}" alt="" class="w-50">
                                                     </div>
                                                 </div>               
                                                 <div class="mb-4">
@@ -196,8 +196,8 @@
                                                 <div class="mb-4">
                                                     <label class="form-control">Status *</label>
                                                     <select name="testimonial_status" class="form-control">
-                                                        <option value="Show" @if($page_home_data->testimonial_status == 'Show') selected @endif>Show</option>
-                                                        <option value="Hide" @if($page_home_data->testimonial_status == 'Hide') selected @endif>Hide</option>
+                                                        <option value="Show" @if($page_home_data?->testimonial_status == 'Show') selected @endif>Show</option>
+                                                        <option value="Hide" @if($page_home_data?->testimonial_status == 'Hide') selected @endif>Hide</option>
                                                     </select>
                                                 </div>     
                                             </div>
@@ -212,17 +212,17 @@
                                             <div class="col-md-12">
                                                 <div class="mb-4">
                                                     <label class="form-control">Heading *</label>
-                                                    <input type="text" class="form-control" name="blog_heading" value="{{ $page_home_data->blog_heading ?? '' }}">
+                                                    <input type="text" class="form-control" name="blog_heading" value="{{ $page_home_data?->blog_heading }}">
                                                 </div>     
                                                 <div class="mb-4">
                                                     <label class="form-control">Sub Heading</label>
-                                                    <input type="text" class="form-control" name="blog_subheading" value="{{ $page_home_data->blog_subheading ?? '' }}">
+                                                    <input type="text" class="form-control" name="blog_subheading" value="{{ $page_home_data?->blog_subheading }}">
                                                 </div>      
                                                 <div class="mb-4">
                                                     <label class="form-control">Status *</label>
                                                     <select name="blog_status" class="form-control">
-                                                        <option value="Show" @if($page_home_data->blog_status == 'Show') selected @endif>Show</option>
-                                                        <option value="Hide" @if($page_home_data->blog_status == 'Hide') selected @endif>Hide</option>
+                                                        <option value="Show" @if($page_home_data?->blog_status == 'Show') selected @endif>Show</option>
+                                                        <option value="Hide" @if($page_home_data?->blog_status == 'Hide') selected @endif>Hide</option>
                                                     </select>
                                                 </div>     
                                             </div>
@@ -237,11 +237,11 @@
                                             <div class="col-md-12">
                                                 <div class="mb-4">
                                                     <label class="form-control">Title</label>
-                                                    <input type="text" class="form-control" name="title" value="{{ $page_home_data->title ?? '' }}">
+                                                    <input type="text" class="form-control" name="title" value="{{ $page_home_data?->title }}">
                                                 </div>     
                                                 <div class="mb-4">
                                                     <label class="form-control">Meta Description</label>
-                                                    <textarea name="meta_description" class="form-control" cols="30" rows="10">{{ $page_home_data->meta_description ?? '' }}</textarea>
+                                                    <textarea name="meta_description" class="form-control" cols="30" rows="10">{{ $page_home_data?->meta_description }}</textarea>
                                                 </div>
                                             </div>
                                         </div>

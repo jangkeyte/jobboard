@@ -27,15 +27,15 @@
                                         <!-- Login Section Start -->                                        
                                         <div class="form-group mb-3">
                                             <label>Heading *</label>
-                                            <input type="text" class="form-control" name="login_page_heading" value="{{ $page_other_data->login_page_heading }}">
+                                            <input type="text" class="form-control" name="login_page_heading" value="{{ $page_other_data?->login_page_heading }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Title *</label>
-                                            <input type="text" class="form-control" name="login_page_title" value="{{ $page_other_data->login_page_title }}">
+                                            <input type="text" class="form-control" name="login_page_title" value="{{ $page_other_data?->login_page_title }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Meta Description *</label>
-                                            <textarea name="login_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data->login_page_meta_description }}</textarea>
+                                            <textarea name="login_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data?->login_page_meta_description }}</textarea>
                                         </div>
                                         <!-- Login Section End -->
                                     </div>
@@ -43,15 +43,15 @@
                                         <!-- Sign Up Section Start -->                                        
                                         <div class="form-group mb-3">
                                             <label>Heading *</label>
-                                            <input type="text" class="form-control" name="signup_page_heading" value="{{ $page_other_data->signup_page_heading }}">
+                                            <input type="text" class="form-control" name="signup_page_heading" value="{{ $page_other_data?->signup_page_heading }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Title *</label>
-                                            <input type="text" class="form-control" name="signup_page_title" value="{{ $page_other_data->signup_page_title }}">
+                                            <input type="text" class="form-control" name="signup_page_title" value="{{ $page_other_data?->signup_page_title }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Meta Description *</label>
-                                            <textarea name="signup_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data->signup_page_meta_description }}</textarea>
+                                            <textarea name="signup_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data?->signup_page_meta_description }}</textarea>
                                         </div>
                                         <!-- Sign Up Section End -->
                                     </div>
@@ -59,15 +59,15 @@
                                         <!-- Forget Password Section Start -->                                        
                                         <div class="form-group mb-3">
                                             <label>Heading *</label>
-                                            <input type="text" class="form-control" name="forget_password_page_heading" value="{{ $page_other_data->forget_password_page_heading }}">
+                                            <input type="text" class="form-control" name="forget_password_page_heading" value="{{ $page_other_data?->forget_password_page_heading }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Title *</label>
-                                            <input type="text" class="form-control" name="forget_password_page_title" value="{{ $page_other_data->forget_password_page_title }}">
+                                            <input type="text" class="form-control" name="forget_password_page_title" value="{{ $page_other_data?->forget_password_page_title }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Meta Description *</label>
-                                            <textarea name="forget_password_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data->forget_password_page_meta_description }}</textarea>
+                                            <textarea name="forget_password_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data?->forget_password_page_meta_description }}</textarea>
                                         </div>
                                         <!-- Forget Password Section End -->
                                     </div>
@@ -75,15 +75,15 @@
                                         <!-- Job Listing Section Start -->                                        
                                         <div class="form-group mb-3">
                                             <label>Heading *</label>
-                                            <input type="text" class="form-control" name="job_listing_page_heading" value="{{ $page_other_data->job_listing_page_heading }}">
+                                            <input type="text" class="form-control" name="job_listing_page_heading" value="{{ $page_other_data?->job_listing_page_heading }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Title *</label>
-                                            <input type="text" class="form-control" name="job_listing_page_title" value="{{ $page_other_data->job_listing_page_title }}">
+                                            <input type="text" class="form-control" name="job_listing_page_title" value="{{ $page_other_data?->job_listing_page_title }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Meta Description *</label>
-                                            <textarea name="job_listing_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data->job_listing_page_meta_description }}</textarea>
+                                            <textarea name="job_listing_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data?->job_listing_page_meta_description }}</textarea>
                                         </div>
                                         <!-- Job Listing Section End -->
                                     </div>
@@ -91,15 +91,15 @@
                                         <!-- Company Listing Section Start -->                                        
                                         <div class="form-group mb-3">
                                             <label>Heading *</label>
-                                            <input type="text" class="form-control" name="company_listing_page_heading" value="{{ $page_other_data->company_listing_page_heading }}">
+                                            <input type="text" class="form-control" name="company_listing_page_heading" value="{{ $page_other_data?->company_listing_page_heading }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Title *</label>
-                                            <input type="text" class="form-control" name="company_listing_page_title" value="{{ $page_other_data->company_listing_page_title }}">
+                                            <input type="text" class="form-control" name="company_listing_page_title" value="{{ $page_other_data?->company_listing_page_title }}">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Meta Description *</label>
-                                            <textarea name="company_listing_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data->company_listing_page_meta_description }}</textarea>
+                                            <textarea name="company_listing_page_meta_description" class="form-control" cols="30" rows="5">{{ $page_other_data?->company_listing_page_meta_description }}</textarea>
                                         </div>
                                         <!-- Company Listing Section End -->
                                     </div>
