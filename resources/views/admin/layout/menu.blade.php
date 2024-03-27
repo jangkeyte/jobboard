@@ -71,6 +71,7 @@
     </ul>
 </li>
 
+<!-- SUBSCRIBERS -->
 <li class="nav-item {{ Request::is('admin/all-subscribers') || Request::is('admin/subscribers-send-email') ? 'menu-open' : '' }}">
     <a href="#" class="nav-link {{ Request::is('admin/all-subscribers') || Request::is('admin/subscribers-send-email') ? 'active' : '' }}">
         <i class="nav-icon bi bi-postcard-fill"></i>
@@ -83,6 +84,13 @@
         <li class="nav-item"><a class="nav-link {{ Request::is('admin/all-subscribers') ? 'active' : '' }}" href="{{ route('admin_all_subscribers') }}"><i class="nav-icon bi bi-caret-right{{ Request::is('admin/all-subscribers') ? '-fill' : '' }}"></i> {{ __('All Subscribers') }}</a></li>
         <li class="nav-item"><a class="nav-link {{ Request::is('admin/subscribers-send-email') ? 'active' : '' }}" href="{{ route('admin_subscribers_send_email') }}"><i class="nav-icon bi bi-caret-right{{ Request::is('admin/subscribers-send-email') ? '-fill' : '' }}"></i> {{ __('Send mail to Subscribers') }}</a></li>
     </ul>
+</li>
+
+<!-- COMPANY -->
+<li class="nav-item">
+    <a href="{{ route('admin_companies') }}" class="nav-link {{ Request::is('admin/companies') ? 'active' : '' }}">
+        <i class="nav-icon bi bi-person-fill-check"></i> <p>{{ __('Company Profile') }}</p>
+    </a>
 </li>
 
 <li class="nav-item">

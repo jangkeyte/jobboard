@@ -49,6 +49,8 @@ use App\Http\Controllers\Admin\AdminAdvertisementController;
 use App\Http\Controllers\Admin\AdminBannerController;
 use App\Http\Controllers\Admin\AdminSubscriberController;
 use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Admin\AdminCompanyController;
+use App\Http\Controllers\Admin\AdminCandidateController;
 
 
 Route::group(['middleware' => 'locale'], function() {
@@ -368,5 +370,8 @@ Route::group(['middleware' => 'locale'], function() {
         
         Route::get('/admin/settings', [AdminSettingController::class, 'index'])->name('admin_settings');
         Route::post('/admin/settings/update', [AdminSettingController::class, 'update'])->name('admin_settings_update');
+        
+        Route::get('/admin/companies', [AdminCompanyController::class, 'index'])->name('admin_companies');
+        Route::get('/admin/companies-detail/{id}', [AdminCompanyController::class, 'companies_detail'])->name('admin_companies_detail');
     });
 });

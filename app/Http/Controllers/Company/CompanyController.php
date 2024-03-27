@@ -26,6 +26,7 @@ use App\Models\CandidateSkill;
 use App\Models\CandidateWorkExperience;
 use App\Models\CandidateAward;
 use App\Models\CandidateResume;
+use App\Models\CandidateBookmark;
 use App\Mail\Websitemail;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -435,6 +436,8 @@ class CompanyController extends Controller
     public function jobs_delete($id)
     {
         Job::where('id', $id)->delete();
+        CandidateApplication::where('job_id', $id)->delete();
+        CandidateBookmark::where('job_id', $id)->delete();
         return redirect()->back()->with('success', 'Job is deleted successfully.');
     }
 
