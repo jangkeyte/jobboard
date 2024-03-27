@@ -7,7 +7,7 @@
     <meta name="description" content="@yield('seo_meta_description')">
     <title>@yield('seo_title')</title>
 
-    <link rel="icon" type="image/png" href="uploads/favicon.png">    
+    <link rel="icon" type="image/png" href="{{ asset('uploads/' . $global_settings_data->favicon) }}">    
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 
     @include('front.layout.styles')

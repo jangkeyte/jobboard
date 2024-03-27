@@ -158,6 +158,10 @@ class CompanyController extends Controller
         $package_data = Package::where('id', $order_data->package_id)->first();
         $existing_photo_number = CompanyPhoto::where('company_id', Auth::guard('company')->user()->id)->count();
 
+        if(date('Y-m-d') > $order_data?->expire_date) {
+            return redirect()->back()->with('error', 'Your package is expired!');
+        }
+
         if($package_data->total_allowed_photos <= $existing_photo_number) {
             return redirect()->back()->with('error', 'Maximum number of allowed photo are uploaded. So you have to upgrade your package if you want to add more photos');
         }
@@ -213,6 +217,10 @@ class CompanyController extends Controller
         $order_data = Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
         $package_data = Package::where('id', $order_data->package_id)->first();
         $existing_video_number = CompanyVideo::where('company_id', Auth::guard('company')->user()->id)->count();
+
+        if(date('Y-m-d') > $order_data?->expire_date) {
+            return redirect()->back()->with('error', 'Your package is expired!');
+        }
 
         if($package_data->total_allowed_videos <= $existing_video_number) {
             return redirect()->back()->with('error', 'Maximum number of allowed video are uploaded. So you have to upgrade your package if you want to add more videos');
@@ -297,6 +305,10 @@ class CompanyController extends Controller
 
         if(!$order_data) {            
             return redirect()->back()->with('error', 'You have to buy a package first to access this page.');
+        }
+
+        if(date('Y-m-d') > $order_data?->expire_date) {
+            return redirect()->back()->with('error', 'Your package is expired!');
         }
 
         // Check if a person has access to this page under the current package

@@ -5,10 +5,10 @@
                 <div class="item">
                     <h2 class="heading">{{ __('For Candidates') }}</h2>
                     <ul class="useful-links">
-                        <li><a href="#">{{ __('Browser Jobs') }}</a></li>
-                        <li><a href="#">{{ __('Browse Candidates') }}</a></li>
-                        <li><a href="#">{{ __('Candidate Dashboard') }}</a></li>
-                        <li><a href="#">{{ __('Saved Jobs') }}</a></li>
+                        <li><a href="{{ route('job_listing') }}">{{ __('Browser Jobs') }}</a></li>
+                        <li><a href="{{ route('candidate_bookmark_view') }}">{{ __('Bookmarked Jobs') }}</a></li>
+                        <li><a href="{{ route('candidate_dashboard') }}">{{ __('Candidate Dashboard') }}</a></li>
+                        <li><a href="{{ route('candidate_apply_view') }}">{{ __('Apllied Jobs') }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -16,10 +16,10 @@
                 <div class="item">
                     <h2 class="heading">{{ __('For Companies') }}</h2>
                     <ul class="useful-links">
-                        <li><a href="#">{{ __('Post Job') }}</a></li>
-                        <li><a href="#">{{ __('Browse Jobs') }}</a></li>
-                        <li><a href="#">{{ __('Company Dashboard') }}</a></li>
-                        <li><a href="#">{{ __('Applications') }}</a></li>
+                        <li><a href="{{ route('company_jobs_create') }}">{{ __('Post New Job') }}</a></li>
+                        <li><a href="{{ route('company_listing') }}">{{ __('Browse Company') }}</a></li>
+                        <li><a href="{{ route('company_dashboard') }}">{{ __('Company Dashboard') }}</a></li>
+                        <li><a href="{{ route('company_candidate_applications') }}">{{ __('Applications') }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="right">
-                            34 Antiger Lane, USA, 12937
+                            {{ $global_settings_data->footer_address }}
                         </div>
                     </div>
                     <div class="list-item">
@@ -40,7 +40,7 @@
                             <i class="fas fa-phone"></i>
                         </div>
                         <div class="right">
-                            122-222-1212
+                            {{ $global_settings_data->footer_phone }}
                         </div>
                     </div>
                     <div class="list-item">
@@ -48,16 +48,15 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="right">
-                            contact@jangkeyte.com
+                            {{ $global_settings_data->footer_email }}
                         </div>
                     </div>
                     <ul class="social">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="{{ $global_settings_data->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="{{ $global_settings_data->twitter }}"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="{{ $global_settings_data->pinterest }}"><i class="fab fa-pinterest-p"></i></a></li>
+                        <li><a href="{{ $global_settings_data->linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="{{ $global_settings_data->instagram }}"><i class="fab fa-instagram"></i></a></li>
                     </ul>
                 </div>
             </div>

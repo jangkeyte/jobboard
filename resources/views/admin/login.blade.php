@@ -1,4 +1,3 @@
-<x-laravel-ui-adminlte::adminlte-layout>
 
     <body class="hold-transition login-page">
         <div class="login-box">
@@ -66,4 +65,3 @@
         </div>
         <!-- /.login-box -->
     </body>
-</x-laravel-ui-adminlte::adminlte-layout>

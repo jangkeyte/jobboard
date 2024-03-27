@@ -71,7 +71,9 @@ class AdminPostController extends Controller
                 'photo' => 'image|mimes:jpg,jpeg,png,gif',
             ]);
 
-            unlink(public_path('uploads/' . $obj->photo));
+            if(file_exists(public_path('uploads/' . $obj->photo))) {
+                unlink(public_path('uploads/' . $obj->photo));
+            }
 
             $ext = $request->file('photo')->extension();
             $final_name = 'post_' . time() . '.' . $ext;

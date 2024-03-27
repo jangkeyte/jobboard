@@ -2,7 +2,7 @@
     <!-- Menu for Mobile Device -->
     <div class="mobile-nav d-md-none text-center">
         <a href="{{ route('home') }}" class="logo">
-            <img src="{{ asset('uploads/logo.png') }}" alt="" />
+            <img src="{{ asset('uploads/' . $global_settings_data->logo) }}" alt="" />
         </a>
     </div>
     

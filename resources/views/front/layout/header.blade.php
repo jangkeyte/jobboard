@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-md-6 left-side">
                 <ul>
-                    <li class="phone-text">111-222-3333</li>
-                    <li class="email-text">contact@jangkeyte.com</li>
+                    <li class="phone-text"><a href="tel:{{ $global_settings_data->top_bar_phone }}">{{ $global_settings_data->top_bar_phone }}</a></li>
+                    <li class="email-text"><a href="mailto:{{ $global_settings_data->top_bar_email }}">{{ $global_settings_data->top_bar_email }}</a></li>
                 </ul>
             </div>
             <div class="col-md-6 right-side">

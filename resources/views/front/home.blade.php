@@ -141,52 +141,64 @@
             </div>
         </div>
         <div class="row">
+            @php $i=0; @endphp
             @foreach($featured_jobs as $item)
-            <div class="col-lg-6 col-md-12">
-                <div class="item d-flex justify-content-start">
-                    <div class="logo">
-                        <img src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
-                    </div>
-                    <div class="text">
-                        <h3>
-                            <a href="{{ route('job', $item->id) }}">{{ $item->title }}, {{ $item->rCompany->company_name }}</a>
-                        </h3>
-                        <div class="detail-1 d-flex justify-content-start">
-                            <div class="category">{{ $item->rJobCategory->name }}</div>
-                            <div class="location">{{ $item->rJobLocation->name }}</div>
+                @php
+                    $this_company_id = $item->rCompany->id;
+                    $order_data = \App\Models\Order::where('company_id', $this_company_id)->where('currently_active', 1)->first();
+                    if(date('Y-m-d') > $order_data?->expire_date) {
+                        continue;
+                    }
+                    $i++;
+                    if($i > 6) {
+                        break;
+                    }
+                @endphp
+                <div class="col-lg-6 col-md-12">
+                    <div class="item d-flex justify-content-start">
+                        <div class="logo">
+                            <img src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
                         </div>
-                        <div class="detail-2 d-flex-justify-content-start">
-                            <div class="date">{{ $item->created_at->diffForHumans() }}</div>
-                            <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
-                            @if(date('Y-m-d') > $item->deadline)
-                            <div class="expired">Expired</div>
+                        <div class="text">
+                            <h3>
+                                <a href="{{ route('job', $item->id) }}">{{ $item->title }}, {{ $item->rCompany->company_name }}</a>
+                            </h3>
+                            <div class="detail-1 d-flex justify-content-start">
+                                <div class="category">{{ $item->rJobCategory->name }}</div>
+                                <div class="location">{{ $item->rJobLocation->name }}</div>
+                            </div>
+                            <div class="detail-2 d-flex-justify-content-start">
+                                <div class="date">{{ $item->created_at->diffForHumans() }}</div>
+                                <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
+                                @if(date('Y-m-d') > $item->deadline)
+                                <div class="expired">Expired</div>
+                                @endif
+                            </div>
+                            <div class="special d-flex justify-content-start">
+                                @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
+                                <div class="type">{{ $item->rJobType->name }}</div>
+                                @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
+                            </div>
+                            @if(!Auth::guard('company')->check())
+                            <div class="bookmark">
+                                @if(Auth::guard('candidate')->check())
+                                    @php
+                                        $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
+                                        if($count > 0) {
+                                            $bookmark_status = 'active';
+                                        } else {
+                                            $bookmark_status = '';
+                                        }
+                                    @endphp
+                                @else
+                                    @php $bookmark_status = ''; @endphp
+                                @endif
+                                <a href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fas fa-bookmark {{ $bookmark_status }}"></i></a>
+                            </div>
                             @endif
                         </div>
-                        <div class="special d-flex justify-content-start">
-                            @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
-                            <div class="type">{{ $item->rJobType->name }}</div>
-                            @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
-                        </div>
-                        @if(!Auth::guard('company')->check())
-                        <div class="bookmark">
-                            @if(Auth::guard('candidate')->check())
-                                @php
-                                    $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
-                                    if($count > 0) {
-                                        $bookmark_status = 'active';
-                                    } else {
-                                        $bookmark_status = '';
-                                    }
-                                @endphp
-                            @else
-                                @php $bookmark_status = ''; @endphp
-                            @endif
-                            <a href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fas fa-bookmark {{ $bookmark_status }}"></i></a>
-                        </div>
-                        @endif
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
         <div class="row">

@@ -113,6 +113,13 @@
                                 <div class="text-danger">{{ __('No result found') }}</div>
                             @else
                                 @foreach($jobs as $item)
+                                    @php
+                                        $this_company_id = $item->rCompany->id;
+                                        $order_data = \App\Models\Order::where('company_id', $this_company_id)->where('currently_active', 1)->first();
+                                        if(date('Y-m-d') > $order_data?->expire_date) {
+                                            continue;
+                                        }
+                                    @endphp
                                     <div class="col-md-12">
                                         <div class="item d-flex justify-content-start">
                                             <div class="logo">

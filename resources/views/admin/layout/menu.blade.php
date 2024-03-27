@@ -120,3 +120,8 @@
         <i class="nav-icon bi bi-card-image"></i> <p>{{ __('Banners') }}</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('admin_settings') }}" class="nav-link {{ Request::is('admin/settings/*') ? 'active' : '' }}">
+        <i class="nav-icon bi bi-person-fill-check"></i> <p>{{ __('Settings') }}</p>
+    </a>
+</li>
