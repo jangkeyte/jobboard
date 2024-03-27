@@ -209,6 +209,7 @@ Route::group(['middleware' => 'locale'], function() {
     /* Admin Middleware */
     Route::middleware(['admin:admin'])->group(function() {
         Route::get('/admin/home', [AdminHomeController::class, 'index'])->name('admin_home');
+        Route::get('/admin/dashboard', [AdminHomeController::class, 'dashboard'])->name('admin_dashboard');
         Route::get('/admin/edit-profile', [AdminProfileController::class, 'index'])->name('admin_profile');
         Route::post('/admin/edit-profile-submit', [AdminProfileController::class, 'profile_submit'])->name('admin_profile_submit');
 
@@ -365,6 +366,3 @@ Route::group(['middleware' => 'locale'], function() {
         Route::get('/admin/subscriber-delete/{id}', [AdminSubscriberController::class, 'delete'])->name('admin_subscriber_delete');
     });
 });
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();

@@ -1,50 +1,69 @@
-@extends('admin.layout.guest')
+<x-laravel-ui-adminlte::adminlte-layout>
 
-@section('heading', 'Dashboard')
+    <body class="hold-transition login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+            </div>
+            <!-- /.login-logo -->
 
-@section('main_content')
+            <!-- /.login-box-body -->
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">{{ __('Sign in to start your session') }}</p>
 
-    <div class="container container-login">
-        <div class="row">
-            <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                <div class="card card-primary border-box">
-                    <div class="card-header card-header-auth">
-                        <h4 class="text-center">Admin Panel Login</h4>
-                    </div>
-                    <div class="card-body card-body-auth">
-                        @if(session()->get('success'))
-                            <div class="text-success">{{ session()->get('success') }}</div>
-                        @endif
-                        <form method="POST" action="{!! route('admin_login_submit') !!}">
-                            @csrf
-                            <div class="form-group">
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email address" value="{{ old('email') ?? 'jangkeyte@gmail.com' }}" autofocus>
-                                @error('email')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                                @if(session()->get('error'))
-                                    <div class="text-danger">{{ session()->get('error') }}</div>
-                                @endif
+                    <form method="post" action="{!! route('admin_login_submit') !!}">
+                        @csrf
+
+                        <div class="input-group mb-3">
+                            <input type="email" name="email" value="{{ old('email') }}" placeholder="{{ __('Email') }}" class="form-control @error('email') is-invalid @enderror">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="fas fa-envelope"></span></div>
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="1234" placeholder="Password">
-                                @error('password')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block"> Login</button>
-                            </div>
-                            <div class="form-group">
-                                <div>
-                                    <a href="{{ route('admin_forget_password') }}">Forget Password?</a>
+                            @error('email')
+                                <span class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input type="password" name="password" placeholder="{{ __('Password') }}" class="form-control @error('password') is-invalid @enderror">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                            @error('password')
+                                <span class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
 
-@endsection
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="remember">
+                                    <label for="remember">{{ __('Remember Me') }}</label>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">{{ __('Sign In') }}</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <p class="mb-1">
+                        <a href="{{ route('admin_forget_password') }}">{{ __('I forgot my password') }}</a>
+                    </p>
+                    <p class="mb-0">
+                        <a href="{{-- route('register') --}}" class="text-center">{{ __('Register a new membership') }}</a>
+                    </p>
+                </div>
+                <!-- /.login-card-body -->
+            </div>
+
+        </div>
+        <!-- /.login-box -->
+    </body>
+</x-laravel-ui-adminlte::adminlte-layout>

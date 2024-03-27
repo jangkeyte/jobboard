@@ -3,9 +3,7 @@
 @section('heading', 'Job Categories')
 
 @section('button')
-<div>
-    <a href="{{ route('admin_job_category_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</a>
-</div>
+<a href="{{ route('admin_job_category_create') }}" class="btn btn-primary btn-sm ms-2"><i class="bi bi-plus"></i> {{ __('Add New') }}</a>
 @endsection
 
 @section('main_content')
@@ -18,7 +16,7 @@
                         <table class="table table-bordered" id="">
                             <thead>
                                 <tr>
-                                    <th>SL</th>
+                                    <th>#</th>
                                     <th>Category Name</th>
                                     <th>Category Icon</th>
                                     <th>Icon Preview</th>

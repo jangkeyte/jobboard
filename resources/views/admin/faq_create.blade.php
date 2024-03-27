@@ -3,9 +3,7 @@
 @section('heading', 'Create Faq')
 
 @section('button')
-<div>
-    <a href="{{ route('admin_faq') }}" class="btn btn-primary"><i class="fas fa-plus"></i> View All</a>
-</div>
+<a href="{{ route('admin_faq') }}" class="btn btn-primary btn-sm ms-2"><i class="bi bi-folder-check"></i> View All</a>
 @endsection
 
 @section('main_content')

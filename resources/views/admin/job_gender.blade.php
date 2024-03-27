@@ -3,9 +3,7 @@
 @section('heading', 'Job Genders')
 
 @section('button')
-<div>
-    <a href="{{ route('admin_job_gender_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</a>
-</div>
+<a href="{{ route('admin_job_gender_create') }}" class="btn btn-primary btn-sm ms-2"><i class="bi bi-plus"></i> {{ __('Add New') }}</a>
 @endsection
 
 @section('main_content')

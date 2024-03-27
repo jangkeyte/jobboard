@@ -3,9 +3,7 @@
 @section('heading', 'Company Industries')
 
 @section('button')
-<div>
-    <a href="{{ route('admin_company_industry_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</a>
-</div>
+<a href="{{ route('admin_company_industry_create') }}" class="btn btn-primary btn-sm ms-2"><i class="bi bi-plus"></i> {{ __('Add New') }}</a>
 @endsection
 
 @section('main_content')

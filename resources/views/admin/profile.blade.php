@@ -17,14 +17,14 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="mb-4">
-                                    <label class="form-control">Name *</label>
+                                    <label>Name *</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ Auth::guard('admin')->user()->name }}">
                                     @error('name')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mb-4">
-                                    <label class="form-control">Email *</label>
+                                    <label>Email *</label>
                                     <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ Auth::guard('admin')->user()->email }}">
                                     @error('email')
                                         <div class="text-danger">{{ $message }}</div>

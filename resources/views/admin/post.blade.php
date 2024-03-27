@@ -3,9 +3,7 @@
 @section('heading', 'Posts')
 
 @section('button')
-<div>
-    <a href="{{ route('admin_post_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</a>
-</div>
+<a href="{{ route('admin_post_create') }}" class="btn btn-primary btn-sm ms-2"><i class="bi bi-plus"></i> {{ __('Add New') }}</a>
 @endsection
 
 @section('main_content')
@@ -18,7 +16,7 @@
                         <table class="table table-bordered" id="">
                             <thead>
                                 <tr>
-                                    <th>SL</th>
+                                    <th>#</th>
                                     <th>Heading</th>
                                     <th>Photo</th>
                                     <th>Action</th>

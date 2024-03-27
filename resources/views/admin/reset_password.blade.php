@@ -1,43 +1,73 @@
-@extends('admin.layout.guest')
+<x-laravel-ui-adminlte::adminlte-layout>
 
-@section('heading', 'Dashboard')
-
-@section('main_content')
-
-    <div class="container container-login">
-        <div class="row">
-            <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                <div class="card card-primary border-box">
-                    <div class="card-header card-header-auth">
-                        <h4 class="text-center">Reset Password</h4>
-                    </div>
-                    <div class="card-body card-body-auth">
-                        <form method="POST" action="{{ route('admin_reset_password_submit') }}">
-                            @csrf
-
-                            <input type="hidden" name="token" value="{{ $token }}">
-                            <input type="hidden" name="email" value="{{ $email }}">
-
-                            <div class="form-group">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" autofocus>
-                                @error('password')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <input type="retype_password" class="form-control @error('retype_password') is-invalid @enderror" name="retype_password" placeholder="Retype Password" autofocus>
-                                @error('retype_password')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block"> Update</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <body class="hold-transition login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
             </div>
-        </div>
-    </div>
 
-@endsection
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">You are only one step a way from your new password, recover your password
+                        now.</p>
+
+                    <form action="{{ route('admin_reset_password_submit') }}" method="POST">
+                        @csrf
+
+                        <input type="hidden" name="token" value="{{ $token }}">
+                        <input type="hidden" name="email" value="{{ $email }}">
+
+                        <div class="input-group mb-3">
+                            <input type="email" name="email"
+                                class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                placeholder="Email">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="fas fa-envelope"></span></div>
+                            </div>
+                            @if ($errors->has('email'))
+                                <span class="error invalid-feedback">{{ $errors->first('email') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input type="password" name="password"
+                                class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="fas fa-lock"></span></div>
+                            </div>
+                            @if ($errors->has('password'))
+                                <span class="error invalid-feedback">{{ $errors->first('password') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input type="password" name="retype_password" class="form-control"
+                                placeholder="Retype Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="fas fa-lock"></span></div>
+                            </div>
+                            @if ($errors->has('retype_password'))
+                                <span
+                                    class="error invalid-feedback">{{ $errors->first('retype_password') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+
+                    <p class="mt-3 mb-1">
+                        <a href="{{ route('login') }}">Login</a>
+                    </p>
+                </div>
+                <!-- /.login-card-body -->
+            </div>
+
+        </div>
+    </body>
+</x-laravel-ui-adminlte::adminlte-layout>

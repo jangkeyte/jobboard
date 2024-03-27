@@ -3,9 +3,7 @@
 @section('heading', 'All Subscribers')
 
 @section('button')
-<div>
-    <a href="{{ route('admin_subscribers_send_email') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Send Email to All</a>
-</div>
+<a href="{{ route('admin_subscribers_send_email') }}" class="btn btn-primary btn-sm ms-2"><i class="bi bi-envelope"></i> {{ __('Send Email to All') }}</a>
 @endsection
 
 @section('main_content')
