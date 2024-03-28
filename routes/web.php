@@ -373,5 +373,14 @@ Route::group(['middleware' => 'locale'], function() {
         
         Route::get('/admin/companies', [AdminCompanyController::class, 'index'])->name('admin_companies');
         Route::get('/admin/companies-detail/{id}', [AdminCompanyController::class, 'companies_detail'])->name('admin_companies_detail');
+        Route::get('/admin/companies-jobs/{id}', [AdminCompanyController::class, 'companies_jobs'])->name('admin_companies_jobs');
+        Route::get('/admin/companies-applicants/{id}', [AdminCompanyController::class, 'companies_applicants'])->name('admin_companies_applicants');
+        Route::get('/admin/companies-applicant-resume/{id}', [AdminCompanyController::class, 'companies_applicant_resume'])->name('admin_companies_applicant_resume');
+        Route::get('/admin/companies-delete/{id}', [AdminCompanyController::class, 'companies_delete'])->name('admin_companies_delete');
+
+        Route::get('/admin/candidates', [AdminCandidateController::class, 'index'])->name('admin_candidates');
+        Route::get('/admin/candidates-detail/{id}', [AdminCandidateController::class, 'candidates_detail'])->name('admin_candidates_detail');
+        Route::get('/admin/candidates-apllied-jobs/{id}', [AdminCandidateController::class, 'candidates_applied_jobs'])->name('admin_candidates_applied_jobs');
+        Route::get('/admin/candidates-delete/{id}', [AdminCandidateController::class, 'candidates_delete'])->name('admin_candidates_delete');
     });
 });

@@ -88,8 +88,15 @@
 
 <!-- COMPANY -->
 <li class="nav-item">
-    <a href="{{ route('admin_companies') }}" class="nav-link {{ Request::is('admin/companies') ? 'active' : '' }}">
+    <a href="{{ route('admin_companies') }}" class="nav-link {{ Request::is('admin/companies') || Request::is('admin/companies-detail/*') || Request::is('admin/companies-jobs/*') || Request::is('admin/companies-applicants/*') || Request::is('admin/companies-applicant-resume/*') ? 'active' : '' }}">
         <i class="nav-icon bi bi-person-fill-check"></i> <p>{{ __('Company Profile') }}</p>
+    </a>
+</li>
+
+<!-- CANDIDATE -->
+<li class="nav-item">
+    <a href="{{ route('admin_candidates') }}" class="nav-link {{ Request::is('admin/candidates') || Request::is('admin/candidates-detail/*') || Request::is('admin/candidates-apllied-jobs/*') || Request::is('admin/candidates-delete/*') ? 'active' : '' }}">
+        <i class="nav-icon bi bi-person-fill-check"></i> <p>{{ __('Candidate Profile') }}</p>
     </a>
 </li>
 
@@ -120,7 +127,7 @@
 </li>
 <li class="nav-item">
     <a href="{{ route('admin_advertisement') }}" class="nav-link {{ Request::is('admin/advertisement') ? 'active' : '' }}">
-        <i class="nav-icon bi bi-browser-edge"></i> <p>{{ __('Advertisement') }}</p>
+        <i class="nav-icon bi bi-badge-ad"></i> <p>{{ __('Advertisement') }}</p>
     </a>
 </li>
 <li class="nav-item">
@@ -130,6 +137,6 @@
 </li>
 <li class="nav-item">
     <a href="{{ route('admin_settings') }}" class="nav-link {{ Request::is('admin/settings/*') ? 'active' : '' }}">
-        <i class="nav-icon bi bi-person-fill-check"></i> <p>{{ __('Settings') }}</p>
+        <i class="nav-icon bi bi-gear"></i> <p>{{ __('Settings') }}</p>
     </a>
 </li>

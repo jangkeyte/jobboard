@@ -97,11 +97,7 @@
                             </tr>
                             <tr>
                                 <th style="width:200px">Google Map</th>
-                                <td>{{ $companies_detail?->map_code }}</td>
-                            </tr>
-                            <tr>
-                                <th style="width:200px">Google Map</th>
-                                <td>{{ $companies_detail?->map_code }}</td>
+                                <td>{!! $companies_detail?->map_code !!}</td>
                             </tr>
                             <tr>
                                 <th style="width:200px">Photos</th>

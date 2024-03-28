@@ -36,6 +36,7 @@
                                 <th>Detail</th>
                                 <th>CV</th>
                             </tr>
+                            
                             @foreach($applicants as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
@@ -68,8 +69,8 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <a href="{{ route('company_applicant_resume', $item->candidate_id) }}" title="Candidate Detail"><i class="fa fa-eye"></i></a>
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#coverLetterModal{{ $item->id }}" title="Cover Letter"><i class="fa fa-envelope"></i></a>
+                                    <a href="{{ route('company_applicant_resume', $item->candidate_id) }}" title="Candidate Detail"><i class="bi bi-eye"></i></a>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#coverLetterModal{{ $item->id }}" title="Cover Letter"><i class="bi bi-envelope"></i></a>
                             </td>
                             </tr>
 

@@ -9,6 +9,11 @@ class Job extends Model
 {
     use HasFactory;
      
+    public function rCandidateApplication()
+    {
+        return $this->hasMany(CandidateApplication::class);
+    }
+
     public function rCompany()
     {
         return $this->belongsTo(Company::class, 'company_id');
