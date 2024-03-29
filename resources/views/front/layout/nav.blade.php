@@ -8,13 +8,13 @@
     
     <!-- Menu for Desktop Device -->
     <div class="main-nav d-none d-md-block">
-        <div class="container">
+        <div class="container text-secondary">
             <nav class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand" href="{{ route('home') }}">
                     <img src="{{  asset('uploads/logo.png') }}" alt="" />
                 </a>
-                <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
-                    <ul class="navbar nav ml-auto">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar nav mr-auto">
                         <li class="nav-item {{ Route::is('/') ? 'active' : '' }}">
                             <a href="{{ route('home') }}" class="nav-link">{{ __('Home') }}</a>
                         </li>
@@ -36,6 +36,13 @@
                         <li class="nav-item {{ Route::is('contact') ? 'active' : '' }}">
                             <a href="{{ route('contact') }}" class="nav-link">{{ __('Contact') }}</a>
                         </li>
+                        @if(Auth::guard('company')->check())
+                        <li class="menu"><a href="{{ route('company_dashboard') }}"><i class="fa-solid fa-house"></i> {{ __('Dashboard') }}</a></li>
+                        @elseif(Auth::guard('candidate')->check())
+                        <li class="menu"><a href="{{ route('candidate_dashboard') }}"><i class="fa-solid fa-house"></i> {{ __('Dashboard') }}</a></li>
+                        @else
+                        <li class="menu"><a href="{{ route('login') }}" class="btn btn-danger btn-sm"><i class="fas fa-sign-in-alt"></i> {{ __('Login') }}</a></li>
+                        @endif
                     </ul>
                 </div>
             </nav>

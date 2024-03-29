@@ -43,7 +43,7 @@
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="map">
-                    {{ $contact_page_item->map_code ?? '' }}
+                    {!! $contact_page_item->map_code ?? '' !!}
                 </div>
             </div>
         </div>
