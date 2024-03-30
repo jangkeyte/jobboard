@@ -45,3 +45,11 @@ img{
     min-height: 100px;
     background-size: cover;
 }
+
+ul.header-left li, ul.header-right li {
+    display:inline;
+}
+
+a, a.nav-link {
+    color:#656c6c;
+}

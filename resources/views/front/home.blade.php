@@ -12,61 +12,87 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="item">
-                    <div class="text">
-                        <h2>{{ $home_page_data->heading ?? __('Heading') }}</h2>
-                        <p>
-                            {{ $home_page_data->text ?? __('Text') }}
-                        </p>
-                    </div>
-                    <div class="search-section">
-                        <form action="{{ route('job_listing') }}" mothod="get">
-                            <div class="inner">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <input type="text" name="title" class="form-control" placeholder="{{ $home_page_data->job_title }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <select name="location" class="form-select select2">
-                                                <option value="">{{ $home_page_data->job_location }}</option>
-                                                @foreach ($all_job_locations as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <select name="category" class="form-select select2">
-                                                <option value="">{{ $home_page_data->job_category }}</option>
-                                                @foreach ($all_job_categories as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <input type="hidden" name="type">
-                                        <input type="hidden" name="experience">
-                                        <input type="hidden" name="gender">
-                                        <input type="hidden" name="salary_range">
-                                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> {{ $home_page_data->search }}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                <div class="jumbotron" style="margin: 200px; width: 600px;">
+                    <h2>{{ $home_page_data->heading ?? __('Heading') }}</h2>
+                    <p>{{ $home_page_data->text ?? __('Text') }}</p>
+                    <p class="lead">
+                        <a class="btn btn-primary btn-lg" href="#" role="button">{{ __('Upload Resume') }}</a>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="search-section d-flex justify-content-center mt-3">
+    <form action="{{ route('job_listing') }}" mothod="get">
+        <div class="inner">
+            <div class="row">
+                <div class="col-lg-6 col-md-8 mt-2">
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control" placeholder="{{ $home_page_data->job_title }}">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
+                    <div class="form-group">
+                        <select name="location" class="form-select select2">
+                            <option value="">{{ $home_page_data->job_location }}</option>
+                            @foreach ($all_job_locations as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
+                    <div class="form-group">
+                        <select name="category" class="form-select select2">
+                            <option value="">{{ $home_page_data->job_category }}</option>
+                            @foreach ($all_job_categories as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
+                    <div class="form-group">
+                        <select name="type" class="form-select select2">
+                            <option value="">{{ $home_page_data->job_type ?? __('Job Type') }}</option>
+                            @foreach ($all_job_types as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
+                    <div class="form-group">
+                        <select name="experience" class="form-select select2">
+                            <option value="">{{ $home_page_data->job_experience ?? __('Job Experience') }}</option>
+                            @foreach ($all_job_experiences as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
+                    <div class="form-group">
+                        <select name="salary_range" class="form-select select2">
+                            <option value="">{{ $home_page_data->job_salary_range ?? __('Job Salary Range') }}</option>
+                            @foreach ($all_job_salary_ranges as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 d-grid gap-2 mt-2">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> {{ $home_page_data->search }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 @if($home_page_data->job_category_status == 'Show')
-<div class="job-category">
+<div class="job-category mt-5">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
