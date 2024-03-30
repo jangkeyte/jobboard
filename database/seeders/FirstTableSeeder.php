@@ -78,5 +78,46 @@ class FirstTableSeeder extends Seeder
             'photo' => 'default_photo.jpg',
             'token' => '',
         ]);
+        $package_data = array([
+            'package_name' => 'Cơ bản',
+            'package_price' => '19',
+            'package_days' => '7',
+            'package_display_time' => '',
+            'total_allowed_jobs' => '5',
+            'total_allowed_featured_jobs' => '0',
+            'total_allowed_photos' => '0',
+            'total_allowed_videos' => '0',
+        ],[
+            'package_name' => 'Tiêu chuẩn',
+            'package_price' => '29',
+            'package_days' => '30',
+            'package_display_time' => '',
+            'total_allowed_jobs' => '10',
+            'total_allowed_featured_jobs' => '2',
+            'total_allowed_photos' => '2',
+            'total_allowed_videos' => '2',
+        ],[
+            'package_name' => 'Chuyên nghiệp',
+            'package_price' => '49',
+            'package_days' => '90',
+            'package_display_time' => '',
+            'total_allowed_jobs' => '-1',
+            'total_allowed_featured_jobs' => '15',
+            'total_allowed_photos' => '10',
+            'total_allowed_videos' => '10',
+        ]);
+
+        foreach($package_data as $item) {
+            \App\Models\Package::factory()->create([  
+                'package_name' => $item['package_name'],
+                'package_price' => $item['package_price'],
+                'package_days' => $item['package_days'],
+                'package_display_time' => $item['package_display_time'],
+                'total_allowed_jobs' => $item['total_allowed_jobs'],
+                'total_allowed_featured_jobs' => $item['total_allowed_featured_jobs'],
+                'total_allowed_photos' => $item['total_allowed_photos'],
+                'total_allowed_videos' => $item['total_allowed_videos']
+            ]);
+        }
     }
 }

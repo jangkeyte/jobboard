@@ -17,7 +17,7 @@ class JobLocationFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->randomElement(['Ho Chi Minh', 'Ha Noi', 'Long An', 'Dong Nai', 'Binh Duong', 'Binh Phuoc', 'Vung Tau', 'Tien Giang', 'Vinh Long', 'Can Tho', 'Tra Vinh', 'Kien Giang', 'Dong Thap', 'Dak Lak', 'Kon Tum', 'Long Khanh', 'Tay Ninh', 'Ben Tre', 'Hau Giang', 'Soc Trang', 'Bac Lieu', 'Ca Mau']),
+            // 'name' => fake()->unique()->randomElement(['Ho Chi Minh', 'Ha Noi', 'Long An', 'Dong Nai', 'Binh Duong', 'Binh Phuoc', 'Vung Tau', 'Tien Giang', 'Vinh Long', 'Can Tho', 'Tra Vinh', 'Kien Giang', 'Dong Thap', 'Dak Lak', 'Kon Tum', 'Long Khanh', 'Tay Ninh', 'Ben Tre', 'Hau Giang', 'Soc Trang', 'Bac Lieu', 'Ca Mau']),
         ];
     }
 }

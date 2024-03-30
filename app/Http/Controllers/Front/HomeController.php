@@ -23,9 +23,9 @@ class HomeController extends Controller
         $job_categories = JobCategory::withCount('rJob')->orderBy('r_job_count', 'desc')->take(9)->get();
         $all_job_categories = JobCategory::orderBy('name', 'asc')->get();
         $all_job_locations = JobLocation::orderBy('name', 'asc')->get();
-        $all_job_types = JobType::orderBy('name', 'asc')->get();
-        $all_job_experiences = JobExperience::orderBy('name', 'asc')->get();
-        $all_job_salary_ranges = JobSalaryRange::orderBy('name', 'asc')->get();
+        $all_job_types = JobType::orderBy('id', 'asc')->get();
+        $all_job_experiences = JobExperience::orderBy('id', 'asc')->get();
+        $all_job_salary_ranges = JobSalaryRange::orderBy('id', 'asc')->get();
         $why_choose_items = WhyChooseItem::take(3)->get();
         $testimonials = Testimonial::get();
         

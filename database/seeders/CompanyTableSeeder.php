@@ -12,9 +12,12 @@ class CompanyTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            CompanyIndustryTableSeeder::class,
+            CompanySizeTableSeeder::class,
+            CompanyLocationTableSeeder::class
+        ]);
+        
         //\App\Models\Company::factory(20)->create();
-        //\App\Models\CompanyIndustry::factory(30)->create();
-        //\App\Models\CompanySize::factory(6)->create();   
-        \App\Models\CompanyLocation::factory(20)->create();
     }
 }

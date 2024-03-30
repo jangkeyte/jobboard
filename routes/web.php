@@ -52,7 +52,6 @@ use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminCompanyController;
 use App\Http\Controllers\Admin\AdminCandidateController;
 
-
 Route::group(['middleware' => 'locale'], function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/switch-language/{language}', [HomeController::class, 'switchLanguage'])->name('switch_language');

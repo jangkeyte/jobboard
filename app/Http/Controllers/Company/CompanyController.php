@@ -316,7 +316,7 @@ class CompanyController extends Controller
         $package_data = Package::where('id', $order_data->package_id)->first();
         
         if($package_data->total_allowed_jobs == 0) {
-            return redirect()->back()->with('error', 'Your current package does not allow to access the job section.');
+            return redirect()->back()->with('error', __('Your current package does not allow to access the job section.'));
         }
 
         // Check how many jobs this company posted

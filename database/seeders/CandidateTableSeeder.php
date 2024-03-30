@@ -14,19 +14,14 @@ class CandidateTableSeeder extends Seeder
     {
         $this->call([
             FirstTableSeeder::class,
-            JobGenderTableSeeder::class,
-            JobTypeTableSeeder::class,
+            JobCategoryTableSeeder::class,
             JobExperienceTableSeeder::class,
+            JobGenderTableSeeder::class,
+            JobLocationTableSeeder::class,
             JobSalaryRangeTableSeeder::class,
+            JobTypeTableSeeder::class,
         ]);
-        /*
-        \App\Models\Candidate::factory(20)->create();
-        \App\Models\JobCategory::factory(10)->create();
-        \App\Models\JobExperience::factory(10)->create();   
-        \App\Models\JobGender::factory(3)->create();
-        \App\Models\JobLocation::factory(20)->create();
-        \App\Models\JobSalaryRange::factory(9)->create();
-        \App\Models\JobType::factory(5)->create();
-        */
+        
+        //\App\Models\Candidate::factory(20)->create();
     }
 }
