@@ -12,6 +12,13 @@ class FirstTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            OrderTableSeeder::class,
+            PostTableSeeder::class,
+            WhyChooseItemTableSeeder::class,
+            FaqTableSeeder::class,
+        ]);
+        
         \App\Models\PageHomeItem::factory()->create([
             'heading' => 'Heading content',
             'job_title' => 'Job Title',

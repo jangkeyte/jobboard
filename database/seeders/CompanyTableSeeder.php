@@ -17,7 +17,8 @@ class CompanyTableSeeder extends Seeder
             CompanySizeTableSeeder::class,
             CompanyLocationTableSeeder::class
         ]);
-
+        
         \App\Models\Company::factory(20)->create();
+
     }
 }

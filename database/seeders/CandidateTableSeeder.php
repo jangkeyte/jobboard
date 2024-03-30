@@ -13,15 +13,13 @@ class CandidateTableSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            FirstTableSeeder::class,
-            JobCategoryTableSeeder::class,
-            JobExperienceTableSeeder::class,
-            JobGenderTableSeeder::class,
-            JobLocationTableSeeder::class,
-            JobSalaryRangeTableSeeder::class,
-            JobTypeTableSeeder::class,
+            CandidateAwardTableSeeder::class,
+            CandidateEducationTableSeeder::class,
+            CandidateSkillTableSeeder::class,
+            CandidateWorkExperienceTableSeeder::class,
+            CandidateBookmarkTableSeeder::class,
         ]);
-        
+
         \App\Models\Candidate::factory(50)->create();
     }
 }
