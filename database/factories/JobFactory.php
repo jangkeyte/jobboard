@@ -22,7 +22,7 @@ class JobFactory extends Factory
         $longitute = fake()->longitude($min = ($long - (rand(0,20) / 1000)), $max = ($long + (rand(0,20) / 1000)));
 
         return [
-            'company_id' => fake()->randomDigitNot(0),
+            'company_id' => fake()->numberBetween(1, 20),
             'title' => fake()->jobTitle(),
             'description' => fake()->paragraph(10),
             'responsibility' => fake()->paragraph(10),
@@ -30,13 +30,13 @@ class JobFactory extends Factory
             'education' => fake()->paragraph(10),
             'benefit' => fake()->paragraph(10),
             'deadline' => fake()->date(),
-            'vacancy' => fake()->randomDigitNot(0),
-            'job_category_id' => fake()->randomDigitNot(0),
-            'job_location_id' => fake()->randomDigitNot(0),
+            'vacancy' => fake()->numberBetween(1, 50),
+            'job_category_id' => fake()->numberBetween(1, 68),
+            'job_location_id' => fake()->numberBetween(1, 63),
             'job_type_id' => fake()->numberBetween(1, 5),
             'job_experience_id' => fake()->numberBetween(1, 10),
             'job_gender_id' => fake()->numberBetween(1, 3),
-            'job_salary_range_id' => fake()->randomDigitNot(0),
+            'job_salary_range_id' => fake()->numberBetween(1, 11),
             'map_code' => $langtitude . ',' . $longitute,
             'is_featured' => fake()->boolean(),
             'is_urgent' => fake()->boolean(),

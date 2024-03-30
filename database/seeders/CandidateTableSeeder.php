@@ -22,6 +22,6 @@ class CandidateTableSeeder extends Seeder
             JobTypeTableSeeder::class,
         ]);
         
-        //\App\Models\Candidate::factory(20)->create();
+        \App\Models\Candidate::factory(50)->create();
     }
 }
