@@ -24,7 +24,7 @@ class JobFactory extends Factory
         return [
             'company_id' => fake()->numberBetween(1, 20),
             'title' => fake()->jobTitle(),
-            'description' => fake()->paragraph(10),
+            'description' => fake()->paragraph(20),
             'responsibility' => fake()->paragraph(10),
             'skill' => fake()->paragraph(10),
             'education' => fake()->paragraph(10),
