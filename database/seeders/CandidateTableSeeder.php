@@ -12,6 +12,14 @@ class CandidateTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            FirstTableSeeder::class,
+            JobGenderTableSeeder::class,
+            JobTypeTableSeeder::class,
+            JobExperienceTableSeeder::class,
+            JobSalaryRangeTableSeeder::class,
+        ]);
+        /*
         \App\Models\Candidate::factory(20)->create();
         \App\Models\JobCategory::factory(10)->create();
         \App\Models\JobExperience::factory(10)->create();   
@@ -19,5 +27,6 @@ class CandidateTableSeeder extends Seeder
         \App\Models\JobLocation::factory(20)->create();
         \App\Models\JobSalaryRange::factory(9)->create();
         \App\Models\JobType::factory(5)->create();
+        */
     }
 }

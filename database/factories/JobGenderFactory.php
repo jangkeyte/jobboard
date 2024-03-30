@@ -17,7 +17,7 @@ class JobGenderFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->randomElement(['Male', 'Female', 'Not Specified']),
+            //
         ];
     }
 }

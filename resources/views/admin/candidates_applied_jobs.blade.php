@@ -10,7 +10,7 @@
                 <div class="card-header ui-sortable-handle" style="cursor: move;">
                     <h3 class="card-title">
                     <i class="ion ion-clipboard mr-1"></i>
-                    Candidates Applied Jobs List
+                    {{ __('Candidates Applied Jobs List') }}
                     </h3>
                     <div class="card-tools">
                         {{ $applications->links() }}
@@ -21,12 +21,12 @@
                         <table class="table table-bordered" id="">
                             <thead>
                                 <tr>
-                                    <th>SL</th>
-                                    <th>Job Title</th>
-                                    <th>Company</th>
-                                    <th>Status</th>
-                                    <th>Cover Letter</th>
-                                    <th>Action</th>
+                                    <th>#</th>
+                                    <th>{{ __('Job Title') }}</th>
+                                    <th>{{ __('Company') }}</th>
+                                    <th>{{ __('Status') }}</th>
+                                    <th>{{ __('Cover Letter') }}</th>
+                                    <th>{{ __('Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,10 +37,10 @@
                                     <td>{{ $item->rJob->rCompany->company_name }}</td>
                                     <td>
                                         @switch($item->status)
-                                            @case('Approved')
+                                            @case('{{ __('Approved') }}')
                                                 @php $color = 'success'; @endphp
                                                 @break
-                                            @case('Rejected')
+                                            @case('{{ __('Rejected') }}')
                                                 @php $color = 'danger'; @endphp
                                                 @break
                                             @default
@@ -48,7 +48,7 @@
                                         @endswitch
                                         <div class="badge bg-{{ $color }}">{{ $item->status }}</div>
                                     </td>
-                                    <td><a href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#coverLetterModal{{ $item->id }}">Cover Letter</a></td>
+                                    <td><a href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#coverLetterModal{{ $item->id }}">{{ __('Cover Letter') }}</a></td>
                                     <td>
                                         <a href="{{ route('job', $item->job_id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                                         <a href="{{ route('candidate_apply_delete', $item->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');"><i class="fas fa-trash-alt"></i></aa>
@@ -59,7 +59,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="coverLetterModalLabel">Cover Letter for Job {{ $item->rJob->title }} of {{ $item->rJob->rCompany->company_name }} Company</h1>
+                                                <h1 class="modal-title fs-5" id="coverLetterModalLabel">{{ __('Cover Letter for Job') }} {{ $item->rJob->title }} {{ __('of') }} {{ $item->rJob->rCompany->company_name }} {{ __('Company') }}</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">

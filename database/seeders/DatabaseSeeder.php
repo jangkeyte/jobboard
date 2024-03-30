@@ -24,5 +24,28 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        \App\Models\PageHomeItem::factory()->create([
+            'heading' => 'Heading content',
+            'job_title' => 'Job Title',
+            'job_category' => 'Job Category',
+            'job_location' => 'Job Location',
+            'search' => 'Search',
+            'background' => 'background_default.jpg',
+            'job_category_heading' => 'Job Category Heading',
+            'job_category_status' => 'Show',
+            'why_choose_heading' => 'Why Choose Heading',
+            'why_choose_background' => 'background_default.jpg',
+            'why_choose_status' => 'Show',
+            'featured_jobs_heading' => 'Featured Jobs Heading',
+            'featured_jobs_status' => 'Show',
+            'testimonial_heading' => 'Testimonial Heading',
+            'testimonial_background' => 'background_default.jpg',
+            'testimonial_status' => 'Show',
+            'blog_heading' => 'Blog Heading',
+            'blog_status' => 'Show',
+            'title' => 'Title',
+            'meta_description' => 'Meta Description',
+        ]);
     }
 }

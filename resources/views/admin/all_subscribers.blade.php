@@ -16,9 +16,9 @@
                         <table class="table table-bordered" id="">
                             <thead>
                                 <tr>
-                                    <th>SL</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
+                                    <th>#</th>
+                                    <th>{{ __('Email') }}</th>
+                                    <th>{{ __('Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -27,7 +27,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td class="py-1">
-                                        <a href="{{ route('admin_subscriber_delete', $item->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');">Delete</a>                                        
+                                        <a href="{{ route('admin_subscriber_delete', $item->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('{{ __('Are you sure?') }}');">Delete</a>                                        
                                     </td>
                                 </tr>
                                 @endforeach
