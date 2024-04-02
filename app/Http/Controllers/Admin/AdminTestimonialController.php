@@ -40,7 +40,7 @@ class AdminTestimonialController extends Controller
         $obj->comment = $request->comment;
         $obj->save();
 
-        return redirect()->route('admin_testimonial')->with('success', 'Data is save successfully.');
+        return redirect()->route('admin_testimonial')->with('success', __('Data is saved successfully.'));
     }
     
     public function edit($id)
@@ -82,7 +82,7 @@ class AdminTestimonialController extends Controller
         $obj->comment = $request->comment;
         $obj->update();
 
-        return redirect()->route('admin_testimonial')->with('success', 'Data is updated successfully.');
+        return redirect()->route('admin_testimonial')->with('success', __('Data is updated successfully.'));
     }
     
     public function delete($id)
@@ -90,6 +90,6 @@ class AdminTestimonialController extends Controller
         $testimonial_single = Testimonial::where('id', $id)->first();
         unlink(public_path('uploads/' . $testimonial_single->photo));
         Testimonial::where('id', $id)->delete();
-        return redirect()->route('admin_testimonial')->with('success', 'Data is deleted successfully.');
+        return redirect()->route('admin_testimonial')->with('success', __('Data is deleted successfully.'));
     }
 }

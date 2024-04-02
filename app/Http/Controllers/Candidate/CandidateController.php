@@ -81,7 +81,7 @@ class CandidateController extends Controller
         $obj->website = $request->website;
         $obj->update();
 
-        return redirect()->back()->with('success', 'Profile is updated successfully.');
+        return redirect()->back()->with('success', __('Profile is updated successfully.'));
     }
 
     public function edit_password()
@@ -98,7 +98,7 @@ class CandidateController extends Controller
         ]);
         $obj->password = Hash::make($request->password);
         $obj->update();
-        return redirect()->route('candidate_logout')->with('success', 'Password has changed successfully. Please relogin with your new password.');
+        return redirect()->route('candidate_logout')->with('success', __('Password has changed successfully. Please relogin with your new password.'));
     }
 
     public function education()
@@ -129,7 +129,7 @@ class CandidateController extends Controller
         $obj->passing_year = $request->passing_year;
         $obj->save();
         
-        return redirect()->route('candidate_education')->with('success', 'Education is created successfully.');
+        return redirect()->route('candidate_education')->with('success', __('Education is created successfully.'));
     }
     
     public function education_edit($id)
@@ -154,13 +154,13 @@ class CandidateController extends Controller
         $obj->passing_year = $request->passing_year;
         $obj->update();
         
-        return redirect()->route('candidate_education')->with('success', 'Education is edited successfully.');
+        return redirect()->route('candidate_education')->with('success', __('Education is edited successfully.'));
     }
     
     public function education_delete($id)
     {
         CandidateEducation::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Education is deleted successfully.');
+        return redirect()->back()->with('success', __('Education is deleted successfully.'));
     }
 
     public function skill()
@@ -187,7 +187,7 @@ class CandidateController extends Controller
         $obj->percentage = $request->percentage;
         $obj->save();
         
-        return redirect()->route('candidate_skill')->with('success', 'Skill is created successfully.');
+        return redirect()->route('candidate_skill')->with('success', __('Skill is created successfully.'));
     }
     
     public function skill_edit($id)
@@ -208,7 +208,7 @@ class CandidateController extends Controller
         $obj->percentage = $request->percentage;
         $obj->update();
         
-        return redirect()->route('candidate_skill')->with('success', 'Skill is edited successfully.');
+        return redirect()->route('candidate_skill')->with('success', __('Skill is edited successfully.'));
     }
     
     public function skill_delete($id)
@@ -245,7 +245,7 @@ class CandidateController extends Controller
         $obj->end_date = $request->end_date;
         $obj->save();
         
-        return redirect()->route('candidate_work_experience')->with('success', 'Work Experience is created successfully.');
+        return redirect()->route('candidate_work_experience')->with('success', __('Work Experience is created successfully.'));
     }
     
     public function work_experience_edit($id)
@@ -270,13 +270,13 @@ class CandidateController extends Controller
         $obj->end_date = $request->end_date;
         $obj->update();
         
-        return redirect()->route('candidate_work_experience')->with('success', 'Work Experience is edited successfully.');
+        return redirect()->route('candidate_work_experience')->with('success', __('Work Experience is edited successfully.'));
     }
     
     public function work_experience_delete($id)
     {
         CandidateWorkExperience::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Work Experience is deleted successfully.');
+        return redirect()->back()->with('success', __('Work Experience is deleted successfully.'));
     }
 
     public function award()
@@ -305,7 +305,7 @@ class CandidateController extends Controller
         $obj->date = $request->date;
         $obj->save();
         
-        return redirect()->route('candidate_award')->with('success', 'Award is created successfully.');
+        return redirect()->route('candidate_award')->with('success', __('Award is created successfully.'));
     }
     
     public function award_edit($id)
@@ -328,13 +328,13 @@ class CandidateController extends Controller
         $obj->date = $request->date;
         $obj->update();
         
-        return redirect()->route('candidate_award')->with('success', 'Award is edited successfully.');
+        return redirect()->route('candidate_award')->with('success', __('Award is edited successfully.'));
     }
     
     public function award_delete($id)
     {
         CandidateAward::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Award is deleted successfully.');
+        return redirect()->back()->with('success', __('Award is deleted successfully.'));
     }
 
     public function resume()
@@ -439,7 +439,7 @@ class CandidateController extends Controller
     public function bookmark_delete($id)
     {                                           
         CandidateBookmark::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Bookmark item is deleted successfully.');
+        return redirect()->back()->with('success', __('Bookmark item is deleted successfully.'));
     }
 
     public function apply($id)
@@ -465,7 +465,7 @@ class CandidateController extends Controller
         $obj->candidate_id = Auth::guard('candidate')->user()->id;
         $obj->job_id = $request->id;
         $obj->cover_letter = $request->cover_letter;
-        $obj->status = 'Applied';
+        $obj->status = __('Applied');
         $obj->save();
         
         // Sending email to company

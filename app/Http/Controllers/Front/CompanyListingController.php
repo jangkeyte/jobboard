@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Job;
 use App\Models\Company;
 use App\Models\CompanyIndustry;
@@ -92,7 +93,7 @@ class CompanyListingController extends Controller
         $message .= __('Phone: ') . $request->visitor_phone . '<br>';
         $message .= __('Message: ') . $request->visitor_message;
 
-        \Mail::to($request->company_email)->send(new Websitemail($subject, $message));
+        Mail::to($request->company_email)->send(new Websitemail($subject, $message));
 
         return redirect()->back()->with('success', __('Email is sent successfully.') );
         

@@ -46,7 +46,7 @@ class AdminPostController extends Controller
         $obj->meta_description = $request->meta_description;
         $obj->save();
 
-        return redirect()->route('admin_post')->with('success', 'Data is save successfully.');
+        return redirect()->route('admin_post')->with('success', __('Data is saved successfully.'));
     }
     
     public function edit($id)
@@ -91,7 +91,7 @@ class AdminPostController extends Controller
         $obj->meta_description = $request->meta_description;
         $obj->update();
 
-        return redirect()->route('admin_post')->with('success', 'Data is updated successfully.');
+        return redirect()->route('admin_post')->with('success', __('Data is updated successfully.'));
     }
     
     public function delete($id)
@@ -99,6 +99,6 @@ class AdminPostController extends Controller
         $post_single = Post::where('id', $id)->first();
         unlink(public_path('uploads/' . $post_single->photo));
         Post::where('id', $id)->delete();
-        return redirect()->route('admin_post')->with('success', 'Data is deleted successfully.');
+        return redirect()->route('admin_post')->with('success', __('Data is deleted successfully.'));
     }
 }

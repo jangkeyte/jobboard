@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\JobLocation;
@@ -93,8 +94,8 @@ class JobListingController extends Controller
         $message .= 'Phone:' . $request->visitor_phone . '<br>';
         $message .= 'Message:' . $request->visitor_message;
 
-        \Mail::to($request->company_email)->send(new Websitemail($subject, $message));
+        Mail::to($request->company_email)->send(new Websitemail($subject, $message));
 
-        return redirect()->back()->with('success', 'Email is sent successfully.');
+        return redirect()->back()->with('success', __('Email is sent successfully.'));
     }
 }

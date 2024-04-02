@@ -69,6 +69,6 @@ class AdminSettingController extends Controller
         $obj->copyright_text = $request->copyright_text;
         $obj->update();
 
-        return redirect()->back()->with('success', 'Data is updated successfully.');
+        return redirect()->back()->with('success', __('Data is updated successfully.'));
     }
 }

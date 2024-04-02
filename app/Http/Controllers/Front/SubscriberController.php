@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\Websitemail;
 
 class SubscriberController extends Controller
@@ -20,7 +21,7 @@ class SubscriberController extends Controller
         } else {
             $check = Subscriber::where('email', $request->email)->where('status', 1)->count();
             if($check > 0) {
-                return response()->json(['code' => 0, 'error_message' => 'Subscriber already exists!']);
+                return response()->json(['code' => 0, 'error_message' => __('Subscriber already exists!')]);
             } else {
                 $token = hash('sha256', time());
                 $obj = new Subscriber();
@@ -30,13 +31,13 @@ class SubscriberController extends Controller
                 $obj->save();
     
                 $verify_link = url('subscriber/verify/' . $request->email . '/' . $token);
-                $subject = 'Subscriber Verification';
-                $message = 'Please click on the link below to confirm subscription: <br>';
-                $message .= '<a href="' . $verify_link . '">Click here</a>';
+                $subject = __('Subscriber Verification');
+                $message = __('Please click on the link below to confirm subscription:') . '<br>';
+                $message .= '<a href="' . $verify_link . '">' . __('Click here') . '</a>';
         
-                \Mail::to($request->email)->send(new Websitemail($subject, $message));
+                Mail::to($request->email)->send(new Websitemail($subject, $message));
         
-                return response()->json(['code' => 1, 'success_message' => 'Please check your email to confirm subscription.']);
+                return response()->json(['code' => 1, 'success_message' => __('Please check your email to confirm subscription.')]);
             }
         }
     }
@@ -49,7 +50,7 @@ class SubscriberController extends Controller
             $subscriber_data->token = '';
             $subscriber_data->status = 1;
             $subscriber_data->update();
-            return redirect()->route('home')->with('success', 'Your subscription is verified successfully');
+            return redirect()->route('home')->with('success', __('Your subscription is verified successfully.'));
         } else {
             return redirect()->route('home');
         }

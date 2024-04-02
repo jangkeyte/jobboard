@@ -33,7 +33,7 @@ class AdminWhyChooseController extends Controller
         $obj->text = $request->text;
         $obj->save();
 
-        return redirect()->route('admin_why_choose_item')->with('success', 'Data is save successfully.');
+        return redirect()->route('admin_why_choose_item')->with('success', __('Data is saved successfully.'));
     }
     
     public function edit($id)
@@ -57,13 +57,13 @@ class AdminWhyChooseController extends Controller
         $obj->text = $request->text;
         $obj->update();
 
-        return redirect()->route('admin_why_choose_item')->with('success', 'Data is updated successfully.');
+        return redirect()->route('admin_why_choose_item')->with('success', __('Data is updated successfully.'));
     }
     
     public function delete($id)
     {
         WhyChooseItem::where('id', $id)->delete();
-        return redirect()->route('admin_why_choose_item')->with('success', 'Data is deleted successfully.');
+        return redirect()->route('admin_why_choose_item')->with('success', __('Data is deleted successfully.'));
     }
 
 }

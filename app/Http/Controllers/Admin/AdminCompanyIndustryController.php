@@ -30,7 +30,7 @@ class AdminCompanyIndustryController extends Controller
         $obj->name = $request->name;
         $obj->save();
 
-        return redirect()->route('admin_company_industry')->with('success', 'Data is save successfully.');
+        return redirect()->route('admin_company_industry')->with('success', __('Data is saved successfully.'));
     }
     
     public function edit($id)
@@ -50,17 +50,17 @@ class AdminCompanyIndustryController extends Controller
         $obj->name = $request->name;
         $obj->update();
 
-        return redirect()->route('admin_company_industry')->with('success', 'Data is updated successfully.');
+        return redirect()->route('admin_company_industry')->with('success', __('Data is updated successfully.'));
     }
     
     public function delete($id)
     {
         $check = Company::where('company_industry_id', $id)->count();
         if($check > 0) {
-            return redirect()->back()->with('error', 'You can not delete this item, because this is used in another place.');
+            return redirect()->back()->with('error', __('You can not delete this item, because this is used in another place.'));
         }
         CompanyIndustry::where('id', $id)->delete();
-        return redirect()->route('admin_company_industry')->with('success', 'Data is deleted successfully.');
+        return redirect()->route('admin_company_industry')->with('success', __('Data is deleted successfully.'));
     }
 
 }

@@ -114,7 +114,7 @@ class CompanyController extends Controller
         $obj->instagram = $request->instagram;
         $obj->update();
 
-        return redirect()->back()->with('success', 'Profile is updated successfully.');
+        return redirect()->back()->with('success', __('Profile is updated successfully.'));
     }
 
     public function edit_password()
@@ -130,7 +130,7 @@ class CompanyController extends Controller
         ]);
         $obj->password = Hash::make($request->password);
         $obj->update();
-        return redirect()->route('company_logout')->with('success', 'Password has changed successfully. Please relogin with your new password.');
+        return redirect()->route('company_logout')->with('success', __('Password has changed successfully. Please relogin with your new password.'));
     }
 
     public function photos()
@@ -139,14 +139,14 @@ class CompanyController extends Controller
         $order_data = Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
 
         if(!$order_data) {            
-            return redirect()->back()->with('error', 'You have to buy a package first to access this page.');
+            return redirect()->back()->with('error', __('You have to buy a package first to access this page.'));
         }
 
         // Check if a person has access to this page under the current package
         $package_data = Package::where('id', $order_data->package_id)->first();
 
         if($package_data->total_allowed_photos == 0) {
-            return redirect()->back()->with('error', 'Your current package does not allow to access the photo section.');
+            return redirect()->back()->with('error', __('Your current package does not allow to access the photo section.'));
         }
 
         $photos = CompanyPhoto::where('company_id', Auth::guard('company')->user()->id)->get();
@@ -160,11 +160,11 @@ class CompanyController extends Controller
         $existing_photo_number = CompanyPhoto::where('company_id', Auth::guard('company')->user()->id)->count();
 
         if(date('Y-m-d') > $order_data?->expire_date) {
-            return redirect()->back()->with('error', 'Your package is expired!');
+            return redirect()->back()->with('error', __('Your package is expired!'));
         }
 
         if($package_data->total_allowed_photos <= $existing_photo_number) {
-            return redirect()->back()->with('error', 'Maximum number of allowed photo are uploaded. So you have to upgrade your package if you want to add more photos');
+            return redirect()->back()->with('error', __('Maximum number of allowed photo are uploaded. So you have to upgrade your package if you want to add more photos.'));
         }
 
         $obj = new CompanyPhoto();
@@ -180,7 +180,7 @@ class CompanyController extends Controller
         $obj->company_id = Auth::guard('company')->user()->id;
         $obj->save();
         
-        return redirect()->back()->with('success', 'Photo is uploaded successfully.');
+        return redirect()->back()->with('success', __('Photo is uploaded successfully.'));
     }
 
     public function photos_delete($id)
@@ -190,7 +190,7 @@ class CompanyController extends Controller
             unlink(public_path('uploads/' . $single_data->photo));
         }
         CompanyPhoto::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Photo is deleted successfully.');
+        return redirect()->back()->with('success', __('Photo is deleted successfully.'));
     }
 
     public function videos()
@@ -199,14 +199,14 @@ class CompanyController extends Controller
         $order_data = Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
 
         if(!$order_data) {            
-            return redirect()->back()->with('error', 'You have to buy a package first to access this page.');
+            return redirect()->back()->with('error', __('You have to buy a package first to access this page.'));
         }
 
         // Check if a person has access to this page under the current package
         $package_data = Package::where('id', $order_data->package_id)->first();
 
         if($package_data->total_allowed_videos == 0) {
-            return redirect()->back()->with('error', 'Your current package does not allow to access the video section.');
+            return redirect()->back()->with('error', __('Your current package does not allow to access the video section.'));
         }
 
         $videos = CompanyVideo::where('company_id', Auth::guard('company')->user()->id)->get();
@@ -220,11 +220,11 @@ class CompanyController extends Controller
         $existing_video_number = CompanyVideo::where('company_id', Auth::guard('company')->user()->id)->count();
 
         if(date('Y-m-d') > $order_data?->expire_date) {
-            return redirect()->back()->with('error', 'Your package is expired!');
+            return redirect()->back()->with('error', __('Your package is expired!'));
         }
 
         if($package_data->total_allowed_videos <= $existing_video_number) {
-            return redirect()->back()->with('error', 'Maximum number of allowed video are uploaded. So you have to upgrade your package if you want to add more videos');
+            return redirect()->back()->with('error', __('Maximum number of allowed video are uploaded. So you have to upgrade your package if you want to add more videos.'));
         }
 
         $request->validate([
@@ -236,14 +236,14 @@ class CompanyController extends Controller
         $obj->video_id = $request->video_id;
         $obj->save();
         
-        return redirect()->back()->with('success', 'Video is uploaded successfully.');
+        return redirect()->back()->with('success', __('Video is uploaded successfully.'));
     }
 
     public function videos_delete($id)
     {
         $single_data = CompanyVideo::where('id', $id)->first();
         CompanyVideo::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Video is deleted successfully.');
+        return redirect()->back()->with('success', __('Video is deleted successfully.'));
     }
 
     public function make_payment()
@@ -288,7 +288,7 @@ class CompanyController extends Controller
             $obj->currently_active = 1;
             $obj->save();
 
-            return redirect()->route('company_make_payment')->with('success', 'Payment is successful!');
+            return redirect()->route('company_make_payment')->with('success', __('Payment is successful!'));
         } else {
             return redirect()->route('company_paypal_cancel');
         }
@@ -296,7 +296,7 @@ class CompanyController extends Controller
     
     public function paypal_cancel(Request $request)
     {
-        return redirect()->route('company_make_payment')->with('error', 'Payment is cancelled!');
+        return redirect()->route('company_make_payment')->with('error', __('Payment is cancelled!'));
     }
 
     public function jobs_create()
@@ -305,11 +305,11 @@ class CompanyController extends Controller
         $order_data = Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
 
         if(!$order_data) {            
-            return redirect()->back()->with('error', 'You have to buy a package first to access this page.');
+            return redirect()->back()->with('error', __('You have to buy a package first to access this page.'));
         }
 
         if(date('Y-m-d') > $order_data?->expire_date) {
-            return redirect()->back()->with('error', 'Your package is expired!');
+            return redirect()->back()->with('error', __('Your package is expired!'));
         }
 
         // Check if a person has access to this page under the current package
@@ -322,7 +322,7 @@ class CompanyController extends Controller
         // Check how many jobs this company posted
         $total_jobs_posted = Job::where('company_id', Auth::guard('company')->user()->id)->count();
         if($package_data->total_allowed_jobs == $total_jobs_posted) {
-            return redirect()->back()->with('error', 'You already have posted the maximum number of allowed jobs.');
+            return redirect()->back()->with('error', __('You already have posted the maximum number of allowed jobs.'));
         }
 
         $job_categories = JobCategory::orderBy('name', 'asc')->get();
@@ -348,7 +348,7 @@ class CompanyController extends Controller
 
         $total_featured_jobs = Job::where('company_id', Auth::guard('company')->user()->id)->where('is_featured', 1)->count();
         if($request->is_featured == 1 && $total_featured_jobs == $package_data->total_allowed_featured_jobs) {
-            return redirect()->back()->with('error', 'You already have added the maximum number of featured jobs.');
+            return redirect()->back()->with('error', __('You already have added the maximum number of featured jobs.'));
         }
 
         $obj = new Job();        
@@ -372,7 +372,7 @@ class CompanyController extends Controller
         $obj->is_urgent = $request->is_urgent;
         $obj->save();
 
-        return redirect()->back()->with('success', 'Job is posted successfully.');
+        return redirect()->back()->with('success', __('Job is posted successfully.'));
     }
 
     public function jobs()
@@ -407,7 +407,7 @@ class CompanyController extends Controller
 
         $total_featured_jobs = Job::where('company_id', Auth::guard('company')->user()->id)->where('is_featured', 1)->count();
         if($request->is_featured == 1 && $total_featured_jobs == $package_data->total_allowed_featured_jobs) {
-            return redirect()->back()->with('error', 'You already have added the maximum number of featured jobs.');
+            return redirect()->back()->with('error', __('You already have added the maximum number of featured jobs.'));
         }
 
         $obj = Job::where('id', $request->id)->first();
@@ -430,7 +430,7 @@ class CompanyController extends Controller
         $obj->is_urgent = $request->is_urgent;
         $obj->update();
 
-        return redirect()->back()->with('success', 'Job is updated successfully.');
+        return redirect()->back()->with('success', __('Job is updated successfully.'));
     }
     
     public function jobs_delete($id)
@@ -438,7 +438,7 @@ class CompanyController extends Controller
         Job::where('id', $id)->delete();
         CandidateApplication::where('job_id', $id)->delete();
         CandidateBookmark::where('job_id', $id)->delete();
-        return redirect()->back()->with('success', 'Job is deleted successfully.');
+        return redirect()->back()->with('success', __('Job is deleted successfully.'));
     }
 
     public function candidate_applications()
@@ -483,13 +483,13 @@ class CompanyController extends Controller
             $candidate_email = $obj->rCandidate->email;            
             $detail_link = route('candidate_applications');
             
-            $subject = __('Congratulation! Your application is approved');
+            $subject = __('Congratulation! Your application is approved.');
             $message = __('Please check the detail:') . '<br>';
-            $message .= '<a href="' . $detail_link . '"> ' . __('Click here to see the detail') . '</a>';
+            $message .= '<a href="' . $detail_link . '"> ' . __('Click here to see the detail.') . '</a>';
 
             Mail::to($request->email)->send(new Websitemail($subject, $message));
         }
 
-        return redirect()->back()->with('success', 'Successfully.');
+        return redirect()->back()->with('success', __('Successfully.'));
     }    
 }

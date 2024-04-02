@@ -37,7 +37,7 @@ class AdminBannerController extends Controller
         $obj->banner_candidate_panel = $this->upload_image($request, 'banner_candidate_panel', $obj?->banner_candidate_panel) ?? $obj?->banner_candidate_panel;
         $obj->update();
 
-        return redirect()->back()->with('success', 'Data is update successfully.');
+        return redirect()->back()->with('success', __('Data is updated successfully.'));
     }
 
     public function upload_image(Request $request, $image_name, $image_old)

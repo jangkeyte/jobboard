@@ -64,7 +64,7 @@ class AdminCandidateController extends Controller
             }
         }
         Candidate::where('id', $id)->delete();   
-        return redirect()->back()->with('success', 'Data is deleted successfully.');
+        return redirect()->back()->with('success', __('Data is deleted successfully.'));
     }
     
 }

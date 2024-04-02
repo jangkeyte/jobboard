@@ -44,6 +44,6 @@ class AdminOtherPageController extends Controller
 
         $other_page_data->update();
 
-        return redirect()->back()->with('success', 'Data is update successfully.');
+        return redirect()->back()->with('success', __('Data is updated successfully.'));
     }
 }

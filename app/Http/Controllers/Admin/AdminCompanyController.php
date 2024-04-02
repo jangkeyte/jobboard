@@ -87,7 +87,7 @@ class AdminCompanyController extends Controller
             }
         }
         Company::where('id', $id)->delete();   
-        return redirect()->back()->with('success', 'Data is deleted successfully.');
+        return redirect()->back()->with('success', __('Data is deleted successfully.'));
     }
     
 }

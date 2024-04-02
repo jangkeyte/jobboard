@@ -30,6 +30,6 @@ class AdminPrivacyPageController extends Controller
 
         $privacy_page_data->update();
 
-        return redirect()->back()->with('success', 'Data is update successfully.');
+        return redirect()->back()->with('success', __('Data is update successfully.'));
     }
 }

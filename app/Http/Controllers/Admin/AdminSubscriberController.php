@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Subscriber;
 use App\Mail\Websitemail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminSubscriberController extends Controller
 {
@@ -33,17 +34,17 @@ class AdminSubscriberController extends Controller
         $all_subscribers = Subscriber::where('status', 1)->get();
 
         foreach($all_subscribers as $item) {
-            \Mail::to($item->email)->send(new Websitemail($subject, $message));
+            Mail::to($item->email)->send(new Websitemail($subject, $message));
         }
 
 
-        return redirect()->back()->with('success', 'Email is sent to all subscribers');
+        return redirect()->back()->with('success', __('Email is sent to all subscribers.'));
     }
 
     public function delete($id)
     {
         Subscriber::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Data is deleted successfully');
+        return redirect()->back()->with('success', __('Data is deleted successfully.'));
     }
 
 }

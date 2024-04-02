@@ -39,7 +39,7 @@ class LoginController extends Controller
         if(Auth::guard('company')->attempt($credential)){
             return redirect()->route('company_dashboard');
         } else {
-            return redirect()->route('login')->with('error', 'Information is not correct');
+            return redirect()->route('login')->with('error', __('Information is not correct.'));
         }
     }
 
@@ -63,7 +63,7 @@ class LoginController extends Controller
         if(Auth::guard('candidate')->attempt($credential)){
             return redirect()->route('candidate_dashboard');
         } else {
-            return redirect()->route('login')->with('error', 'Information is not correct');
+            return redirect()->route('login')->with('error', __('Information is not correct.'));
         }
     }
 

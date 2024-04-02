@@ -55,6 +55,6 @@ class AdminProfileController extends Controller
         $admin_data->email = $request->email;
         $admin_data->update();
 
-        return redirect()->back()->with('success', 'Profile infomation is saved successfully.');
+        return redirect()->back()->with('success', __('Profile infomation is saved successfully.'));
     }
 }

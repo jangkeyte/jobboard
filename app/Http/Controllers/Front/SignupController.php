@@ -10,6 +10,7 @@ use App\Models\Candidate;
 use App\Mail\Websitemail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class SignupController extends Controller
 {
@@ -50,13 +51,13 @@ class SignupController extends Controller
         $obj->save();
 
         $verify_link = url('company-signup-verify/' . $token . '/' . $request->email);
-        $subject = 'Company Signup Verification';
-        $message = 'Please click on the following link: <br>';
-        $message .= '<a href="' . $verify_link . '">Click here</a>';
+        $subject = __('Company Signup Verification');
+        $message = __('Please click on the following link:') . '<br>';
+        $message .= '<a href="' . $verify_link . '">' . __('Click here') . '</a>';
 
-        \Mail::to($request->email)->send(new Websitemail($subject, $message));
+        Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('login')->with('success', 'An email is sent to your email adress. You must have to check that and click on the confimation link to validate your signup.');
+        return redirect()->route('login')->with('success', __('An email is sent to your email adress. You must have to check that and click on the confimation link to validate your signup.'));
     }
 
     public function company_signup_verify($token, $email)
@@ -71,7 +72,7 @@ class SignupController extends Controller
         $company_data->status = 1;
         $company_data->update();
 
-        return redirect()->route('login')->with('success', 'Your email is verified successfully. You can now login to the system as company.');
+        return redirect()->route('login')->with('success', __('Your email is verified successfully. You can now login to the system as company.'));
     }
     
     public function candidate_signup_submit(Request $request)
@@ -97,13 +98,13 @@ class SignupController extends Controller
         $obj->save();
 
         $verify_link = url('candidate-signup-verify/' . $token . '/' . $request->email);
-        $subject = 'Candidate Signup Verification';
-        $message = 'Please click on the following link: <br>';
-        $message .= '<a href="' . $verify_link . '">Click here</a>';
+        $subject = __('Candidate Signup Verification');
+        $message = __('Please click on the following link:') . '<br>';
+        $message .= '<a href="' . $verify_link . '">' . __('Click here') . '</a>';
 
-        \Mail::to($request->email)->send(new Websitemail($subject, $message));
+        Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('login')->with('success', 'An email is sent to your email adress. You must have to check that and click on the confimation link to validate your signup.');
+        return redirect()->route('login')->with('success', __('An email is sent to your email adress. You must have to check that and click on the confimation link to validate your signup.'));
     }
 
     public function candidate_signup_verify($token, $email)
@@ -118,6 +119,6 @@ class SignupController extends Controller
         $candidate_data->status = 1;
         $candidate_data->update();
 
-        return redirect()->route('login')->with('success', 'Your email is verified successfully. You can now login to the system as candidate.');
+        return redirect()->route('login')->with('success', __('Your email is verified successfully. You can now login to the system as candidate.'));
     }
 }

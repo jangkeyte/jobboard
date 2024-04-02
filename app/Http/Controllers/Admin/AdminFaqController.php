@@ -32,7 +32,7 @@ class AdminFaqController extends Controller
         $obj->answer = $request->answer;
         $obj->save();
 
-        return redirect()->route('admin_faq')->with('success', 'Data is save successfully.');
+        return redirect()->route('admin_faq')->with('success', __('Data is saved successfully.'));
     }
     
     public function edit($id)
@@ -54,12 +54,12 @@ class AdminFaqController extends Controller
         $obj->answer = $request->answer;
         $obj->update();
 
-        return redirect()->route('admin_faq')->with('success', 'Data is updated successfully.');
+        return redirect()->route('admin_faq')->with('success', __('Data is updated successfully.'));
     }
     
     public function delete($id)
     {
         Faq::where('id', $id)->delete();
-        return redirect()->route('admin_faq')->with('success', 'Data is deleted successfully.');
+        return redirect()->route('admin_faq')->with('success', __('Data is deleted successfully.'));
     }
 }

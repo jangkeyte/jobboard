@@ -58,6 +58,6 @@ class AdminAdvertisementController extends Controller
         $obj->job_listing_ad_url = $request->job_listing_ad_url;
         $obj->company_listing_ad_url = $request->company_listing_ad_url;
         $obj->update();
-        return redirect()->back()->with('success', 'Data is update successfully.');
+        return redirect()->back()->with('success', __('Data is updated successfully.'));
     }
 }

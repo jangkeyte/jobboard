@@ -11,6 +11,7 @@ use App\Mail\Websitemail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ForgetPasswordController extends Controller
 {
@@ -34,7 +35,7 @@ class ForgetPasswordController extends Controller
         
         $company_data = Company::where('email', $request->email)->first();
         if(!$company_data) {
-            return redirect()->back()->with('error', 'Email address not found');
+            return redirect()->back()->with('error', __('Email address not found.'));
         }
 
         $token = hash('sha256', time());
@@ -47,9 +48,9 @@ class ForgetPasswordController extends Controller
         $message = 'Please click on the following link: <br>';
         $message .= '<a href="' . $reset_link . '">Click here</a>';
 
-        \Mail::to($request->email)->send(new Websitemail($subject, $message));
+        Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('login')->with('success', 'Please check your email and follow the steps there');
+        return redirect()->route('login')->with('success', __('Please check your email and follow the steps there.'));
     }
     
     public function company_reset_password($token, $email)
@@ -76,7 +77,7 @@ class ForgetPasswordController extends Controller
         $company_data->token = '';
         $company_data->update();
 
-        return redirect()->route('login')->with('success', 'Password is reset successfully. You can now login to system.');
+        return redirect()->route('login')->with('success', __('Password is reset successfully. You can now login to system.'));
     }
     
     public function candidate_forget_password()
@@ -99,7 +100,7 @@ class ForgetPasswordController extends Controller
         
         $candidate_data = Candidate::where('email', $request->email)->first();
         if(!$candidate_data) {
-            return redirect()->back()->with('error', 'Email address not found');
+            return redirect()->back()->with('error', __('Email address not found.'));
         }
 
         $token = hash('sha256', time());
@@ -112,9 +113,9 @@ class ForgetPasswordController extends Controller
         $message = 'Please click on the following link: <br>';
         $message .= '<a href="' . $reset_link . '">Click here</a>';
 
-        \Mail::to($request->email)->send(new Websitemail($subject, $message));
+        Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('login')->with('success', 'Please check your email and follow the steps there');
+        return redirect()->route('login')->with('success', __('Please check your email and follow the steps there.'));
     }
     
     public function candidate_reset_password($token, $email)
@@ -141,6 +142,6 @@ class ForgetPasswordController extends Controller
         $candidate_data->token = '';
         $candidate_data->update();
 
-        return redirect()->route('login')->with('success', 'Password is reset successfully. You can now login to system.');
+        return redirect()->route('login')->with('success', __('Password is reset successfully. You can now login to system.'));
     }
 }

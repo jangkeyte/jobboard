@@ -31,7 +31,7 @@ class AdminLoginController extends Controller
 
         $admin_data = Admin::where('email', $request->email)->first();
         if(!$admin_data) {
-            return redirect()->back()->with('error', 'Email address not found');
+            return redirect()->back()->with('error', __('Email address not found.'));
         }
 
         $token = hash('sha256', time());
@@ -46,7 +46,7 @@ class AdminLoginController extends Controller
 
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('admin_login')->with('success', 'Please check your email and follow the steps there');
+        return redirect()->route('admin_login')->with('success', __('Please check your email and follow the steps there.'));
     }
     
     public function login_submit(Request $request)
@@ -64,7 +64,7 @@ class AdminLoginController extends Controller
         if(Auth::guard('admin')->attempt($credential)){
             return redirect()->route('admin_home');
         } else {
-            return redirect()->route('admin_login')->with('error', 'Information is not correct');
+            return redirect()->route('admin_login')->with('error', __('Information is not correct.'));
         }
     }
     
@@ -98,6 +98,6 @@ class AdminLoginController extends Controller
         $admin_data->token = '';
         $admin_data->update();
 
-        return redirect()->route('admin_login')->with('success', 'Password is reset successfully');
+        return redirect()->route('admin_login')->with('success', __('Password is reset successfully.'));
     }
 }

@@ -30,7 +30,7 @@ class AdminJobTypeController extends Controller
         $obj->name = $request->name;
         $obj->save();
 
-        return redirect()->route('admin_job_type')->with('success', 'Data is save successfully.');
+        return redirect()->route('admin_job_type')->with('success', __('Data is saved successfully.'));
     }
     
     public function edit($id)
@@ -50,17 +50,17 @@ class AdminJobTypeController extends Controller
         $obj->name = $request->name;
         $obj->update();
 
-        return redirect()->route('admin_job_type')->with('success', 'Data is updated successfully.');
+        return redirect()->route('admin_job_type')->with('success', __('Data is updated successfully.'));
     }
     
     public function delete($id)
     {
         $check = Job::where('job_type_id', $id)->count();
         if($check > 0) {
-            return redirect()->back()->with('error', 'You can not delete this item, because this is used in another place.');
+            return redirect()->back()->with('error', __('You can not delete this item, because this is used in another place.'));
         }
         JobType::where('id', $id)->delete();
-        return redirect()->route('admin_job_type')->with('success', 'Data is deleted successfully.');
+        return redirect()->route('admin_job_type')->with('success', __('Data is deleted successfully.'));
     }
 
 }
