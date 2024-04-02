@@ -9,6 +9,18 @@ class Company extends Authenticatable
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'facebook_id'
+    ]; 
+ 
     public function rJob()
     {
         return $this->hasMany(Job::class);

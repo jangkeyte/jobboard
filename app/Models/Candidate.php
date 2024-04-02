@@ -8,4 +8,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Candidate extends Authenticatable
 {
     use HasFactory;
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'facebook_id'
+    ]; 
+ 
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\TermsController;
 use App\Http\Controllers\Front\PrivacyController;
@@ -51,6 +52,7 @@ use App\Http\Controllers\Admin\AdminSubscriberController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminCompanyController;
 use App\Http\Controllers\Admin\AdminCandidateController;
+use App\Http\Controllers\Front\SocialiteController;
 
 Route::group(['middleware' => 'locale'], function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -90,6 +92,11 @@ Route::group(['middleware' => 'locale'], function() {
     Route::get('/reset-password/candidate/{token}/{email}', [ForgetPasswordController::class, 'candidate_reset_password'])->name('candidate_reset_password');
     Route::post('/reset-password/candidate/submit', [ForgetPasswordController::class, 'candidate_reset_password_submit'])->name('candidate_reset_password_submit');
 
+    Route::controller(SocialiteController::class)->group(function(){
+        Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+        Route::get('auth/facebook/callback', 'handleFacebookCallback');
+    });
+
     /* Company */
     Route::post('/company-login-submit', [LoginController::class, 'company_login_submit'])->name('company_login_submit');
     Route::post('/company-signup-submit', [SignupController::class, 'company_signup_submit'])->name('company_signup_submit');
@@ -97,40 +104,40 @@ Route::group(['middleware' => 'locale'], function() {
     Route::get('/company/logout', [LoginController::class, 'company_logout'])->name('company_logout');
 
     /* Company Middleware */
-    Route::middleware(['company:company'])->group(function() {
-        Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company_dashboard');
-        Route::get('/company/make-payment', [CompanyController::class, 'make_payment'])->name('company_make_payment');
-        Route::get('/company/orders', [CompanyController::class, 'orders'])->name('company_orders');
+    Route::middleware(['company:company'])->controller(CompanyController::class)->group(function() {
+        Route::get('/company/dashboard', 'dashboard')->name('company_dashboard');
+        Route::get('/company/make-payment', 'make_payment')->name('company_make_payment');
+        Route::get('/company/orders', 'orders')->name('company_orders');
 
-        Route::post('/company/paypal/payment', [CompanyController::class, 'paypal'])->name('company_paypal');
-        Route::get('/company/paypal/success', [CompanyController::class, 'paypal_success'])->name('company_paypal_success');
-        Route::get('/company/paypal/cancel', [CompanyController::class, 'paypal_cancel'])->name('company_paypal_cancel');
+        Route::post('/company/paypal/payment', 'paypal')->name('company_paypal');
+        Route::get('/company/paypal/success', 'paypal_success')->name('company_paypal_success');
+        Route::get('/company/paypal/cancel', 'paypal_cancel')->name('company_paypal_cancel');
         
-        Route::get('/company/edit-profile', [CompanyController::class, 'edit_profile'])->name('company_edit_profile');
-        Route::post('/company/edit-profile/update', [CompanyController::class, 'edit_profile_update'])->name('company_edit_profile_update');
+        Route::get('/company/edit-profile', 'edit_profile')->name('company_edit_profile');
+        Route::post('/company/edit-profile/update', 'edit_profile_update')->name('company_edit_profile_update');
         
-        Route::get('/company/edit-password', [CompanyController::class, 'edit_password'])->name('company_edit_password');
-        Route::post('/company/edit-password/update', [CompanyController::class, 'edit_password_update'])->name('company_edit_password_update');
+        Route::get('/company/edit-password', 'edit_password')->name('company_edit_password');
+        Route::post('/company/edit-password/update', 'edit_password_update')->name('company_edit_password_update');
         
-        Route::get('/company/photos', [CompanyController::class, 'photos'])->name('company_photos');
-        Route::post('/company/photos/submit', [CompanyController::class, 'photos_submit'])->name('company_photos_submit');
-        Route::get('/company/photos/delete/{id}', [CompanyController::class, 'photos_delete'])->name('company_photos_delete');
+        Route::get('/company/photos', 'photos')->name('company_photos');
+        Route::post('/company/photos/submit', 'photos_submit')->name('company_photos_submit');
+        Route::get('/company/photos/delete/{id}', 'photos_delete')->name('company_photos_delete');
         
-        Route::get('/company/videos', [CompanyController::class, 'videos'])->name('company_videos');
-        Route::post('/company/videos/submit', [CompanyController::class, 'videos_submit'])->name('company_videos_submit');
-        Route::get('/company/videos/delete/{id}', [CompanyController::class, 'videos_delete'])->name('company_videos_delete');
+        Route::get('/company/videos', 'videos')->name('company_videos');
+        Route::post('/company/videos/submit', 'videos_submit')->name('company_videos_submit');
+        Route::get('/company/videos/delete/{id}', 'videos_delete')->name('company_videos_delete');
         
-        Route::get('/company/jobs', [CompanyController::class, 'jobs'])->name('company_jobs');
-        Route::get('/company/create-job', [CompanyController::class, 'jobs_create'])->name('company_jobs_create');
-        Route::post('/company/create-job-submit', [CompanyController::class, 'jobs_create_submit'])->name('company_jobs_create_submit');
-        Route::get('/company/job-edit/{id}', [CompanyController::class, 'jobs_edit'])->name('company_jobs_edit');
-        Route::post('/company/job-update', [CompanyController::class, 'jobs_update'])->name('company_jobs_update');
-        Route::get('/company/job-delete/{id}', [CompanyController::class, 'jobs_delete'])->name('company_jobs_delete');
+        Route::get('/company/jobs', 'jobs')->name('company_jobs');
+        Route::get('/company/create-job', 'jobs_create')->name('company_jobs_create');
+        Route::post('/company/create-job-submit', 'jobs_create_submit')->name('company_jobs_create_submit');
+        Route::get('/company/job-edit/{id}', 'jobs_edit')->name('company_jobs_edit');
+        Route::post('/company/job-update', 'jobs_update')->name('company_jobs_update');
+        Route::get('/company/job-delete/{id}', 'jobs_delete')->name('company_jobs_delete');
         
-        Route::get('/company/candidate-applications', [CompanyController::class, 'candidate_applications'])->name('company_candidate_applications');
-        Route::get('/company/applicants/{id}', [CompanyController::class, 'applicants'])->name('company_applicants');
-        Route::get('/company/applicant-resume/{id}', [CompanyController::class, 'applicant_resume'])->name('company_applicant_resume');
-        Route::post('/company/applicant-status-change', [CompanyController::class, 'applicant_status_change'])->name('company_applicant_status_change');
+        Route::get('/company/candidate-applications', 'candidate_applications')->name('company_candidate_applications');
+        Route::get('/company/applicants/{id}', 'applicants')->name('company_applicants');
+        Route::get('/company/applicant-resume/{id}', 'applicant_resume')->name('company_applicant_resume');
+        Route::post('/company/applicant-status-change', 'applicant_status_change')->name('company_applicant_status_change');
     });
 
     /* Candidate */
