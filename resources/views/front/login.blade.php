@@ -59,6 +59,10 @@
                                     <input type="password" class="form-control" name="password">
                                 </div>
                                 <div class="mb-3">
+                                    <fb:login-button 
+                                      scope="public_profile,email"
+                                      onlogin="checkLoginState();">A
+                                    </fb:login-button>
                                     <button type="submit" class="btn btn-primary bg-website">{{ __('Login') }}</button>
                                     <a href="{{ route('company_forget_password') }}" class="primary-color">{{ __('Forget Password') }}</a>
                                 </div>
@@ -76,3 +80,36 @@
 </div>
 
 @endsection
+
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '{2062403544160324}',
+        cookie     : true,
+        xfbml      : true,
+        version    : '{v2.8}'
+      });
+        
+      FB.AppEvents.logPageView();   
+        
+    };
+  
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+     
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+    
+    function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+    }
+  </script>

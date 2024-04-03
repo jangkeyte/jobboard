@@ -92,9 +92,9 @@ Route::group(['middleware' => 'locale'], function() {
     Route::get('/reset-password/candidate/{token}/{email}', [ForgetPasswordController::class, 'candidate_reset_password'])->name('candidate_reset_password');
     Route::post('/reset-password/candidate/submit', [ForgetPasswordController::class, 'candidate_reset_password_submit'])->name('candidate_reset_password_submit');
 
-    Route::controller(SocialiteController::class)->group(function(){
-        Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
-        Route::get('auth/facebook/callback', 'handleFacebookCallback');
+    Route::controller(LoginController::class)->group(function(){
+        Route::get('social/{provider}', 'redirect')->name('auth_social');
+        Route::get('callback/{provider}', 'callback')->name('auth_callback');
     });
 
     /* Company */
