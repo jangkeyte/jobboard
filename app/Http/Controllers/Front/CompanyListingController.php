@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Filters\CompanyFilter;
 use App\Models\Job;
 use App\Models\Company;
 use App\Models\CompanyIndustry;
@@ -24,44 +25,19 @@ class CompanyListingController extends Controller
         $company_industries = CompanyIndustry::orderBy('name', 'asc')->get();
         $company_locations = CompanyLocation::orderBy('name', 'asc')->get();
         $company_sizes = CompanySize::orderBy('id', 'asc')->get();
-
-        $form_name = $request->name;
-        $form_industry = $request->industry;
-        $form_location = $request->location;
-        $form_size = $request->size;
-        $form_founded_on = $request->founded_on;
-
-        $companies = Company::withCount('rJob')->with('rCompanyIndustry', 'rCompanyLocation', 'rCompanySize')->orderBy('id', 'desc');
-
-        if($request->name != null) {
-            $companies = $companies->where('company_name', 'LIKE', '%' . $request->name . '%');
-        }
-        if($request->industry != null) {
-            $companies = $companies->where('company_industry_id', $request->industry);
-        }
-        if($request->location != null) {
-            $companies = $companies->where('company_location_id', $request->location);
-        }
-        if($request->size != null) {
-            $companies = $companies->where('company_size_id', $request->size);
-        }        
-        if($request->founded_on != null) {
-            $companies = $companies->where('founded_on', $request->founded_on);
-        }
-        
-        $companies = $companies->paginate(10);
-
+        $advertisement_data = Advertisement::where('id', 1)->first();
+        $other_page_item = PageOtherItem::where('id', 1)->first();
+                
+        $form_data = $request;
+        $companies = Company::filter(new CompanyFilter($request))->orderBy('id', 'desc')->paginate(10);
+            
         // Get the data from previous request, if don't add here you can add appends($_GET) in pagination links()
         $companies = $companies->appends($request->all());
 
-        $advertisement_data = Advertisement::where('id', 1)->first();
-        $other_page_item = PageOtherItem::where('id', 1)->first();
-        
-        return view('front.company_listing', compact('companies', 'company_industries', 'company_locations', 'company_sizes', 
-                    'form_name', 'form_industry', 'form_location', 'form_size', 'form_founded_on', 'advertisement_data', 'other_page_item'));
+        return view('front.company_listing', compact('companies', 'company_industries', 'company_locations', 'company_sizes', 'advertisement_data', 'other_page_item', 'form_data'));
     }
 
-    public function detail($id)
+    public function detail($id) 
     {        
         $order_data = Order::where('company_id', $id)->where('currently_active', 1)->first();
         if(date('Y-m-d') > $order_data?->expire_date) {

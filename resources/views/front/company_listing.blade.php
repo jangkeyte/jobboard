@@ -23,32 +23,32 @@
                     <form action="{{ url('company-listing') }}" method="get">
                         <div class="widget">
                             <h2>{{ __('Company Title') }}</h2>
-                            <input type="text" class="form-control" name="name" value="{{  $form_name }}" placeholder="{{ __('Company Name') }}...">
+                            <input type="text" class="form-control" name="name" value="{{  $form_data->name }}" placeholder="{{ __('Company Name') }}...">
                         </div>
                         <div class="widget">
                             <h2>{{ __('Company Industry') }}</h2>
-                            <select name="industry" class="form-control select2">
+                            <select name="company_industry_id" class="form-control select2">
                                 <option value="">{{ __('Company Industry') }}</option>
                                 @foreach($company_industries as $item)
-                                <option value="{{ $item->id }}" @if($form_industry == $item->id) selected @endif>{{  $item->name }}</option>
+                                <option value="{{ $item->id }}" @if($form_data->company_industry_id == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
                             <h2>{{ __('Company Location') }}</h2>
-                            <select name="location" class="form-control select2">
+                            <select name="company_location_id" class="form-control select2">
                                 <option value="">{{ __('Company Location') }}</option>
                                 @foreach($company_locations as $item)
-                                <option value="{{ $item->id }}" @if($form_location == $item->id) selected @endif>{{  $item->name }}</option>
+                                <option value="{{ $item->id }}" @if($form_data->company_location_id == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
                             <h2>{{ __('Company Size') }}</h2>
-                            <select name="size" class="form-control select2">
+                            <select name="company_size_id" class="form-control select2">
                                 <option value="">{{ __('Company Size') }}</option>
                                 @foreach($company_sizes as $item)
-                                <option value="{{ $item->id }}" @if($form_size == $item->id) selected @endif>{{  $item->name }}</option>
+                                <option value="{{ $item->id }}" @if($form_data->company_size_id == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -57,7 +57,7 @@
                             <select name="founded_on" class="form-control select2">
                                 <option value="">{{ __('Founded On') }}</option>
                                 @for($i = 1990; $i <= date('Y'); $i++)
-                                <option value="{{ $i }}" @if($form_founded_on == $i) selected @endif>{{  $i }}</option>
+                                <option value="{{ $i }}" @if($form_data->founded_on == $i) selected @endif>{{  $i }}</option>
                                 @endfor
                             </select>
                         </div>

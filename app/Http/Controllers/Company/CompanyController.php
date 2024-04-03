@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Company\UpdateCompanyRequest;
+use App\Repositories\Company\CompanyRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Package;
@@ -35,6 +37,21 @@ use Illuminate\Support\Facades\Mail;
 
 class CompanyController extends Controller
 {
+    /**
+     * @var CompanyRepositoryInterface
+     */
+    private $companyRepository;
+
+    /**
+     * CompanyController constructor.
+     * 
+     * @param CompanyRepositoryInterface $companyRepository
+     */
+    public function __construct(CompanyRepositoryInterface $companyRepository)
+    {
+        $this->companyRepository = $companyRepository;
+    }
+
     public function dashboard()
     {
         $total_opened_jobs = Job::where('company_id', Auth::guard('company')->user()->id)->count();
@@ -58,62 +75,10 @@ class CompanyController extends Controller
         return view('company.edit_profile', compact('company_locations', 'company_industries', 'company_sizes'));
     }
 
-    public function edit_profile_update(Request $request)
+    public function edit_profile_update(UpdateCompanyRequest $request)
     {
-        $obj = Company::where('id', Auth::guard('company')->user()->id)->first();
-        $request->validate([
-            'company_name' => 'required',
-            'person_name' => 'required',
-            'username' => ['required', 'alpha_dash', Rule::unique('companies')->ignore(Auth::guard('company')->user()->id)],
-            'email' => ['required', 'email', Rule::unique('companies')->ignore(Auth::guard('company')->user()->id)],
-
-        ]);
-
-        if($request->hasFile('logo')) {
-            $request->validate([
-                'logo' => 'image|mimes:jpg,jpeg,png,gif',
-            ]);
-
-            if(Auth::guard('company')->user()->logo != '') {
-                if(file_exists(public_path('uploads/' . $obj->logo))) {
-                    unlink(public_path('uploads/' . $obj->logo));
-                }
-            }           
-
-            $ext = $request->file('logo')->extension();
-            $final_name = 'company_logo_' . time() . '.' . $ext;
-
-            $request->file('logo')->move(public_path('uploads/'), $final_name);
-
-            $obj->logo = $final_name;
-        }
-
-        $obj->company_name = $request->company_name;
-        $obj->person_name = $request->person_name;
-        $obj->username = $request->username;
-        $obj->email = $request->email;
-        $obj->phone = $request->phone;
-        $obj->address = $request->address;
-        $obj->company_location_id = $request->company_location_id;
-        $obj->company_industry_id = $request->company_industry_id;
-        $obj->company_size_id = $request->company_size_id;
-        $obj->founded_on = $request->founded_on;
-        $obj->website = $request->website;
-        $obj->description = $request->description;
-        $obj->oh_mon = $request->oh_mon;
-        $obj->oh_tue = $request->oh_tue;
-        $obj->oh_web = $request->oh_web;
-        $obj->oh_thu = $request->oh_thu;
-        $obj->oh_fri = $request->oh_fri;
-        $obj->oh_sat = $request->oh_sat;
-        $obj->oh_sun = $request->oh_sun;
-        $obj->map_code = $request->map_code;
-        $obj->facebook = $request->facebook;
-        $obj->twitter = $request->twitter;
-        $obj->linkedin = $request->linkedin;
-        $obj->instagram = $request->instagram;
-        $obj->update();
-
+        
+        $company = $this->companyRepository->updateCompany($request);
         return redirect()->back()->with('success', __('Profile is updated successfully.'));
     }
 

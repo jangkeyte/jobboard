@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Candidate extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Filterable;
     
     /**
      * The attributes that are mass assignable.

@@ -23,59 +23,59 @@
                     <form action="{{ url('job-listing') }}" method="get">
                         <div class="widget">
                             <h2>{{ __('Job Title') }}</h2>
-                            <input type="text" class="form-control" name="title" value="{{  $form_title }}" placeholder="{{ __('Job Title') }}">
+                            <input type="text" class="form-control" name="title" value="{{  $form_data->title }}" placeholder="{{ __('Job Title') }}">
                         </div>
                         <div class="widget">
                             <h2>{{ __('Job Category') }}</h2>
-                            <select name="category" class="form-control select2">
+                            <select name="job_category_id" class="form-control select2">
                                 <option value="">{{ __('Job Category') }}</option>
                                 @foreach($job_categories as $item)
-                                <option value="{{ $item->id }}" @if($form_category == $item->id) selected @endif>{{  $item->name }}</option>
+                                <option value="{{ $item->id }}" @if($form_data->job_category_id == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
                             <h2>{{ __('Job Location') }}</h2>
-                            <select name="location" class="form-control select2">
+                            <select name="job_location_id" class="form-control select2">
                                 <option value="">{{ __('Job Location') }}</option>
                                 @foreach($job_locations as $item)
-                                <option value="{{ $item->id }}" @if($form_location == $item->id) selected @endif>{{  $item->name }}</option>
+                                <option value="{{ $item->id }}" @if($form_data->job_location_id == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
                             <h2>{{ __('Job Type') }}</h2>
-                            <select name="type" class="form-control select2">
+                            <select name="job_type_id" class="form-control select2">
                                 <option value="">{{ __('Job Type') }}</option>
                                 @foreach($job_types as $item)
-                                <option value="{{ $item->id }}" @if($form_type == $item->id) selected @endif>{{  $item->name }}</option>
+                                <option value="{{ $item->id }}" @if($form_data->job_type_id == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
                             <h2>{{ __('Experience') }}</h2>
-                            <select name="experience" class="form-control select2">
+                            <select name="job_experience_id" class="form-control select2">
                                 <option value="">{{ __('Experience') }}</option>
                                 @foreach($job_experiences as $item)
-                                <option value="{{ $item->id }}" @if($form_experience == $item->id) selected @endif>{{  $item->name }}</option>
+                                <option value="{{ $item->id }}" @if($form_data->job_experience_id == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
                             <h2>{{ __('Gender') }}</h2>
-                            <select name="gender" class="form-control select2">
+                            <select name="job_gender_id" class="form-control select2">
                                 <option value="">{{ __('Gender') }}</option>
                                 @foreach($job_genders as $item)
-                                <option value="{{ $item->id }}" @if($form_gender == $item->id) selected @endif>{{  $item->name }}</option>
+                                <option value="{{ $item->id }}" @if($form_data->job_gender_id == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="widget">
                             <h2>{{ __('Salary Range') }}</h2>
-                            <select name="salary_range" class="form-control select2">
+                            <select name="job_salary_range_id" class="form-control select2">
                                 <option value="">{{ __('Salary Range') }}</option>
                                 @foreach($job_salary_ranges as $item)
-                                <option value="{{ $item->id }}" @if($form_salary_range == $item->id) selected @endif>{{  $item->name }}</option>
+                                <option value="{{ $item->id }}" @if($form_data->job_salary_range_id == $item->id) selected @endif>{{  $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>

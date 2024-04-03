@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Pagination\Paginator;
 use App\Models\Banner;
@@ -12,11 +13,24 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        
+        $this->app->singleton(
+            \App\Repositories\Job\JobRepositoryInterface::class,
+            \App\Repositories\Job\JobRepository::class
+        );        
+        $this->app->singleton(
+            \App\Repositories\Company\CompanyRepositoryInterface::class,
+            \App\Repositories\Company\CompanyRepository::class
+        );        
+        $this->app->singleton(
+            \App\Repositories\Candidate\CandidateRepositoryInterface::class,
+            \App\Repositories\Candidate\CandidateRepository::class
+        );        
     }
 
     public function boot(): void
     {
+        Blade::componentNamespace('App\\Http\\View\\Components', strtolower('JangKeyte'));
+
         Paginator::useBootstrap();
 
         $banner_data = Schema::hasTable('banners') ? Banner::where('id', 1)->first() : array();

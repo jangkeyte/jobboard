@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Company\CreateCompanyRequest;
 use Illuminate\Http\Request;
 use App\Models\PageOtherItem;
 use App\Models\Company;
@@ -26,17 +27,8 @@ class SignupController extends Controller
         return view('front.signup', compact('other_page_item'));
     }
 
-    public function company_signup_submit(Request $request)
+    public function company_signup_submit(CreateCompanyRequest $request)
     {
-        $request->validate([
-            'company_name' => 'required',
-            'person_name' => 'required',
-            'username' => 'required|unique:companies',
-            'email' => 'required|email|unique:companies',
-            'password' => 'required',
-            'retype_password' => 'required|same:password'
-        ]);
-
         $token = hash('sha256', time());
         
         $obj = new Company();

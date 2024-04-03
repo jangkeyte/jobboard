@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Filters\JobFilter;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\JobLocation;
@@ -26,48 +27,16 @@ class JobListingController extends Controller
         $job_experiences = JobExperience::orderBy('id', 'asc')->get();
         $job_genders = JobGender::orderBy('id', 'asc')->get();
         $job_salary_ranges = JobSalaryRange::orderBy('id', 'asc')->get();
-
-        $form_title = $request->title;
-        $form_category = $request->category;
-        $form_location = $request->location;
-        $form_type = $request->type;
-        $form_experience = $request->experience;
-        $form_gender = $request->gender;
-        $form_salary_range = $request->salary_range;
-
-        $jobs = Job::with('rCompany', 'rJobCategory', 'rJobLocation', 'rJobType', 'rJobExperience', 'rJobGender', 'rJobSalaryRange')->orderBy('id', 'desc');
-
-        if($request->title != null) {
-            $jobs = $jobs->where('title', 'LIKE', '%' . $request->title . '%');
-        }
-        if($request->category != null) {
-            $jobs = $jobs->where('job_category_id', $request->category);
-        }
-        if($request->location != null) {
-            $jobs = $jobs->where('job_location_id', $request->location);
-        }
-        if($request->type != null) {
-            $jobs = $jobs->where('job_type_id', $request->type);
-        }
-        if($request->experience != null) {
-            $jobs = $jobs->where('job_experience_id', $request->experience);
-        }
-        if($request->gender != null) {
-            $jobs = $jobs->where('job_gender_id', $request->gender);
-        }
-        if($request->salary_range != null) {
-            $jobs = $jobs->where('job_salary_range_id', $request->salary_range);
-        }
-        
-        $jobs = $jobs->paginate(10);
-        // Get the data from previous request, if don't add here you can add appends($_GET) in pagination links()
-        $jobs = $jobs->appends($request->all());
-
         $advertisement_data = Advertisement::where('id', 1)->first();
         $other_page_item = PageOtherItem::where('id', 1)->first();
         
-        return view('front.job_listing', compact('jobs', 'job_categories', 'job_locations', 'job_types', 'job_experiences', 'job_genders', 'job_salary_ranges', 
-                    'form_title', 'form_category', 'form_location', 'form_type', 'form_experience', 'form_gender', 'form_salary_range', 'advertisement_data', 'other_page_item'));
+        $form_data = $request;
+        $jobs = Job::filter(new JobFilter($request))->orderBy('id', 'desc')->paginate(10);
+
+        // Get the data from previous request, if don't add here you can add appends($_GET) in pagination links()
+        $jobs = $jobs->appends($request->all());
+
+        return view('front.job_listing', compact('jobs', 'job_categories', 'job_locations', 'job_types', 'job_experiences', 'job_genders', 'job_salary_ranges', 'form_data', 'advertisement_data', 'other_page_item'));
     }
 
     public function detail($id)
