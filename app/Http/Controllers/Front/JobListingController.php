@@ -31,10 +31,20 @@ class JobListingController extends Controller
         $other_page_item = PageOtherItem::where('id', 1)->first();
         
         $form_data = $request;
-        $jobs = Job::filter(new JobFilter($request))->orderBy('id', 'desc')->paginate(10);
+        $raw_jobs = Job::with('visits')->filter(new JobFilter($request))->orderBy('id', 'desc')->get();
+
+        $jobs = $raw_jobs->filter(function ($item) {
+            $this_company_id = $item->rCompany->id;
+            $order_data = \App\Models\Order::where('company_id', $this_company_id)->where('currently_active', 1)->first();
+            if(date('Y-m-d') > $order_data?->expire_date) {
+                return $item;
+            }
+        })->values();
+
+        //$jobs = $jobs->paginate(10);
 
         // Get the data from previous request, if don't add here you can add appends($_GET) in pagination links()
-        $jobs = $jobs->appends($request->all());
+        // $jobs = $jobs->appends($request->all());
 
         return view('front.job_listing', compact('jobs', 'job_categories', 'job_locations', 'job_types', 'job_experiences', 'job_genders', 'job_salary_ranges', 'form_data', 'advertisement_data', 'other_page_item'));
     }
@@ -43,7 +53,9 @@ class JobListingController extends Controller
     {        
         $job_single = Job::with('rCompany', 'rJobCategory', 'rJobLocation', 'rJobType', 'rJobExperience', 'rJobGender', 'rJobSalaryRange')->where('id', $id)->first();
         $jobs_related = Job::with('rCompany', 'rJobCategory', 'rJobLocation', 'rJobType', 'rJobExperience', 'rJobGender', 'rJobSalaryRange')->where('job_category_id', $job_single->job_category_id)->where('id', '<>', $id)->get();
-        $other_page_item = PageOtherItem::where('id', 1)->first();
+        $other_page_item = PageOtherItem::where('id', 1)->first();        
+        visits($job_single)->increment();
+        //$job_single->vzt()->increment();
         return view('front.job', compact('job_single', 'jobs_related', 'other_page_item'));
     }
 

@@ -11,6 +11,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Job Title</h2>
+                {{ visits($job_single)->count(); }}
             </div>
         </div>
     </div>

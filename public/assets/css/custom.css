@@ -53,3 +53,126 @@ ul.header-left li, ul.header-right li {
 a, a.nav-link {
     color:#656c6c;
 }
+
+.text-danger {
+    color: red !important;
+}
+
+.bg-danger {
+    background-color: red !important;
+}
+
+.btn-danger {
+    background-color: red !important;
+    color: white;
+}
+
+.btn-fulltime {
+    background-color: #186fc9 !important;
+    color: white;
+}
+
+.btn-parttime {
+    background-color: #f1630d !important;
+    color: white;
+}
+
+.btn-freelance {
+    background-color: #53b427 !important;
+    color: white;
+}
+
+.btn-temporary {
+    background-color: #e12335 !important;
+    color: white;
+}
+
+.btn-internship {
+    background-color: #0fa1ce !important;
+    color: white;
+}
+
+.btn-rss {
+    background-color: #f8991b !important;
+    color: white;
+    width: 84px;
+}
+
+.navbar-area {
+    height: 158px;
+}
+
+.careerfy-header-seventeen .careerfy-logo {
+    display: inline-block;
+    vertical-align: middle;
+    width: 25%;
+    float: none;
+}
+.hover-color-danger:hover {
+    color: red;
+}
+
+.hover-outline:hover {
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+}
+
+.fs-7 {
+    font-size: 14px;
+}
+
+.fs-8 {
+    font-size: 12px;
+}
+
+.ff-1 {
+    font-family: "Source Sans Pro";
+}
+
+.list-image {
+    width: 58px;
+    height: 58px;
+    border: 1px solid #eeeeee;
+}
+
+.btn-job-type {
+    width: 104px;
+    height: 28px;
+    padding: 4px;
+    color: white;
+    font-family: "Source Sans Pro";
+    font-size: 12px;
+}
+
+.icon-job-like {
+    float: right;
+    width: 27px;
+    height: 27px;
+    border-radius: 100%;
+    border: 1px solid;
+    padding: 7px 6px;
+    font-size: 12px;
+    /* background-color: red; */
+    color: white;
+}
+
+body {
+    font-family: "Source Sans Pro";
+    line-height: 20px;
+    color: #999999;
+    font-display: swap;
+}
+
+h-lg {
+    height: 60px !important;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
+
+.form-check label,
+.form-check input {
+    cursor: pointer !important;
+}

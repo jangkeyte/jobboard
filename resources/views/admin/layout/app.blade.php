@@ -13,6 +13,7 @@
    <meta name="description" content="">
    <meta name="keywords" content=""><!--end::Primary Meta Tags-->      
    @include('admin.layout.styles') 
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head> <!--end::Head--> 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <!--begin::App Wrapper-->

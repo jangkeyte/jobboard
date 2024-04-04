@@ -15,7 +15,8 @@ class AdminHomeController extends Controller
         $total_companies = Company::where('status', 1)->count();
         $total_candidates = Candidate::where('status', 1)->count();
         $total_jobs = Job::count();
-        return view('admin.home', compact('total_companies', 'total_candidates', 'total_jobs'));
+        $job_statistic = visits('App\Models\Job');
+        return view('admin.home', compact('total_companies', 'total_candidates', 'total_jobs', 'job_statistic'));
     }
 
     public function dashboard()
@@ -23,6 +24,8 @@ class AdminHomeController extends Controller
         $total_companies = Company::where('status', 1)->count();
         $total_candidates = Candidate::where('status', 1)->count();
         $total_jobs = Job::count();
-        return view('admin.home', compact('total_companies', 'total_candidates', 'total_jobs'));
+        $job_statistic = visits('App\Models\Job');
+        dd($job_statistic);
+        return view('admin.home', compact('total_companies', 'total_candidates', 'total_jobs', 'job_statistic'));
     }
 }

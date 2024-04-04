@@ -50,4 +50,13 @@ class Job extends Model
         return $this->belongsTo(JobSalaryRange::class, 'job_salary_range_id');
     }
     
+    public function vzt()
+    {
+        return visits($this);
+    }
+    
+    public function visits()
+    {
+        return visits($this)->relation();
+    }
 }
