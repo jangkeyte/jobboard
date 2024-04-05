@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="jumbotron" style="margin: 200px; width: 600px;">
+                <div class="jumbotron">
                     <h2>{{ $home_page_data->heading ?? __('Heading') }}</h2>
                     <p>{{ $home_page_data->text ?? __('Text') }}</p>
                     <p class="lead">
@@ -24,144 +24,67 @@
     </div>
 </div>
 
-<div class="search-section d-flex justify-content-center mt-3">
-    <form action="{{ route('job_listing') }}" mothod="get">
-        <div class="inner">
-            <div class="row">
-                <div class="col-lg-6 col-md-8 mt-2">
-                    <div class="form-group">
-                        <input type="text" name="title" class="form-control" placeholder="{{ $home_page_data->job_title }}">
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
-                    <div class="form-group">
-                        <select name="location" class="form-select select2">
-                            <option value="">{{ $home_page_data->job_location }}</option>
-                            @foreach ($all_job_locations as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
-                    <div class="form-group">
-                        <select name="category" class="form-select select2">
-                            <option value="">{{ $home_page_data->job_category }}</option>
-                            @foreach ($all_job_categories as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
-                    <div class="form-group">
-                        <select name="type" class="form-select select2">
-                            <option value="">{{ $home_page_data->job_type ?? __('Job Type') }}</option>
-                            @foreach ($all_job_types as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
-                    <div class="form-group">
-                        <select name="experience" class="form-select select2">
-                            <option value="">{{ $home_page_data->job_experience ?? __('Job Experience') }}</option>
-                            @foreach ($all_job_experiences as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
-                    <div class="form-group">
-                        <select name="salary_range" class="form-select select2">
-                            <option value="">{{ $home_page_data->job_salary_range ?? __('Job Salary Range') }}</option>
-                            @foreach ($all_job_salary_ranges as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>                                                    
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 d-grid gap-2 mt-2">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> {{ $home_page_data->search }}</button>
-                </div>
-            </div>
-        </div>
-    </form>
+<div class="search-section d-flex justify-content-center py-3" style="background-color: #e6eaec;">
+    @include('front/templates/home_search_form', array('home_page_data' => $home_page_data, 'all_job_locations' => $all_job_locations, 'all_job_categories' => $all_job_categories, 'all_job_types' => $all_job_types, 'all_job_experiences' => $all_job_experiences, 'all_job_salary_ranges' => $all_job_salary_ranges))
 </div>
-
-@if($home_page_data->job_category_status == 'Show')
-<div class="job-category mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="heading">
-                    <h2>{{ $home_page_data->job_category_heading }}</h2>
-                    <p>{{ $home_page_data->job_category_subheading }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            @foreach($job_categories as $item)
-            <div class="col-md-4">
-                <div class="item">
-                    <div class="icon">
-                        <i class="{{ $item->icon }}"></i>
-                    </div>
-                    <h3><a href="{{ url('job-listing?category=' . $item->id) }}">{{ $item->name }}</a></h3>
-                    <p>({{ $item->r_job_count }} Open Positions)</p>
-                    
-                </div>
-            </div>
-            @endforeach
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a href="{{ route('job_categories') }}" class="btn btn-primary">See All Categories</a>
-            </div>
-        </div>
-    </div>
-</div>
-@endif
 
 @if($home_page_data->why_choose_status == 'Show')
-<div class="why-choose" style="background-image: url({{ asset('uploads/' . ($home_page_data->why_choose_background ?? 'background_default.jpg')) }})">
+<div class="why-choose py-4" style="background-image: url({{ asset('uploads/' . ($home_page_data->why_choose_background ?? 'background_default.jpg')) }})">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="heading">
+                <div class="heading careerfy-fancy-title-seventeen">
                     <h2>{{ $home_page_data->why_choose_heading }}</h2>
                     <p>{{ $home_page_data->why_choose_subheading }}</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            @foreach($why_choose_items as $item)
-            <div class="col-md-4">
-                <div class="inner">
-                    <div class="icon">
-                        <i class="{{ $item->icon }}"></i>
-                    </div>
-                    <div class="text">
-                        <h2>{{ $item->heading }}</h2>
-                        <p>{{ nl2br($item->text) }}</p>
-                    </div>
+            <div class="careerfy-seventeen-services">
+                <ul class="row">
+                    @foreach($why_choose_items as $item)
+                        <li class="col-md-3 col-6">
+                            <i class="careerfy-icon {{ $item->icon }} text-danger"></i>
+                            <h2><a href="#">{{ $item->heading }}</a></h2>
+                            <p>{{ nl2br($item->text) }}</p>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>            
+        </div>
+    </div>
+</div>
+@endif
+
+@if($home_page_data->job_category_status == 'Show')
+<div class="job-category py-4" style="background-image: url({{ asset('assets/images/trending-categories-pattren.png') }}); background-color:#e6eaec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading careerfy-fancy-title-seventeen">
+                    <h2>{{ $home_page_data->job_category_heading }}</h2>
+                    <p>{{ $home_page_data->job_category_subheading }}</p>
                 </div>
             </div>
-            @endforeach
+        </div>
+        <div class="row careerfy-categories careerfy-trending-categories">
+            @include('front/templates/home_job_categories', array('job_categories' => $job_categories))
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="careerfy-loadmore-listingsbtn"><a href="{{ route('job_categories') }}">{{ __('See All Categories') }}</a></div>
+            </div>
         </div>
     </div>
 </div>
 @endif
 
 @if($home_page_data->featured_jobs_status == 'Show')
-<div class="job">
+<div class="job py-4">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="heading">
+                <div class="heading careerfy-fancy-title-seventeen">
                     <h2>{{ $home_page_data->featured_jobs_heading }}</h2>
                     <p>{{ $home_page_data->featured_jobs_subheading }}</p>
                 </div>
@@ -182,55 +105,13 @@
                     }
                 @endphp
                 <div class="col-lg-6 col-md-12">
-                    <div class="item d-flex justify-content-start">
-                        <div class="logo">
-                            <img src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
-                        </div>
-                        <div class="text">
-                            <h3>
-                                <a href="{{ route('job', $item->id) }}">{{ $item->title }}, {{ $item->rCompany->company_name }}</a>
-                            </h3>
-                            <div class="detail-1 d-flex justify-content-start">
-                                <div class="category">{{ $item->rJobCategory->name }}</div>
-                                <div class="location">{{ $item->rJobLocation->name }}</div>
-                            </div>
-                            <div class="detail-2 d-flex-justify-content-start">
-                                <div class="date">{{ $item->created_at->diffForHumans() }}</div>
-                                <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
-                                @if(date('Y-m-d') > $item->deadline)
-                                <div class="expired">Expired</div>
-                                @endif
-                            </div>
-                            <div class="special d-flex justify-content-start">
-                                @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
-                                <div class="type">{{ $item->rJobType->name }}</div>
-                                @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
-                            </div>
-                            @if(!Auth::guard('company')->check())
-                            <div class="bookmark">
-                                @if(Auth::guard('candidate')->check())
-                                    @php
-                                        $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
-                                        if($count > 0) {
-                                            $bookmark_status = 'active';
-                                        } else {
-                                            $bookmark_status = '';
-                                        }
-                                    @endphp
-                                @else
-                                    @php $bookmark_status = ''; @endphp
-                                @endif
-                                <a href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fas fa-bookmark {{ $bookmark_status }}"></i></a>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
+                    @include('front/templates/job_featured_item', array('item' => $item))
                 </div>
             @endforeach
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="all"><a href="{{ route('job_listing') }}" class="btn btn-primary">See All Jobs</a></div>
+                <div class="careerfy-loadmore-listingsbtn"><a href="{{ route('job_listing') }}" class="lodmore-jlists-16912428">{{ __('See All Jobs') }}</a></div>
             </div>
         </div>
     </div>
@@ -238,30 +119,70 @@
 @endif
 
 @if($home_page_data->testimonial_status == 'Show')
-<div class="testimonial" style="background-image: url({{ asset('uploads/banner11.jpg') }})">
+<div class="testimonial py-4" style="background-image: url({{ asset('uploads/banner11.jpg') }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="main-header">Our Happy Clients</h2>
+                <div class="header careerfy-fancy-title-seventeen">
+                    <h2>{{ $home_page_data->testimonial_heading }}</h2>
+                    <p>{{ $home_page_data->testimonial_subheading }}</p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="testimonial-carousel owl-carousel">
-                    @foreach($testimonials as $item)
-                    <div class="item">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/' . $item->photo) }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h4>{{ $item->name }}</h4>
-                            <p>{{ $item->designation }}</p>
-                        </div>
-                        <div class="description">{{ nl2br($item->comment) }}</div>
-                    </div>
-                    @endforeach
+        <div class="row">            
+            @foreach($testimonials as $item)
+            <div class="col-md-6">    
+                <div class="careerfy-seventeen-testimonial">
+                    <figure>
+                        <a href="#"><img src="{{ asset('uploads/' . $item->photo) }}" alt=""><strong></strong> </a>
+                        <figcaption>
+                            <h2><a href="#">{{ $item->name }}</a></h2>
+                            <span>{{ $item->designation }}</span><small>2 Days ago</small>
+                        </figcaption>
+                    </figure>
+                    <p>{{ nl2br($item->comment) }}</p>
                 </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
+@if($home_page_data->featured_jobs_status == 'Show')
+<div class="careerfy-refejobs-list careerfy-refejobs-list-two py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading careerfy-fancy-title-seventeen">
+                    <h2>{{ $home_page_data->refered_jobs_heading ?? __('Job List') }}</h2>
+                    <p>{{ $home_page_data->refered_jobs_subheading ?? __('Start your search by using any of the following job categories') }}</p>
+                </div>
+            </div>
+        </div>
+        <ul class="row">
+            @php $i=0; @endphp
+            @foreach($refered_jobs as $item)
+                @php
+                    $this_company_id = $item->rCompany->id;
+                    $order_data = \App\Models\Order::where('company_id', $this_company_id)->where('currently_active', 1)->first();
+                    if(date('Y-m-d') > $order_data?->expire_date) {
+                        continue;
+                    }
+                    $i++;
+                    if($i > 6) {
+                        break;
+                    }
+                @endphp
+                <li class="col-12">
+                    @include('front/templates/job_refered_item', array('item' => $item))
+                </li>
+            @endforeach
+        </ul>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="careerfy-loadmore-listingsbtn"><a href="{{ route('job_listing') }}" class="lodmore-jlists-16912428">{{ __('See All Jobs') }}</a></div>
             </div>
         </div>
     </div>
@@ -269,11 +190,11 @@
 @endif
 
 @if($home_page_data->blog_status == 'Show')
-<div class="blog">
+<div class="blog py-4">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="heading">
+                <div class="heading careerfy-fancy-title-seventeen">
                     <h2>{{ $home_page_data->blog_heading }}</h2>
                     <p>{{ $home_page_data->blog_subheading }}</p>
                 </div>
