@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('job_listing_ad_status');
             $table->string('company_listing_ad');
             $table->string('company_listing_ad_url')->nullable();
-            $table->string('company_listing_status');
+            $table->string('company_listing_ad_status');
             $table->timestamps();
         });
     }

@@ -57,7 +57,7 @@
 @endif
 
 @if($home_page_data->job_category_status == 'Show')
-<div class="job-category py-4" style="background-image: url({{ asset('assets/images/trending-categories-pattren.png') }}); background-color:#e6eaec">
+<div class="job-category py-4" style="background-image: url({{ asset('assets/images/trending-categories-pattren.png') }});">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -119,7 +119,7 @@
 @endif
 
 @if($home_page_data->testimonial_status == 'Show')
-<div class="testimonial py-4" style="background-image: url({{ asset('uploads/banner11.jpg') }})">
+<div class="testimonial py-4" style="background-image: url({{ asset('assets/images/trending-categories-pattren.png') }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
@@ -189,46 +189,42 @@
 </div>
 @endif
 
-@if($home_page_data->blog_status == 'Show')
-<div class="blog py-4">
+<div class="companies py-4" style="background-image: url({{ asset('assets/images/trending-categories-pattren.png') }})">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="heading careerfy-fancy-title-seventeen">
-                    <h2>{{ $home_page_data->blog_heading }}</h2>
-                    <p>{{ $home_page_data->blog_subheading }}</p>
+                    <h2>{{ __('Employers') }}</h2>
+                    <p>{{ __('Start your search by using any of the following job categories') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row careerfy-seventeen-employers-grid">
+            @include('front/templates/home_companies', array('companies' => $companies))
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="careerfy-loadmore-listingsbtn"><a href="{{ route('company_listing') }}">{{ __('See All Employers') }}</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="why-choose py-4" style="background-image: url({{ asset('uploads/' . ($home_page_data->why_choose_background ?? 'background_default.jpg')) }})">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading careerfy-fancy-title-seventeen">
+                    <h2>{{ __('Perfect Job Stats') }}</h2>
+                    <p>{{ __('Start your search by using any of the following job categories') }}</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            @foreach($posts as $item)
-            <div class="col-lg-4 col-md-6">
-                <div class="item">
-                    <div class="photo">
-                        <img src="{{ asset('uploads/' . $item->photo) }}" alt="{{ $item->title }}">
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="{{ route('post', $item->slug) }}">
-                                {{ $item->title }}
-                            </a>
-                        </h2>
-                        <div class="short-des">
-                            <p>{{ $item->short_description }}</p>
-                        </div>
-                        <div class="button">
-                            <a href="{{ route('post', $item->slug) }}" class="btn btn-primary">
-                                Read More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
+            @include('front/templates/home_stats')
         </div>
     </div>
 </div>
-@endif
 
 @endisset
 

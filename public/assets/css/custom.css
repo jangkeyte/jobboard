@@ -314,7 +314,58 @@ h-lg {
     margin-bottom: 0px;
     letter-spacing: 0px;
 }
-
+/* Seventeen Employers Grid */
+.careerfy-seventeen-employers-grid,
+.careerfy-seventeen-employers-grid-inner,
+.careerfy-seventeen-employers-grid figure {
+    /*float: left;*/
+    width: 100%;
+}
+.careerfy-seventeen-employers-grid ul li {
+    list-style: none; }
+.careerfy-seventeen-employers-grid > ul > li {
+    margin-bottom: 30px; }
+.careerfy-seventeen-employers-grid-inner {
+    border: 1px solid #cdd0d2;
+    background-color: #ffffff;
+    text-align: center;
+    padding: 37px 15px 48px 15px;
+    position: relative;
+    -webkit-transition: all 0.4s ease-in-out;
+       -moz-transition: all 0.4s ease-in-out;
+        -ms-transition: all 0.4s ease-in-out;
+         -o-transition: all 0.4s ease-in-out;
+            transition: all 0.4s ease-in-out;
+}
+.careerfy-seventeen-employers-grid-inner:hover {
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15); }
+.careerfy-seventeen-employers-grid figure {
+    margin-bottom: 17px; }
+.careerfy-seventeen-employers-grid figure a {
+    display: inline-block;
+    width: 93px;
+}
+.careerfy-seventeen-employers-grid h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.careerfy-seventeen-employers-grid span {
+    display: block;
+    font-size: 18px;
+    color: #ff0000;
+    margin-bottom: 22px;
+}
+.careerfy-seventeen-employers-grid small {
+    display: inline-block;
+    font-size: 14px;
+    color: #ffffff;
+    text-transform: uppercase;
+    background-color: #666666;
+    border-radius: 4px;
+    padding: 9px 18px;
+    line-height: 1;
+}
 /* Featured Listing */
 .careerfy-featured-listing > ul > li { margin-bottom: 30px; list-style: none; float: none; display: inline-block; vertical-align: top; margin-right: -4px; }
 .careerfy-featured-listing { margin-bottom: 25px; }
@@ -483,7 +534,7 @@ h-lg {
     color: #ffffff; }
 /* RefeJobs List */
 .careerfy-refejobs-list {
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 .careerfy-refejobs-list ul li {
@@ -560,7 +611,9 @@ h-lg {
             transition: all 0.4s ease-in-out;
 }
 li:hover .careerfy-refejobs-list-btn span {
-    color: #ffffff; }
+    color: #ffffff;
+    background-color: #ff0000; 
+}
  /* RefeJobs List Two */
 .careerfy-refejobs-list-two .careerfy-refejobs-list-inner {
     padding: 22px;
@@ -644,7 +697,48 @@ li:hover .careerfy-refejobs-list-btn span {
          -o-transform: rotate(-40deg);
             transform: rotate(-40deg);
 }
-
+/* Counter ElevenView */
+.careerfy-counter-elevenview {
+    float: left;
+    width: 100%;
+}
+.careerfy-counter-elevenview ul li {
+    list-style: none;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.careerfy-counter-elevenview i {
+    font-size: 40px;
+    color: #1e6de6;
+    display: inline-block;
+    margin-bottom: 17px;
+}
+.careerfy-counter-elevenview h2 {
+    display: block;
+    font-size: 26px;
+    font-weight: 700;
+    color: #474b56;
+    position: relative;
+    margin-bottom: 18px;
+    padding-bottom: 13px;
+}
+.careerfy-counter-elevenview h2:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    width: 44px;
+    height: 2px;
+    margin-left: -22px;
+}
+.careerfy-counter-elevenview span {
+    font-size: 40px;
+    font-weight: 600;
+    color: #6d7383;
+}
+.careerfy-counter-elevenview h2:before {
+    background-color: #ff0000;
+}
 /* Load More button */
 .careerfy-loadmore-listingsbtn {
     float: left;
@@ -685,4 +779,26 @@ li:hover .careerfy-refejobs-list-btn span {
 	.careerfy-refejobs-list-inner,.careerfy-jobslatest-list-inner { flex-wrap: wrap; }
 	.careerfy-jobslatest-list figure > a ~ figcaption { padding-left: 0px; width: 100%;  }
 	.careerfy-jobslatest-list-cell small { margin-bottom: 10px;  }
+}
+
+.careerfy-like-list a:hover {
+    color: #ffb607;
+}
+
+.careerfy-jobli-medium3 {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #ffffff !important;
+    background-color: #ffb14a;
+    width: 30px;
+    height: 33px;
+    border-radius: 0px 0px 0px 80px;
+    text-align: center;
+    padding: 0px 0px 0px 9px;
+}
+
+.job-category, .testimonial, .companies {    
+    background-color:#e6eaec; 
+    background-size:cover
 }
