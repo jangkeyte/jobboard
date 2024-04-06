@@ -49,7 +49,12 @@ img{
     background-size: cover;
 }
 
-ul.header-left li, ul.header-right li {
+.page-top-detail {
+    height: 320px;
+    background-color: rgba(111, 123, 134);
+}
+
+ul.d-inline li, ul.header-left li, ul.header-right li {
     display:inline;
 }
 
@@ -61,13 +66,18 @@ a, a.nav-link {
     color: red !important;
 }
 
-.bg-danger {
-    background-color: red !important;
-}
-
+.hover-danger:hover,
 .btn-danger {
     background-color: red !important;
-    color: white;
+    color: white !important;
+    border: 1px solid red;
+}
+
+.btn-outline,
+.hover-outline:hover {
+    background-color: white !important;
+    color: red !important;
+    border: 1px solid red;
 }
 
 .btn-fulltime {
@@ -139,9 +149,31 @@ a, a.nav-link {
     border: 1px solid #eeeeee;
 }
 
+.job-detail-image {
+    width: 200px;
+    height: 200px;
+    padding-top: 21px;
+    padding-left: 21px;
+    border: 1px solid #eeeeee;
+}
+
+.job-detail-image img {
+    width: 158px;
+    height: 158px;
+}
+
 .btn-job-type {
     width: 104px;
     height: 28px;
+    padding: 4px;
+    color: white;
+    font-family: "Source Sans Pro";
+    font-size: 12px;
+}
+
+.btn-follow {
+    width: 100px;
+    height: 33px;
     padding: 4px;
     color: white;
     font-family: "Source Sans Pro";
@@ -178,6 +210,15 @@ h-lg {
 .form-check label,
 .form-check input {
     cursor: pointer !important;
+}
+
+.promotepof-badgeemp {
+    margin-right: -7px;
+    background-color: #ffb607;
+    color: #ffffff;
+    line-height: 1;
+    font-size: 11px;
+    padding: 3px;
 }
 
 /* GIANG-KT */
@@ -314,11 +355,11 @@ h-lg {
     margin-bottom: 0px;
     letter-spacing: 0px;
 }
+
 /* Seventeen Employers Grid */
 .careerfy-seventeen-employers-grid,
 .careerfy-seventeen-employers-grid-inner,
 .careerfy-seventeen-employers-grid figure {
-    /*float: left;*/
     width: 100%;
 }
 .careerfy-seventeen-employers-grid ul li {
@@ -366,6 +407,7 @@ h-lg {
     padding: 9px 18px;
     line-height: 1;
 }
+
 /* Featured Listing */
 .careerfy-featured-listing > ul > li { margin-bottom: 30px; list-style: none; float: none; display: inline-block; vertical-align: top; margin-right: -4px; }
 .careerfy-featured-listing { margin-bottom: 25px; }
@@ -529,12 +571,14 @@ h-lg {
     background: url("images/seventeen-services-border-2.png");
 }
 .careerfy-seventeen-services li:nth-child(4n):before {
-    display: none; }
+    display: none; 
+}
 .careerfy-seventeen-services li:hover i {
-    color: #ffffff; }
+    color: #ffffff; 
+}
+
 /* RefeJobs List */
 .careerfy-refejobs-list {
-    /*float: left;*/
     width: 100%;
 }
 .careerfy-refejobs-list ul li {
@@ -614,6 +658,7 @@ li:hover .careerfy-refejobs-list-btn span {
     color: #ffffff;
     background-color: #ff0000; 
 }
+
  /* RefeJobs List Two */
 .careerfy-refejobs-list-two .careerfy-refejobs-list-inner {
     padding: 22px;
@@ -621,7 +666,9 @@ li:hover .careerfy-refejobs-list-btn span {
     border-bottom: 1px solid #e3e3e3;
 }
 .careerfy-refejobs-list-two li:last-child .careerfy-refejobs-list-inner {
-    border: none; }
+    border: none; 
+}
+
 /* Sector Grid */
 .careerfy-sector-grid {
     float: left;
@@ -697,6 +744,7 @@ li:hover .careerfy-refejobs-list-btn span {
          -o-transform: rotate(-40deg);
             transform: rotate(-40deg);
 }
+
 /* Counter ElevenView */
 .careerfy-counter-elevenview {
     float: left;
@@ -739,6 +787,7 @@ li:hover .careerfy-refejobs-list-btn span {
 .careerfy-counter-elevenview h2:before {
     background-color: #ff0000;
 }
+
 /* Load More button */
 .careerfy-loadmore-listingsbtn {
     float: left;

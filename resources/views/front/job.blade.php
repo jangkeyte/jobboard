@@ -5,137 +5,238 @@
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_job_detail ?? 'banner_default.jpg')) }})">
-    <div class="bg"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Job Title</h2>
-                {{ visits($job_single)->count(); }}
-            </div>
-        </div>
-    </div>
-</div>
+<div class="page-top-detail" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_job_detail ?? 'banner_default.jpg')) }})"></div>
+<div class="container w-75 bg-white" style="margin-top: -150px;">
+    <div class="row py-5 border">
+        <div class="col-md-12">
+            <div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 job job-single">
+                            <div class="item d-flex justify-content-start">
+                                <div class="logo job-detail-image me-4"><img src="{{ asset('uploads/' . $job_single->rCompany->logo) }}"></div>
+                                <div class="text">
+                                    <h4 class="text-black fw-bold">{{ $job_single->title }}</h4>
+                                    <span>
+                                        @if($job_single->rJobType->id == 1)<button type="submit" class="btn btn-fulltime rounded-0 btn-job-type">{{ $job_single->rJobType->name }}</button>@endif
+                                        @if($job_single->rJobType->id == 2)<button type="submit" class="btn btn-parttime rounded-0 btn-job-type">{{ $job_single->rJobType->name }}</button>@endif
+                                        @if($job_single->rJobType->id == 3)<button type="submit" class="btn btn-freelance rounded-0 btn-job-type">{{ $job_single->rJobType->name }}</button>@endif
+                                        @if($job_single->rJobType->id == 4)<button type="submit" class="btn btn-temporary rounded-0 btn-job-type">{{ $job_single->rJobType->name }}</button>@endif
+                                        @if($job_single->rJobType->id == 5)<button type="submit" class="btn btn-internship rounded-0 btn-job-type">{{ $job_single->rJobType->name }}</button>@endif
+                                        <a class ="text-black px-1 fw-bold" href="javascript:void(0);">{{ $job_single->rCompany->company_name }}</a>
+                                        <span class ="text-danger fs-8 fst-italic pe-1" href="javascript:void(0);">{{ __('posted')}} {{ $job_single->created_at->format('d F, Y') }} {{ $job_single->created_at->diffForHumans() }}</span> 
+                                        <a class ="text-black fw-bold" href="javascript:void(0);">{{ __('in')}} {{ $job_single->rJobCategory->name }}</a>
+                                    <span/>
 
-<div class="page-top page-top-job-single" style="background-image: url({{ asset('uploads/banner.jpg') }}">
-    <div class="bg"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 job job-single">
-                <div class="item d-flex justify-content-start">
-                    <div class="logo"><img src="{{ asset('uploads/' . $job_single->rCompany->logo) }}"></div>
-                    <div class="text">
-                        <h3>{{ $job_single->title }}, {{ $job_single->rCompany->company_name }}</h3>
-                        <div class="detail-1 d-flex justify-content-start">
-                            <div class="category">{{ $job_single->rJobCategory->name }}</div>
-                            <div class="location">{{ $job_single->rJobLocation->name }}</div>
+                                    <div class="pt-2">
+                                        <i class="pe-1 fa fa-location-dot"></i>{{ $job_single->rJobLocation->name }}
+                                        <a 
+                                            href="https://www.google.com/maps/search/{{ __('company')}} {{ $job_single->rCompany->company_name }} {{ __('in')}} {{ $job_single->rJobLocation->name }}"
+                                            class="btn btn-danger rounded-4 ms-2 fs-8 py-0" style="height:20px;"
+                                        >
+                                            {{ __('view on map')}}
+                                        </a>
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <i class="pe-1 fa fa-calendar-days text-danger"></i>{{ $job_single->created_at }}
+                                        <i class="ps-4 pe-1 fa fa-calendar-days text-danger"></i>{{ $job_single->deadline }}
+                                        <i class="ps-4 pe-1 fa fa-money-bill text-danger"></i>{{ $job_single->rJobSalaryRange->name }}
+                                    </div>
+
+                                    <div class="pt-2">
+                                        @if($job_single->is_featured == 1)<div class="featured badge text-bg-primary">{{ __('Featured') }}</div> @endif
+                                        @if($job_single->is_urgent == 1)<div class="urgent badge text-bg-danger">{{ __('Urgent') }}</div> @endif
+                                        @if(date('Y-m-d') > $job_single->deadline)<div class="badge text-bg-warning">{{ __('Expired') }}</div>@endif
+                                    </div>
+                                    
+                                    @if(!Auth::guard('company')->check())
+                                    <div class="pt-3">
+                                        @if(date('Y-m-d') >= $job_single->deadline)
+                                            <a href="{{ route('candidate_apply', $job_single->id) }}" class="btn btn-danger me-2">
+                                                <i class="pe-2 fa fa-feather-pointed"></i>{{__('Apply Now')}}
+                                            </a>
+                                            <a href="{{ route('candidate_bookmark_add', $job_single->id) }}" class="btn btn-warning save-job">
+                                                <i class="pe-2 fa fa-bookmark"></i>{{__('Bookmark')}}
+                                            </a>
+                                        @endif
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                        <div class="detail-2 d-flex-justify-content-start">
-                            <div class="date">{{ $job_single->created_at->diffForHumans() }}</div>
-                            <div class="budget">{{ $job_single->rJobSalaryRange->name }}</div>
-                            @if(date('Y-m-d') > $job_single->deadline)
-                            <div class="expired">Expired</div>
-                            @endif
-                        </div>
-                        <div class="special d-flex justify-content-start">
-                            @if($job_single->is_featured == 1)<div class="featured">Featured</div> @endif
-                            <div class="type">{{ $job_single->rJobType->name }}</div>
-                            @if($job_single->is_urgent == 1)<div class="urgent">Urgent</div> @endif
-                        </div>
-                        @if(!Auth::guard('company')->check())
-                        <div class="apply">
-                            @if(date('Y-m-d') >= $job_single->deadline)
-                                <a href="{{ route('candidate_apply', $job_single->id) }}" class="btn btn-success">Apply Now</a>
-                                <a href="{{ route('candidate_bookmark_add', $job_single->id) }}" class="btn btn-primary save-job">Bookmark</a>
-                            @endif
-                        </div>
-                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="job-result pt-5 pb-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-12">
+    <div class="row mt-4">
+        <div class="col-md-8 pe-3 ps-0 float-left">
+            <div class="job-result pt-4 pb-5 px-4 border">
                 <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Description</h2>
+                    <div class="py-3"><span class="fs-5 fw-bolder text-black">{{ __('Job Detail') }}</span></div>
+                    <div class="container">
+
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-briefcase fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 px-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Job ID')}}</div>
+                                            <div class="col-md-12">{{ $job_single->id }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-users-rectangle fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 pe-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Career Level')}}</div>
+                                            <div class="col-md-12">{{ $job_single->id }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-briefcase fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 px-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Experience')}}</div>
+                                            <div class="col-md-12">{{ $job_single->rJobExperience->name }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-user fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 px-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Gender')}}</div>
+                                            <div class="col-md-12">{{ $job_single->rJobGender->name }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-graduation-cap fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 pe-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Qualifications')}}</div>
+                                            <div class="col-md-12">{{ $job_single->id }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="left-item">                                
+                    <div class="py-3"><span class="fs-5 fw-bolder text-black">{{ __('Job Description') }}</span></div>
                     <p>{!! $job_single->description !!}</p>
                 </div>
                 <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Job Responsibilities</h2>
+                    <div class="py-3"><span class="fs-5 fw-bolder text-black">{{ __('Job Responsibilities') }}</span></div>
                     {!! nl2br($job_single->responsibility) !!}
                 </div>
                 <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Skills and Abilities</h2>
+                    <div class="py-3"><span class="fs-5 fw-bolder text-black">{{ __('Skills and Abilities') }}</span></div>
                     {!! nl2br($job_single->skill) !!}
                 </div>
                 <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Educational Qualification</h2>
+                    <div class="py-3"><span class="fs-5 fw-bolder text-black">{{ __('Educational Qualification') }}</span></div>
                     {!! nl2br($job_single->education) !!}
                 </div>
                 <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Benefits</h2>
+                    <div class="py-3"><span class="fs-5 fw-bolder text-black">{{ __('Benefits') }}</span></div>
                     {!! nl2br($job_single->benefit) !!}
                 </div>
-                @if(date('Y-m-d') >= $job_single->deadline)
+  
+                
                 <div class="left-item">
-                    <div class="apply">
-                        <a href="" class="btn btn-primary">Apply Now</a>
-                    </div>
-                </div>
-                @endif
-                <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Related Jobs</h2>
+                    <div class="py-3 "><span class="fs-4 fw-bolder">{{ __('Related Jobs') }}</span></div>
+                    
                     <div class="job related-job pt-0 pb-0">
                         <div class="container">
                             <div class="row">
+
                                 @forelse($jobs_related as $item)
-                                    <div class="col-md-12">
-                                        <div class="item d-flex justify-content-start">
-                                            <div class="logo">
-                                                <img src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
+                                    @php
+                                        $this_company_id = $item->rCompany->id;
+                                        $order_data = \App\Models\Order::where('company_id', $this_company_id)->where('currently_active', 1)->first();
+                                        if(date('Y-m-d') > $order_data?->expire_date) {
+                                            continue;
+                                        }
+                                    @endphp
+
+                                    <div class="col-md-12 py-2">
+                                        <div class="row border">
+                                            <div class="col-md-1 pt-4">
+                                                <div class="border">
+                                                    <a href="{{ route('job', $item->id) }}" data-job-id="174" class="">
+                                                        <img class="list-image" src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="text">
-                                                <h3>
-                                                    <a href="{{ route('job', $item->id) }}">{{ $item->title }}, {{ $item->rCompany->company_name }}</a>
-                                                </h3>
-                                                <div class="detail-1 d-flex justify-content-start">
-                                                    <div class="category">{{ $item->rJobCategory->name }}</div>
-                                                    <div class="location">{{ $item->rJobLocation->name }}</div>
+                                            <div class="col-md-9 pt-3">
+                                                <div>
+                                                    <h5><a class="fw-bold" href="{{ route('job', $item->id) }}">{{ $item->title }}</a></h5>
+                                                    <ul class="list-unstyled fs-7">
+                                                        <li>
+                                                                <a class ="text-danger" href="javascript:void(0);">{{ $item->rCompany->company_name }}</a>
+                                                                <i class="ms-1 px-1 border-start fa fa-location-dot"></i>{{ $item->rJobLocation->name }}
+                                                                @if($item->is_featured == 1)<div class="featured badge text-bg-primary">{{ __('Featured') }}</div> @endif
+                                                                @if($item->is_urgent == 1)<div class="urgent badge text-bg-danger">{{ __('Urgent') }}</div> @endif
+                                                        </li>
+                                                        <li>
+                                                            <i class="px-1 fa fa-calendar-days"></i>Published {{ $item->created_at->diffForHumans() }}
+                                                            @if(date('Y-m-d') > $item->deadline)
+                                                                <div class="expired badge text-bg-warning">{{ __('Expired') }}</div>
+                                                            @endif
+                                                            <i class="ms-1 px-1 border-start fa fa-filter"></i>{{ $item->rJobCategory->name }}
+                                                            <i class="ms-1 px-1 border-start fa fa-dollar-sign"></i>{{ $item->rJobSalaryRange->name }}
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                <div class="detail-2 d-flex-justify-content-start">
-                                                    <div class="date">{{ $item->created_at->diffForHumans() }}</div>
-                                                    <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
-                                                    @if(date('Y-m-d') > $item->deadline)
-                                                    <div class="expired">Expired</div>
-                                                    @endif
-                                                </div>
-                                                <div class="special d-flex justify-content-start">
-                                                    @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
-                                                    <div class="type">{{ $item->rJobType->name }}</div>
-                                                    @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
-                                                </div>
-                                                @if(!Auth::guard('company')->check())
-                                                <div class="bookmark">
-                                                    @if(Auth::guard('candidate')->check())
-                                                        @php
-                                                            $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
-                                                            if($count > 0) {
-                                                                $bookmark_status = 'active';
-                                                            } else {
-                                                                $bookmark_status = '';
-                                                            }
-                                                        @endphp
-                                                    @else
-                                                        @php $bookmark_status = ''; @endphp
-                                                    @endif
-                                                    <a href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fas fa-bookmark {{ $bookmark_status }}"></i></a>
-                                                </div>
-                                                @endif
+                                            </div>
+
+                                            <div class="col-md-2 pt-5 px-0">
+                                                <ul class="list-unstyled fs-7">
+                                                    <li>
+                                                        @if($item->rJobType->id == 1)<button type="submit" class="btn btn-fulltime rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        @if($item->rJobType->id == 2)<button type="submit" class="btn btn-parttime rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        @if($item->rJobType->id == 3)<button type="submit" class="btn btn-freelance rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        @if($item->rJobType->id == 4)<button type="submit" class="btn btn-temporary rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        @if($item->rJobType->id == 5)<button type="submit" class="btn btn-internship rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        
+                                                        @if(!Auth::guard('company')->check())
+                                                            @if(Auth::guard('candidate')->check())
+                                                                @php
+                                                                    $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
+                                                                    if($count > 0) {
+                                                                        $bookmark_status = 'bg-danger';
+                                                                    } else {
+                                                                        $bookmark_status = '';
+                                                                    }
+                                                                @endphp
+                                                            @else
+                                                                @php $bookmark_status = ''; @endphp
+                                                            @endif
+                                                            <a class="icon-job-like bg-danger pt-1" href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fa fa-heart"></i></a>
+                                                        @endif
+                                                        
+                                                    </li>
+                                                </ul>
+
                                             </div>
                                         </div>
                                     </div>
@@ -147,90 +248,59 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="right-item">
-                    <h2><i class="fas fa-file-invoice"></i> Job Summary</h2>
-                    <div class="summary">
-                        <div class="table-responsive">
-                            <table class="rable table-bordered">
-                                <tr>
-                                    <td><b>Published On:</b></td>
-                                    <td>{{ $job_single->created_at->format('d F, Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Deadline:</b></td>
-                                    <td>{{ DateTime::createFromFormat('Y-m-d', $job_single->deadline)->format('d F, Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Vacancy:</b></td>
-                                    <td>{{ $job_single->vacancy }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Category:</b></td>
-                                    <td>{{ $job_single->rJobCategory->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Location:</b></td>
-                                    <td>{{ $job_single->rJobLocation->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Type:</b></td>
-                                    <td>{{ $job_single->rJobType->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Experience:</b></td>
-                                    <td>{{ $job_single->rJobExperience->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Gender:</b></td>
-                                    <td>{{ $job_single->rJobGender->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Salary Range:</b></td>
-                                    <td>{{ $job_single->rJobSalaryRange->name }}</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+        </div>
 
-                <div class="right-item">
-                    <h2><i class="fas fa-file-invoice"></i> Enquery Formy</h2>
-                    <div class="enquery-form">
-                        <form action="{{ route('job_enquery_email') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="job_title" value="{{ $job_single->title }}">
-                            <input type="hidden" name="company_email" value="{{ $job_single->rCompany->email }}">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" name="visitor_name" placeholder="Full Name">
+        <div class="col-md-4 ps-3 pe-0 float-right">
+            <div class="container">
+                <div class="row border">
+                    <div class="col-md-12 p-0">
+                        @if(date('Y-m-d') > $job_single->deadline)
+                            <div class="right-item text-center text-danger py-5">
+                                {{ __('The Application deadline closed.') }}
                             </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" name="visitor_email" placeholder="Email Address">
+                        @else
+                            <div class="right-item mt-4 px-4">
+                                <div class="enquery-form">
+                                    <form action="{{ route('job_enquery_email') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="job_title" value="{{ $job_single->title }}">
+                                        <input type="hidden" name="company_email" value="{{ $job_single->rCompany->email }}">
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" name="visitor_name" placeholder="Full Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" name="visitor_email" placeholder="Email Address">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" name="visitor_phone" placeholder="Phone Number">
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea class="form-control" name="visitor_message" placeholder="Message" rows="5" style="width: 100%;" ></textarea>
+                                        </div>
+                                        <button type="submit" class="btn bg-warning w-100 py-2 my-3"><i class="pe-1 fa fa-email text-danger"></i>{{ __('CONTACT EMPLOYER') }}</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" name="visitor_phone" placeholder="Phone Number">
-                            </div>
-                            <div class="mb-3">
-                                <textarea name="visitor_message" cols="30" rows="10" placeholder="Message"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
+                        @endif
                     </div>
                 </div>
                 
-                @if($job_single->map_code != null)
-                <div class="right-item">
-                    <h2><i class="fas fa-file-invoice"></i> Location Map</h2>
-                    <div class="location-map">
-                        {!! nl2br($job_single->map_code) !!}
+                <!-- @if($job_single->map_code != null)
+                    <div class="row border mt-4">
+                    <div class="right-item">
+                        <h2><i class="fas fa-file-invoice"></i> Location Map</h2>
+                        <div class="location-map">
+                            {!! nl2br($job_single->map_code) !!}
+                        </div>
                     </div>
-                </div>
-                @endif
+                    </div>
+                @endif -->
+                
             </div>
         </div>
+
     </div>
 </div>
+
 
 @endsection

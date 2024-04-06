@@ -1,204 +1,226 @@
 @extends('front.layout.app')
 
 @section('seo_title'){{ $other_page_item->company_listing_page_title ?? __('SEO Title') }}@endsection
-@section('seo_meta_description'){{ $other_page_item->company_listing_page_meta_description ?? __('SEO Meta Description') }}@endsection
+@section('seo_meta_description'){{ $other_page_item->job_listing_page_meta_description ?? __('SEO Meta Description') }}@endsection
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_company_detail ?? 'banner_default.jpg')) }})">
-    <div class="bg"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>{{ __('Job Title') }}</h2>
-            </div>
-        </div>
-    </div>
-</div>
-
 @isset($company_single)
-<div class="page-top page-top-company-single" style="background-image: url({{ asset('uploads/banner.jpg') }}">
-    <div class="bg"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 company company-single">
-                <div class="item d-flex justify-content-start">
-                    <div class="logo"><img src="{{ asset('uploads/' . $company_single->logo) }}"></div>
-                    <div class="text">
-                        <h3>{{ $company_single->title }}, {{ $company_single->company_name }}</h3>
-                        <div class="detail-1 d-flex justify-content-start">
-                            <div class="category">{{ $company_single->rCompanyIndustry->name }}</div>
-                            <div class="location">{{ $company_single->rCompanyLocation->name }}</div>
-                            <div class="email">{{ $company_single->email }}</div>
-                            @if($company_single->phone != '')
-                            <div class="phone">{{ $company_single->phone }}</div>
-                            @endif
-                        </div>
-                        <div class="special">
-                            <div class="type">{{ $company_single->r_job_count }} Open Postions</div>
-                            @if($company_single->facebook != '' || $company_single->twitter != '' || $company_single->linkedin != '' || $company_single->instagram != '')
-                            <div class="social">
-                                <ul>
-                                    @if($company_single->facebook != '')
-                                        <li><a href="{{ $company_single->facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                    @endif
-                                    @if($company_single->twitter != '')
-                                        <li><a href="{{ $company_single->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                    @endif
-                                    @if($company_single->linkedin != '')
-                                        <li><a href="{{ $company_single->linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                                    @endif
-                                    @if($company_single->instagram != '')
-                                        <li><a href="{{ $company_single->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                    @endif
-                                </ul>
+<div class="page-top-detail" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_job_detail ?? 'banner_default.jpg')) }})"></div>
+<div class="container w-75 bg-white" style="margin-top: -150px;">
+    <div class="row py-5 border">
+        <div class="col-md-12">
+            <div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 job job-single">
+                            <div class="item d-flex justify-content-start">
+                                <div class="logo job-detail-image me-4"><img src="{{ asset('uploads/' . $company_single->logo) }}"></div>
+                                <div class="text mt-4">
+                                    <h4 class="text-black fw-bold">{{ $company_single->company_name }}</h4>
+                                    <div class="pt-2">
+                                        <i class="pe-1 fa fa-location-dot"></i>{{ $company_single->rCompanyLocation->name }}
+                                        <a 
+                                            href="https://www.google.com/maps/search/{{ __('company')}} {{ $company_single->company_name }} {{ __('in')}} {{ $company_single->rCompanyLocation->name }}"
+                                            class="btn btn-danger rounded-4 ms-2 fs-8 py-0" style="height:20px;"
+                                        >
+                                            {{ __('view on map')}}
+                                        </a>
+                                    </div>
+                                    
+                                    <div class="pt-3">
+                                            <span>
+                                                <a 
+                                                    href="{{ route('candidate_apply', $company_single->id) }}"
+                                                    class="btn btn-outline hover-danger rounded-1 btn-follow me-2"
+                                                    style="padding-top:6px;"
+                                                >
+                                                    <i class="pe-2 fa fa-plus"></i>{{__('Add a review')}}
+                                                </a>
+                                                <a 
+                                                    href="{{ route('candidate_bookmark_add', $company_single->id) }}" 
+                                                    class="btn btn-outline hover-danger rounded-1 btn-follow me-2"
+                                                    style="padding-top:6px;"
+                                                >
+                                                    <i class="fa fa-user-plus pe-2"></i>{{__('Follow')}}
+                                                </a>
+
+                                                <span class="px-2 fs-7">{{__('SOCIAL LINK:')}}</span>
+                                                
+                                                @if($company_single->facebook != '')
+                                                    <a href="{{ $company_single->facebook }}" target="_blank"><i class="px-1 fa-brands fa-facebook fa-lg hover-color-danger" style="color:#3b5998;"></i></a>
+                                                @endif
+                                                @if($company_single->twitter != '')
+                                                    <a href="{{ $company_single->twitter }}" target="_blank"><i class="px-1 fa-brands fa-twitter fa-lg hover-color-danger" style="color:#3ac1f1;"></i></a>
+                                                @endif
+                                                @if($company_single->linkedin != '')
+                                                    <a href="{{ $company_single->linkedin }}" target="_blank"><i class="px-1 fa-brands fa-linkedin fa-lg hover-color-danger" style="color:#007AB9;"></i></a>
+                                                @endif
+                                                @if($company_single->instagram != '')
+                                                    <a href="{{ $company_single->instagram }}" target="_blank"><i class="px-1 fa-brands fa-square-instagram fa-lg hover-color-danger" style="color:#f95c94"></i></a>
+                                                @endif
+                                            </span>
+                                    </div>
+                                    
+                                </div>
                             </div>
-                        </div>
-                        @endif
-                        <div class="apply">
-                            <a href="" class="btn btn-primary save-company">Bookmark</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="company-result pt-5 pb-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-12">
+    <div class="row mt-4">
+        <div class="col-md-8 pe-3 ps-0 float-left">
+            <div class="job-result pt-4 pb-5 px-4 border">
                 <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Description</h2>
+                    <div class="py-3"><span class="fs-5 fw-bolder text-black">{{ __('Job Detail') }}</span></div>
+                    <div class="container">
+
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-briefcase fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 px-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Job ID')}}</div>
+                                            <div class="col-md-12">{{ $company_single->rCompanyIndustry->name }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-users-rectangle fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 pe-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Career Level')}}</div>
+                                            <div class="col-md-12">{{ $company_single->person_name }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-briefcase fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 px-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Experience')}}</div>
+                                            <div class="col-md-12">{{ $company_single->address }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-user fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 px-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Gender')}}</div>
+                                            <div class="col-md-12">{{ $company_single->phone }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-3"><i class="pe-2 fa fa-graduation-cap fs-1 text-danger"></i></div>
+                                    <div class="col-md-9 pe-0">
+                                        <div class="row">
+                                            <div class="col-md-12">{{__('Qualifications')}}</div>
+                                            <div class="col-md-12">{{ $company_single->founded_on }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="left-item">                                
+                    <div class="py-3"><span class="fs-5 fw-bolder text-black">{{ __('Company Description') }}</span></div>
                     <p>{!! $company_single->description !!}</p>
                 </div>
-                @if($company_single->oh_mon != null || $company_single->oh_tue || $company_single->oh_web || $company_single->oh_thu || $company_single->oh_fri || $company_single->oh_sat || $company_single->oh_sun)
-                <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Opening Hours</h2>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td>Monday</td>
-                                <td>{{ $company_single->oh_mon ?? 'Off-day' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Tuesday</td>
-                                <td>{{ $company_single->oh_tue ?? 'Off-day' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Webnesday</td>
-                                <td>{{ $company_single->oh_web ?? 'Off-day' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Thursday</td>
-                                <td>{{ $company_single->oh_thu ?? 'Off-day' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Friday</td>
-                                <td>{{ $company_single->oh_fri ?? 'Off-day' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Saturday</td>
-                                <td>{{ $company_single->oh_sat ?? 'Off-day' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Sunday</td>
-                                <td>{{ $company_single->oh_sun ?? 'Off-day' }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                @endif
-                
-                @if($company_photos->count() != 0)
-                <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Photos</h2>
-                    <div class="photo-all">
-                        <div class="row">
-                            @foreach($company_photos as $item)
-                            <div class="col-md-6 col-lg-4">
-                                <div class="item">
-                                    <a href="{{ asset('uploads/' . $item->photo) }}" class="magnific">
-                                        <img src="{{ asset('uploads/' . $item->photo) }}" alt="">
-                                        <div class="icon"><i class="fas fa-plus"></i></div>
-                                        <div class="bg"></div>
-                                    </a>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                @endif
-
-                @if($company_videos->count() != 0)
-                <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Videos</h2>
-                    <div class="video-all">
-                        <div class="row">
-                            @foreach($company_videos as $item)
-                            <div class="col-md-6 col-lg-4">
-                                <div class="item">
-                                    <a href="https://www.youtobe.com/watch/?v={{  $item->video }}" class="video-button">
-                                        <img src="https://img.youtube.com/vi/{{ $item->video }}/0.jpg" alt="">
-                                        <div class="icon"><i class="far fa-play-circle"></i></div>
-                                        <div class="bg"></div>
-                                    </a>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                @endif
+  
                 
                 <div class="left-item">
-                    <h2><i class="fas fa-file-invoice"></i> Open Positions</h2>
+                    <div class="py-3 "><span class="fs-4 fw-bolder">{{ __('Open Positions') }}</span></div>
+                    
                     <div class="job related-job pt-0 pb-0">
                         <div class="container">
                             <div class="row">
+
                                 @forelse($jobs as $item)
-                                    <div class="col-md-12">
-                                        <div class="item d-flex justify-content-start">
-                                            <div class="logo">
-                                                <img src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $company_single->company_name }}">
+                                    @php
+                                        $this_company_id = $item->rCompany->id;
+                                        $order_data = \App\Models\Order::where('company_id', $this_company_id)->where('currently_active', 1)->first();
+                                        if(date('Y-m-d') > $order_data?->expire_date) {
+                                            continue;
+                                        }
+                                    @endphp
+
+                                    <div class="col-md-12 py-2">
+                                        <div class="row border">
+                                            <div class="col-md-1 pt-4">
+                                                <div class="border">
+                                                    <a href="{{ route('job', $item->id) }}" data-job-id="174" class="">
+                                                        <img class="list-image" src="{{ asset('uploads/' . $item->rCompany->logo) }}" alt="{{ $item->rCompany->company_name }}">
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="text">
-                                                <h3>
-                                                    <a href="{{ route('job', $item->id) }}">{{ $item->title }}, {{ $company_single->company_name }}</a>
-                                                </h3>
-                                                <div class="detail-1 d-flex justify-content-start">
-                                                    <div class="category">{{ $item->rJobCategory->name }}</div>
-                                                    <div class="location">{{ $item->rJobLocation->name }}</div>
+                                            <div class="col-md-9 pt-3">
+                                                <div>
+                                                    <h5><a class="fw-bold" href="{{ route('job', $item->id) }}">{{ $item->title }}</a></h5>
+                                                    <ul class="list-unstyled fs-7">
+                                                        <li>
+                                                                <a class ="text-danger" href="javascript:void(0);">{{ $item->rCompany->company_name }}</a>
+                                                                <i class="ms-1 px-1 border-start fa fa-location-dot"></i>{{ $item->rJobLocation->name }}
+                                                                @if($item->is_featured == 1)<div class="featured badge text-bg-primary">{{ __('Featured') }}</div> @endif
+                                                                @if($item->is_urgent == 1)<div class="urgent badge text-bg-danger">{{ __('Urgent') }}</div> @endif
+                                                        </li>
+                                                        <li>
+                                                            <i class="px-1 fa fa-calendar-days"></i>Published {{ $item->created_at->diffForHumans() }}
+                                                            @if(date('Y-m-d') > $item->deadline)
+                                                                <div class="expired badge text-bg-warning">{{ __('Expired') }}</div>
+                                                            @endif
+                                                            <i class="ms-1 px-1 border-start fa fa-filter"></i>{{ $item->rJobCategory->name }}
+                                                            <i class="ms-1 px-1 border-start fa fa-dollar-sign"></i>{{ $item->rJobSalaryRange->name }}
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                <div class="detail-2 d-flex-justify-content-start">
-                                                    <div class="date">{{ $item->created_at->diffForHumans() }}</div>
-                                                    <div class="budget">{{ $item->rJobSalaryRange->name }}</div>
-                                                    @if(date('Y-m-d') > $item->deadline)
-                                                    <div class="expired">Expired</div>
-                                                    @endif
-                                                </div>
-                                                <div class="special d-flex justify-content-start">
-                                                    @if($item->is_featured == 1)<div class="featured">Featured</div> @endif
-                                                    <div class="type">{{ $item->rJobType->name }}</div>
-                                                    @if($item->is_urgent == 1)<div class="urgent">Urgent</div> @endif
-                                                </div>                                                
-                                                <div class="bookmark">
-                                                    @if(Auth::guard('candidate')->check())
-                                                        @php
-                                                            $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
-                                                            if($count > 0) {
-                                                                $bookmark_status = 'active';
-                                                            } else {
-                                                                $bookmark_status = '';
-                                                            }
-                                                        @endphp
-                                                    @else
-                                                        @php $bookmark_status = ''; @endphp
-                                                    @endif
-                                                    <a href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fas fa-bookmark {{ $bookmark_status }}"></i></a>
-                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 pt-5 px-0">
+                                                <ul class="list-unstyled fs-7">
+                                                    <li>
+                                                        @if($item->rJobType->id == 1)<button type="submit" class="btn btn-fulltime rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        @if($item->rJobType->id == 2)<button type="submit" class="btn btn-parttime rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        @if($item->rJobType->id == 3)<button type="submit" class="btn btn-freelance rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        @if($item->rJobType->id == 4)<button type="submit" class="btn btn-temporary rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        @if($item->rJobType->id == 5)<button type="submit" class="btn btn-internship rounded-0 btn-job-type">{{ $item->rJobType->name }}</button>@endif
+                                                        
+                                                        @if(!Auth::guard('company')->check())
+                                                            @if(Auth::guard('candidate')->check())
+                                                                @php
+                                                                    $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
+                                                                    if($count > 0) {
+                                                                        $bookmark_status = 'bg-danger';
+                                                                    } else {
+                                                                        $bookmark_status = '';
+                                                                    }
+                                                                @endphp
+                                                            @else
+                                                                @php $bookmark_status = ''; @endphp
+                                                            @endif
+                                                            <a class="icon-job-like bg-danger pt-1" href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fa fa-heart"></i></a>
+                                                        @endif
+                                                        
+                                                    </li>
+                                                </ul>
+
                                             </div>
                                         </div>
                                     </div>
@@ -210,94 +232,56 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-4 col-md-12">
-                <div class="right-item">
-                    <h2><i class="fas fa-file-invoice"></i> Company Overview</h2>
-                    <div class="summary">
-                        <div class="table-responsive">
-                            <table class="rable table-bordered">
-                                <tr>
-                                    <td><b>Contact Person:</b></td>
-                                    <td>{{ $company_single->person_name }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Industry:</b></td>
-                                    <td>{{ $company_single->rCompanyIndustry->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Location:</b></td>
-                                    <td>{{ $company_single->rCompanyLocation->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Company Size:</b></td>
-                                    <td>{{ $company_single->rCompanySize->name }}</td>
-                                </tr>
-                                @if($company_single->address != null)
-                                <tr>
-                                    <td><b>Address:</b></td>
-                                    <td>{{ $company_single->address }}</td>
-                                </tr>
-                                @endif
-                                <tr>
-                                    <td><b>Email:</b></td>
-                                    <td>{{ $company_single->email }}</td>
-                                </tr>
-                                @if($company_single->address != null)
-                                <tr>
-                                    <td><b>Phone:</b></td>
-                                    <td>{{ $company_single->phone }}</td>
-                                </tr>
-                                @endif
-                                <tr>
-                                    <td><b>Founded On:</b></td>
-                                    <td>{{ $company_single->founded_on }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Website:</b></td>
-                                    <td><a href="{{ $company_single->website }}" target="_blank">{{ $company_single->website }}</a></td>
-                                </tr>
-                            </table>
+        </div>
+
+        <div class="col-md-4 ps-3 pe-0 float-right">
+            <div class="container">
+                <form action="{{ route('company_enquery_email') }}" method="post">
+                    @csrf
+                    <div class="row mt-2">
+                        <div class="col-md-12 p-0">
+                            <span class="fs-5 fw-bolder text-black">{{ __('Contact Form') }}</span>
                         </div>
                     </div>
-                </div>
-
-                <div class="right-item">
-                    <h2><i class="fas fa-file-invoice"></i> Contact Company</h2>
-                    <div class="enquery-form">
-                        <form action="{{ route('company_enquery_email') }}" method="post">
-                            @csrf
+                    <div class="row mt-3">
+                        <div class="col-md-12 p-4 border">
                             <input type="hidden" name="company_email" value="{{ $company_single->email }}">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" name="visitor_name" placeholder="Full Name">
+                            {{ __('User Name') }}
+                            <div class="mb-3 mt-2">
+                                <input type="text" class="form-control" name="visitor_name" placeholder="Enter Your Name">
                             </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" name="visitor_email" placeholder="Email Address">
+                            {{ __('Email Address') }}
+                            <div class="mb-3 mt-2">
+                                <input type="text" class="form-control" name="visitor_email" placeholder="Enter Your Email Address">
                             </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" name="visitor_phone" placeholder="Phone Number">
+                            {{ __('Phone Number') }}
+                            <div class="mb-3 mt-2">
+                                <input type="text" class="form-control" name="visitor_phone" placeholder="Enter Your Phone Number">
                             </div>
-                            <div class="mb-3">
-                                <textarea name="visitor_message" cols="30" rows="10" placeholder="Message"></textarea>
+                            {{ __('Message') }}
+                            <div class="mb-3 mt-2">
+                                <textarea class="form-control" name="visitor_message" placeholder="Enter Your Message Here" rows="5" style="width: 100%;" ></textarea>
                             </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
+                            <button type="submit" class="btn btn-danger w-100 py-2">{{ __('SEND NOW') }}</button>
+                        </div>
                     </div>
-                </div>
+                    
+                </form>
                 
-                @if($company_single->map_code != null)
-                <div class="right-item">
-                    <h2><i class="fas fa-file-invoice"></i> Location Map</h2>
-                    <div class="location-map">
-                        {!! nl2br($company_single->map_code) !!}
+                <!-- @if($company_single->map_code != null)
+                    <div class="row border mt-4">
+                    <div class="right-item">
+                        <h2><i class="fas fa-file-invoice"></i> Location Map</h2>
+                        <div class="location-map">
+                            {!! nl2br($company_single->map_code) !!}
+                        </div>
                     </div>
-                </div>
-                @endif
-            
+                    </div>
+                @endif -->
+                
             </div>
         </div>
+
     </div>
 </div>
 @endisset

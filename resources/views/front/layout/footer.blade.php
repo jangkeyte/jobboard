@@ -1,9 +1,9 @@
-<div class="footer">
+<div class="footer mt-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-md-3">
                 <div class="item">
-                    <h2 class="heading">{{ __('For Candidates') }}</h2>
+                    <h5 class="heading">{{ __('For Candidates') }}</h5>
                     <ul class="useful-links">
                         <li><a href="{{ route('job_listing') }}">{{ __('Browser Jobs') }}</a></li>
                         <li><a href="{{ route('candidate_bookmark_view') }}">{{ __('Bookmarked Jobs') }}</a></li>
@@ -12,9 +12,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-md-3">
                 <div class="item">
-                    <h2 class="heading">{{ __('For Companies') }}</h2>
+                    <h5 class="heading">{{ __('For Companies') }}</h5>
                     <ul class="useful-links">
                         <li><a href="{{ route('company_jobs_create') }}">{{ __('Post New Job') }}</a></li>
                         <li><a href="{{ route('company_listing') }}">{{ __('Browse Company') }}</a></li>
@@ -23,10 +23,18 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-md-3">
                 <div class="item">
-                    <h2 class="heading">{{ __('Contact') }}</h2>
-                    
+                    <h5 class="heading">{{ __('For Companies') }}</h5>
+                    <ul class="useful-links">
+                        <li><a href="{{ route('terms') }}">{{ __('Terms of Use') }}</a></li>
+                        <li><a href="{{ route('privacy') }}">{{ __('Privacy Policy') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="item">
+                    <h5 class="heading">{{ __('Contact') }}</h5>
                     <div class="list-item">
                         <div class="left">
                             <i class="fas fa-map-marker-alt"></i>
@@ -51,32 +59,26 @@
                             {{ $global_settings_data->footer_email }}
                         </div>
                     </div>
-                    <ul class="social">
-                        <li><a href="{{ $global_settings_data->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="{{ $global_settings_data->twitter }}"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="{{ $global_settings_data->pinterest }}"><i class="fab fa-pinterest-p"></i></a></li>
-                        <li><a href="{{ $global_settings_data->linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li><a href="{{ $global_settings_data->instagram }}"><i class="fab fa-instagram"></i></a></li>
-                    </ul>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item">
-                    <h2 class="heading">{{ __('Newsletter') }}</h2>
-                    <p>
-                        {{ __('To get the latest news from our website, please subscribe us') }}
-                    </p>
-                    <form action="{{ route('subscriber_send_email') }}" method="post" class="form_subscribe_ajax">
-                        @csrf
-                        <div class="form-group">
-                            <input type="text" name="email" class="form-control">
-                            <span class="text-danger error-text email_error"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="{{ __('Subscribe Now') }}">
-                        </div>
-                    </form>
-                </div>
+
+            <div class="col-md-12 text-center mt-5">
+                <ul class="header-right social mr-auto">
+                    <li><a href="{{ $global_settings_data->facebook }}"><i class="px-2 fs-1 fa-brands fa-facebook-f fa-lg hover-color-danger"></i></a></li>
+                    <li><a href="{{ $global_settings_data->twitter }}"><i class="px-2 fs-1 fa-brands fa-twitter fa-lg hover-color-danger"></i></a></li>
+                    <li><a href="{{ $global_settings_data->pinterest }}"><i class="px-2 fs-1 fa-brands fa-google-plus fa-lg hover-color-danger"></i></a></li>
+                    <li><a href="{{ $global_settings_data->linkedin }}"><i class="px-2 fs-1 fa-brands fa-linkedin fa-lg hover-color-danger"></i></a></li>                    
+                </ul>
+            </div>
+
+            <div class="col-md-12 text-center mt-2">
+                <ul class="header-right social mr-auto">
+                    @if(app()->getLocale() == 'vi')
+                    <li class="menu"><a href="{!! route('switch_language', ['en']) !!}"><img src="{{ asset('uploads/flags/united-kingdom.svg') }}" alt="English" title="{{ __('English') }}" class="mx-2" style="width:24px;"> English</a></li>
+                    @else
+                    <li class="menu"><a href="{!! route('switch_language', ['vi']) !!}"><img src="{{ asset('uploads/flags/vietnam.svg') }}" alt="Tiếng Việt" title="{{ __('Tiếng Việt') }}" class="mx-2" style="width:24px"> Tiếng Việt</a></li>
+                    @endif
+                </ul>
             </div>
         </div>
     </div>
@@ -92,10 +94,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="right">
-                    <ul>
-                        <li><a href="{{ route('terms') }}">{{ __('Terms of Use') }}</a></li>
-                        <li><a href="{{ route('privacy') }}">{{ __('Privacy Policy') }}</a></li>
-                    </ul>
+                    
                 </div>
             </div>
         </div>
