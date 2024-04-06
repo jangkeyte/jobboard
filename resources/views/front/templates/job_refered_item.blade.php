@@ -4,13 +4,8 @@
     @endif
     <figure>
         <a href="{{ route('job', $item->id) }}">
-            @if (file_exists(asset('uploads/' . $item->rCompany->logo)))
-                <img src="{{ asset('uploads/' . $item->rCompany->logo) }}"
-                    alt="{{ $item->rCompany->company_name }}">
-            @else
-                <img src="{{ asset('uploads/company/default_company.jpg') }}"
-                    alt="{{ $item->rCompany->company_name }}">
-            @endif
+            @include('front/templates/image', array('image' => $item->rCompany->logo, 'name' => $item->rCompany->company_name))
+        </a>
         <figcaption>
             <h2>
                 <a href="{{ route('job', $item->id) }}">{{ $item->title }}</a>
