@@ -1,80 +1,65 @@
 @extends('front.layout.app')
 
-@section('seo_title'){{ $other_page_item->company_listing_page_title ?? __('SEO Title') }}@endsection
-@section('seo_meta_description'){{ $other_page_item->job_listing_page_meta_description ?? __('SEO Meta Description') }}@endsection
-
 @section('main_content')
 
-@isset($company_single)
+@isset($candidate_single)
+
 <div class="page-top-detail" style="background-image: url({{ asset('uploads/' . ($global_banner_data->banner_job_detail ?? 'banner_default.jpg')) }})"></div>
 <div class="container w-75 bg-white" style="margin-top: -150px;">
-    <div class="row py-5 border">
-        <div class="col-md-12">
-            <div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 job job-single">
-                            <div class="item d-flex justify-content-start">
-                                <div class="logo job-detail-image me-4">
-                                    @include('front/templates/image', array('image' => $company_single->logo, 'name' => $company_single->company_name))
-                                </div>
-                                <div class="text mt-4">
-                                    <h4 class="text-black fw-bold">{{ $company_single->company_name }}</h4>
-                                    <div class="pt-2">
-                                        <i class="pe-1 fa fa-location-dot"></i>{{ $company_single->rCompanyLocation->name }}
-                                        <a 
-                                            href="https://www.google.com/maps/search/{{ __('company')}} {{ $company_single->company_name }} {{ __('in')}} {{ $company_single->rCompanyLocation->name }}"
-                                            class="btn btn-danger rounded-4 ms-2 fs-8 py-0" style="height:20px;"
-                                        >
-                                            {{ __('view on map')}}
-                                        </a>
-                                    </div>
-                                    
-                                    <div class="pt-3">
-                                            <span>
-                                                <a 
-                                                    href="{{ route('candidate_apply', $company_single->id) }}"
-                                                    class="btn btn-outline hover-danger rounded-1 btn-follow me-2"
-                                                    style="padding-top:6px;"
-                                                >
-                                                    <i class="pe-2 fa fa-plus"></i>{{__('Add a review')}}
-                                                </a>
-                                                <a 
-                                                    href="{{ route('candidate_bookmark_add', $company_single->id) }}" 
-                                                    class="btn btn-outline hover-danger rounded-1 btn-follow me-2"
-                                                    style="padding-top:6px;"
-                                                >
-                                                    <i class="fa fa-user-plus pe-2"></i>{{__('Follow')}}
-                                                </a>
-
-                                                <span class="px-2 fs-7">{{__('SOCIAL LINK:')}}</span>
-                                                
-                                                @if($company_single->facebook != '')
-                                                    <a href="{{ $company_single->facebook }}" target="_blank"><i class="px-1 fa-brands fa-facebook fa-lg hover-color-danger" style="color:#3b5998;"></i></a>
-                                                @endif
-                                                @if($company_single->twitter != '')
-                                                    <a href="{{ $company_single->twitter }}" target="_blank"><i class="px-1 fa-brands fa-twitter fa-lg hover-color-danger" style="color:#3ac1f1;"></i></a>
-                                                @endif
-                                                @if($company_single->linkedin != '')
-                                                    <a href="{{ $company_single->linkedin }}" target="_blank"><i class="px-1 fa-brands fa-linkedin fa-lg hover-color-danger" style="color:#007AB9;"></i></a>
-                                                @endif
-                                                @if($company_single->instagram != '')
-                                                    <a href="{{ $company_single->instagram }}" target="_blank"><i class="px-1 fa-brands fa-square-instagram fa-lg hover-color-danger" style="color:#f95c94"></i></a>
-                                                @endif
-                                            </span>
-                                    </div>
-                                    
-                                </div>
-                            </div>
+    <div class="row mt-4">
+        
+        <div class="col-md-4 ps-3 pe-0 float-right">
+            <div class="container">
+                @include('front/templates/candidate_profile')
+                {{--
+                <form action="{{ route('candidate_enquery_email') }}" method="post">
+                    @csrf
+                    <div class="row mt-2">
+                        <div class="col-md-12 p-0">
+                            <span class="fs-5 fw-bolder text-black">{{ __('Contact Form') }}</span>
                         </div>
                     </div>
-                </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12 p-4 border">
+                            <input type="hidden" name="candidate_email" value="{{ $candidate_single->email }}">
+                            {{ __('User Name') }}
+                            <div class="mb-3 mt-2">
+                                <input type="text" class="form-control" name="visitor_name" placeholder="Enter Your Name">
+                            </div>
+                            {{ __('Email Address') }}
+                            <div class="mb-3 mt-2">
+                                <input type="text" class="form-control" name="visitor_email" placeholder="Enter Your Email Address">
+                            </div>
+                            {{ __('Phone Number') }}
+                            <div class="mb-3 mt-2">
+                                <input type="text" class="form-control" name="visitor_phone" placeholder="Enter Your Phone Number">
+                            </div>
+                            {{ __('Message') }}
+                            <div class="mb-3 mt-2">
+                                <textarea class="form-control" name="visitor_message" placeholder="Enter Your Message Here" rows="5" style="width: 100%;" ></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100 py-2">{{ __('SEND NOW') }}</button>
+                        </div>
+                    </div>
+                    
+                </form>
+                <!-- @if($company_single->map_code != null)
+                    <div class="row border mt-4">
+                    <div class="right-item">
+                        <h2><i class="fas fa-file-invoice"></i> Location Map</h2>
+                        <div class="location-map">
+                            {!! nl2br($company_single->map_code) !!}
+                        </div>
+                    </div>
+                    </div>
+                @endif -->
+                --}}                
             </div>
         </div>
-    </div>
 
-    <div class="row mt-4">
         <div class="col-md-8 pe-3 ps-0 float-left">
+            @include('front/templates/candidate_profile_detail')
+            {{--
             <div class="job-result pt-4 pb-5 px-4 border">
                 <div class="left-item">
                     <div class="py-3"><span class="fs-5 fw-bolder text-black">{{ __('Job Detail') }}</span></div>
@@ -210,54 +195,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-4 ps-3 pe-0 float-right">
-            <div class="container">
-                <form action="{{ route('company_enquery_email') }}" method="post">
-                    @csrf
-                    <div class="row mt-2">
-                        <div class="col-md-12 p-0">
-                            <span class="fs-5 fw-bolder text-black">{{ __('Contact Form') }}</span>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12 p-4 border">
-                            <input type="hidden" name="company_email" value="{{ $company_single->email }}">
-                            {{ __('User Name') }}
-                            <div class="mb-3 mt-2">
-                                <input type="text" class="form-control" name="visitor_name" placeholder="Enter Your Name">
-                            </div>
-                            {{ __('Email Address') }}
-                            <div class="mb-3 mt-2">
-                                <input type="text" class="form-control" name="visitor_email" placeholder="Enter Your Email Address">
-                            </div>
-                            {{ __('Phone Number') }}
-                            <div class="mb-3 mt-2">
-                                <input type="text" class="form-control" name="visitor_phone" placeholder="Enter Your Phone Number">
-                            </div>
-                            {{ __('Message') }}
-                            <div class="mb-3 mt-2">
-                                <textarea class="form-control" name="visitor_message" placeholder="Enter Your Message Here" rows="5" style="width: 100%;" ></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-danger w-100 py-2">{{ __('SEND NOW') }}</button>
-                        </div>
-                    </div>
-                    
-                </form>
-                
-                <!-- @if($company_single->map_code != null)
-                    <div class="row border mt-4">
-                    <div class="right-item">
-                        <h2><i class="fas fa-file-invoice"></i> Location Map</h2>
-                        <div class="location-map">
-                            {!! nl2br($company_single->map_code) !!}
-                        </div>
-                    </div>
-                    </div>
-                @endif -->
-                
-            </div>
+            --}}
         </div>
 
     </div>

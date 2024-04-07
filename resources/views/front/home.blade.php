@@ -7,16 +7,16 @@
 
 @isset($home_page_data)
 
-<div class="slider" style="background-image: url({{ asset('uploads/' . ($home_page_data->background ?? 'background_default.jpg')) }})">
+<div class="home-banner" style="background-image: url({{ asset('uploads/' . ($home_page_data->background ?? 'background_default.jpg')) }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="jumbotron">
-                    <h2>{{ $home_page_data->heading ?? __('Heading') }}</h2>
+                    <h2 class="fw-bold text-white">{{ $home_page_data->heading ?? __('Heading') }}</h2>
                     <p>{{ $home_page_data->text ?? __('Text') }}</p>
                     <p class="lead">
-                        <a class="btn btn-primary btn-lg" href="#" role="button">{{ __('Upload Resume') }}</a>
+                        <a class="btn btn-light btn-sm rounded-5 px-3" href="{{ route('login') }}" role="button">{{ __('Upload Resume') }}</a>
                     </p>
                 </div>
             </div>

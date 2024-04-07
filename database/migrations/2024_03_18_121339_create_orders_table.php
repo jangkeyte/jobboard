@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('payment_method');
             $table->string('start_date');
             $table->string('expire_date');
+            $table->tinyInteger('candidate_viewed');
             $table->tinyInteger('currently_active');
             $table->timestamps();
         });

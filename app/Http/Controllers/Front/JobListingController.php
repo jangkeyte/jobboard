@@ -36,7 +36,7 @@ class JobListingController extends Controller
         $jobs = $raw_jobs->filter(function ($item) {
             $this_company_id = $item->rCompany->id;
             $order_data = \App\Models\Order::where('company_id', $this_company_id)->where('currently_active', 1)->first();
-            if(date('Y-m-d') > $order_data?->expire_date) {
+            if(date('Y-m-d') <= $order_data?->expire_date) {
                 return $item;
             }
         })->values();

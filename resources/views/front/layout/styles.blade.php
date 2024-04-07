@@ -3,3 +3,4 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/jangkeyte.css') }}">

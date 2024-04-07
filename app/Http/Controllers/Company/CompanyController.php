@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\UpdateCompanyRequest;
 use App\Repositories\Company\CompanyRepositoryInterface;
-use Illuminate\Http\Request;
-use App\Models\Order;
-use App\Models\Package;
+use App\Models\Advertisement;
+use App\Models\Candidate;
+use App\Models\CandidateApplication;
+use App\Models\CandidateEducation;
+use App\Models\CandidateSkill;
+use App\Models\CandidateWorkExperience;
+use App\Models\CandidateAward;
+use App\Models\CandidateResume;
+use App\Models\CandidateBookmark;
 use App\Models\Company;
 use App\Models\CompanyLocation;
 use App\Models\CompanyIndustry;
@@ -21,15 +27,12 @@ use App\Models\JobType;
 use App\Models\JobExperience;
 use App\Models\JobGender;
 use App\Models\JobSalaryRange;
-use App\Models\Candidate;
-use App\Models\CandidateApplication;
-use App\Models\CandidateEducation;
-use App\Models\CandidateSkill;
-use App\Models\CandidateWorkExperience;
-use App\Models\CandidateAward;
-use App\Models\CandidateResume;
-use App\Models\CandidateBookmark;
+use App\Models\Order;
+use App\Models\Package;
 use App\Mail\Websitemail;
+use App\Filters\CandidateFilter;
+ 
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -456,5 +459,36 @@ class CompanyController extends Controller
         }
 
         return redirect()->back()->with('success', __('Successfully.'));
-    }    
+    }
+    
+    public function candidate_listing(Request $request)
+    {
+        $candidate_sectors = JobCategory::get();
+        $advertisement_data = Advertisement::where('id', 1)->first();
+
+        $form_data = $request;
+        $candidates = Candidate::with('rCandidateSector')->filter(new CandidateFilter($request))->orderBy('id', 'desc')->paginate(10);
+        //dd($candidates);
+        // Get the data from previous request, if don't add here you can add appends($_GET) in pagination links()
+        $candidates = $candidates->appends($request->all());
+
+        return view('front.candidate_listing', compact('candidates', 'candidate_sectors', 'form_data', 'advertisement_data'));
+    }
+
+    public function candidate_detail($id) 
+    {
+        $order_data = Order::with('rPackage')->where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
+        
+        if($order_data->candidate_viewed >= $order_data->rPackage->total_allowed_candidate_view) {
+            return redirect()->back()->with('error', __('You already viewed the maximum number of allowed candidate profile. You have to buy a new package to access this page.') );
+        } else {
+            $candidate_viewed = $order_data->candidate_viewed + 1;
+            Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->update(['candidate_viewed' => $candidate_viewed]);
+        }
+
+        $candidate_single = Candidate::where('id', $id)->first();
+
+        return view('front.candidate_detail', compact('candidate_single'));
+    }
+
 }

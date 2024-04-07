@@ -52,14 +52,6 @@
                                                 </li>
                                             </ul>                                            
                                         </div>
-                                        <div class="col-md-6 right-side text-end">
-                                            <ul class="header-right social mr-auto ">
-                                                <li><a href="{{ $global_settings_data->facebook }}"><i class="fa fa-sort"></i></a></li>
-                                                <span class=" text-danger ps-1" >{{ __('Most Recent') }}</span>
-                                                <li><a href="{{ $global_settings_data->facebook }}"><i class="fa fa-sort t"></i></a></li>
-                                                <span class=" text-danger ps-1" >{{ __('Records Per Page') }}</span>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -68,13 +60,6 @@
                                 <div class="text-danger">{{ __('No result found') }}</div>
                             @else
                                 @foreach($companies as $item)
-                                    @php
-                                    $order_data = \App\Models\Order::where('company_id', $item->id)->where('currently_active', 1)->first();
-                                    if(date('Y-m-d') > $order_data?->expire_date) {
-                                        continue;
-                                    }
-                                    @endphp
-
                                     <div class="col-md-12 my-2 border">                                        
                                         <div class="row">
                                             <div class="col-md-12 text-end pe-0">
@@ -82,28 +67,24 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-1 pt-3">
-                                                <div class="border">
-                                                    <a href="{{ route('company', $item->id) }}" data-job-id="174" class="">
+                                            <div class="col-md-1 pb-3 pt-2 ">
+                                                    <a href="{{ route('company', $item->id) }}" style="width:85px; height:85px; display: block;">
                                                         @include('front/templates/image', array('image' => $item->logo, 'name' => $item->company_name))
                                                     </a>
-                                                </div>
                                             </div>
-                                            <div class="col-md-8 pt-2">
-                                                <div>
-                                                    <ul class="list-unstyled fs-7">
-                                                        <li><a class ="text-danger" href="javascript:void(0);">{{ $item->rCompanyIndustry->name }}</a></li>
-                                                        <li><h7><a class="fw-bold" href="{{ route('company', $item->id) }}">{{ $item->company_name }}</a></h7></li>
-                                                        <li><i class="pe-1 fa fa-location-dot"></i>{{ $item->rCompanyLocation->name }}</li>
-                                                    </ul>
-                                                </div>
+                                            <div class="col-md-8 pt-2 ps-5">
+                                                <ul class="list-unstyled fs-7">
+                                                    <li><a class ="text-danger" href="javascript:void(0);">{{ $item->rCompanyIndustry->name }}</a></li>
+                                                    <li class="pt-1"><h7><a class="fw-bold" href="{{ route('company', $item->id) }}">{{ $item->company_name }}</a></h7></li>
+                                                    <li class="pt-1"><i class="pe-1 fa fa-location-dot"></i>{{ $item->rCompanyLocation->name }}</li>
+                                                </ul>
                                             </div>
 
                                             <div class="col-md-3 pt-3 mt-2">
                                                 <ul class="list-unstyled fs-7">
                                                     <li>
                                                         <button type="submit" class="btn btn-outline hover-danger rounded-1 btn-follow me-2"><i class="fa fa-user-plus pe-2"></i>{{ __('Follow') }}</button>
-                                                        <button type="submit" class="btn btn-outline hover-danger rounded-1 btn-follow">1 {{ __('Vacancy') }}</button>
+                                                        <button type="submit" class="btn btn-outline hover-danger rounded-1 btn-follow">{{ $item->r_job_sum_vacancy }} {{ __('Vacancy') }}</button>
                                                     </li>
                                                 </ul>
 
@@ -111,10 +92,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-
-                                <div class="col-md-12">
-                                    
-                                </div>
                             @endif
                         </div>
                     </div>

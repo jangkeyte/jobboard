@@ -29,7 +29,7 @@
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primry bg-website">Submit</button>
-                            <a href="{{ route('login') }}" class="primary-color">Back to Login Page</a>
+                            <a href="{{ route('home') }}" class="primary-color">Back to Login Page</a>
                         </div>
                     </form>
                 </div>

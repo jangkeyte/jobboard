@@ -16,39 +16,42 @@
     </div>
 </div>
 
-<div class="page-content pricing">
+<div class="page-content pricing mt-5">
     <div class="container">
-        <div class="row pricing">
+        <div class="row pricing justify-content-center">
             @foreach($packages as $item)
-            <div class="col-lg-4">
-                <div class="card mb-5 mb-lg-0">
-                    <div class="card-body">
-                        <h2 class="card-title">{{ $item->package_name }}</h2>
-                        <h3 class="card-price">${{ $item->package_price }}</h3>
-                        <h4 class="card-day">({{ $item->package_days }} Days)</h4>
-                        <hr />
-                        <ul class="fa-ul">
-                            <li>
+            <div class="col-md-3">
+                <div class="card mb-5 border-0 shadow">
+                    <div class="card-body px-0">
+                        <h2 class="card-title px-3 text-center fw-bold">{{ $item->package_name }}</h2>
+                        <div style="background-color:#F7F7F7;" class="text-center py-3">
+                            <h3 class="card-price pt-2 fw-bolder">${{ $item->package_price }}</h3>
+                            <span class="card-day fs-7">{{ $item->package_days }} {{__('Days') }}</span>
+                        </div>
+                        
+                        
+                        <ul class="fa-ul px-3 py-3">
+                            <li class="py-2">
                                 @php
-                                    if($item->total_allowed_jobs == -1) {
+                                    if ($item->total_allowed_jobs == -1) {
                                         $text = "Unlimited";
                                         $icon_code = "fas fa-check";
-                                    } elseif($item->total_allowed_jobs == 0) {
-                                        $text = "No";
+                                    } elseif ($item->total_allowed_jobs == 0) {
+                                        $text = "{{__('No') }}";
                                         $icon_code = "fas fa-times";
                                     } else {
                                         $text = $item->total_allowed_jobs;
                                         $icon_code = "fas fa-check";
                                     }                                    
                                 @endphp
-                                <span class="fa-li"><i class="{{ $icon_code }}"></i></span>{{ $text }} Job Post Allowed
+                                <span class="fa-li"><i class="{{ $icon_code }}"></i></span>{{ $text }} {{__('Job Post Allowed') }}
                             </li>
-                            <li>
+                            <li class="py-2">
                                 @php
-                                    if($item->total_allowed_featured_jobs == -1) {
+                                    if ($item->total_allowed_featured_jobs == -1) {
                                         $text = "Unlimited";
                                         $icon_code = "fas fa-check";
-                                    } elseif($item->total_allowed_featured_jobs == 0) {
+                                    } elseif ($item->total_allowed_featured_jobs == 0) {
                                         $text = "No";
                                         $icon_code = "fas fa-times";
                                     } else {
@@ -56,14 +59,14 @@
                                         $icon_code = "fas fa-check";
                                     }                                    
                                 @endphp
-                                <span class="fa-li"><i class="{{ $icon_code }}"></i></span>{{ $text }} Featured Job
+                                <span class="fa-li"><i class="{{ $icon_code }}"></i></span>{{ $text }} {{__('Featured Job') }}
                             </li>
-                            <li>
+                            <li class="py-2">
                                 @php
-                                    if($item->total_allowed_photos == -1) {
+                                    if ($item->total_allowed_photos == -1) {
                                         $text = "Unlimited";
                                         $icon_code = "fas fa-check";
-                                    } elseif($item->total_allowed_photos == 0) {
+                                    } elseif ($item->total_allowed_photos == 0) {
                                         $text = "No";
                                         $icon_code = "fas fa-times";
                                     } else {
@@ -71,14 +74,14 @@
                                         $icon_code = "fas fa-check";
                                     }                                    
                                 @endphp
-                                <span class="fa-li"><i class="{{ $icon_code }}"></i></span>{{ $text }} Company Photos
+                                <span class="fa-li"><i class="{{ $icon_code }}"></i></span>{{ $text }} {{__('Company Photos') }}
                             </li>
-                            <li>
+                            <li class="py-2">
                                 @php
-                                    if($item->total_allowed_videos == -1) {
+                                    if ($item->total_allowed_videos == -1) {
                                         $text = "Unlimited";
                                         $icon_code = "fas fa-check";
-                                    } elseif($item->total_allowed_videos == 0) {
+                                    } elseif ($item->total_allowed_videos == 0) {
                                         $text = "No";
                                         $icon_code = "fas fa-times";
                                     } else {
@@ -86,10 +89,10 @@
                                         $icon_code = "fas fa-check";
                                     }                                    
                                 @endphp
-                                <span class="fa-li"><i class="{{ $icon_code }}"></i></span>{{ $text }} Company Videos
+                                <span class="fa-li"><i class="{{ $icon_code }}"></i></span>{{ $text }} {{__('Company Videos') }}
                             </li>
                         </ul>
-                        <div class="buy"><a href="" class="btn btn-primary">Choose Plan</a></div>
+                        <div class="buy text-center"><a href="" class="btn btn-danger">{{__('Choose Plan') }}</a></div>
                     </div>
                 </div>
             </div>

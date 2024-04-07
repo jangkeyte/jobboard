@@ -14,7 +14,9 @@
                     <div class="row">
                         <div class="col-md-12 job job-single">
                             <div class="item d-flex justify-content-start">
-                                <div class="logo job-detail-image me-4"><img src="{{ asset('uploads/' . $job_single->rCompany->logo) }}"></div>
+                                <div class="logo job-detail-image me-4">
+                                    @include('front/templates/image', array('image' => $job_single->rCompany->logo, 'name' => $job_single->rCompany->company_name))
+                                </div>
                                 <div class="text">
                                     <h4 class="text-black fw-bold">{{ $job_single->title }}</h4>
                                     <span>
@@ -168,16 +170,7 @@
                     <div class="job related-job pt-0 pb-0">
                         <div class="container">
                             <div class="row">
-
                                 @forelse($jobs_related as $item)
-                                    @php
-                                        $this_company_id = $item->rCompany->id;
-                                        $order_data = \App\Models\Order::where('company_id', $this_company_id)->where('currently_active', 1)->first();
-                                        if(date('Y-m-d') > $order_data?->expire_date) {
-                                            continue;
-                                        }
-                                    @endphp
-
                                     <div class="col-md-12 py-2">
                                         <div class="row border">
                                             <div class="col-md-1 pt-4">

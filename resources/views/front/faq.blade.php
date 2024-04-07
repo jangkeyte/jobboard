@@ -16,13 +16,13 @@
     </div>
 </div>
 
-<div class="page-content faq">
+<div class="page-content faq mt-4">
     <div class="container">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center">
                 <div class="accordion w-100" id="accordionExample">
                     @foreach($faqs as $item)
-                    <div class="accordion-item">
+                    <div class="accordion-item mt-2 shadow">
                         <h2 class="accordion" id="heading{{ $item->id }}">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $item->id }}" aria-expanded="false" aria-controls="collapse{{ $item->id }}">
                                 {!! $item->question !!}

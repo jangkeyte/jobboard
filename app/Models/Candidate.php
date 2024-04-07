@@ -22,4 +22,9 @@ class Candidate extends Authenticatable
         'facebook_id'
     ]; 
  
+    public function rCandidateSector()
+    {
+        return $this->belongsTo(JobCategory::class, 'sector_id');
+    }
+    
 }

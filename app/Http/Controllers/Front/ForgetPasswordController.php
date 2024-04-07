@@ -50,7 +50,7 @@ class ForgetPasswordController extends Controller
 
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('login')->with('success', __('Please check your email and follow the steps there.'));
+        return redirect()->back()->with('success', __('Please check your email and follow the steps there.'));
     }
     
     public function company_reset_password($token, $email)
@@ -58,7 +58,7 @@ class ForgetPasswordController extends Controller
         $company_data = Company::where('token', $token)->where('email', $email)->first();
 
         if(!$company_data) {
-            return redirect()->route('login');
+            return redirect()->route('home');
         }
 
         return view('front.reset_password_company', compact('token', 'email'));
@@ -77,7 +77,7 @@ class ForgetPasswordController extends Controller
         $company_data->token = '';
         $company_data->update();
 
-        return redirect()->route('login')->with('success', __('Password is reset successfully. You can now login to system.'));
+        return redirect()->route('home')->with('success', __('Password is reset successfully. You can now login to system.'));
     }
     
     public function candidate_forget_password()
@@ -115,7 +115,7 @@ class ForgetPasswordController extends Controller
 
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('login')->with('success', __('Please check your email and follow the steps there.'));
+        return redirect()->route('home')->with('success', __('Please check your email and follow the steps there.'));
     }
     
     public function candidate_reset_password($token, $email)
@@ -123,7 +123,7 @@ class ForgetPasswordController extends Controller
         $candidate_data = Candidate::where('token', $token)->where('email', $email)->first();
 
         if(!$candidate_data) {
-            return redirect()->route('login');
+            return redirect()->route('home');
         }
 
         return view('front.reset_password_candidate', compact('token', 'email'));
@@ -142,6 +142,6 @@ class ForgetPasswordController extends Controller
         $candidate_data->token = '';
         $candidate_data->update();
 
-        return redirect()->route('login')->with('success', __('Password is reset successfully. You can now login to system.'));
+        return redirect()->route('home')->with('success', __('Password is reset successfully. You can now login to system.'));
     }
 }

@@ -29,8 +29,7 @@ class CompanyListingController extends Controller
         $other_page_item = PageOtherItem::where('id', 1)->first();
                 
         $form_data = $request;
-        $companies = Company::filter(new CompanyFilter($request))->orderBy('id', 'desc')->paginate(10);
-            
+        $companies = Company::withSum('rJob', 'vacancy')->filter(new CompanyFilter($request))->orderBy('id', 'desc')->paginate(10);
         // Get the data from previous request, if don't add here you can add appends($_GET) in pagination links()
         $companies = $companies->appends($request->all());
 

@@ -41,14 +41,14 @@ class LoginController extends Controller
         if(Auth::guard('company')->attempt($credential)){
             return redirect()->route('company_dashboard');
         } else {
-            return redirect()->route('login')->with('error', __('Information is not correct.'));
+            return redirect()->back()->with('error', __('Information is not correct.'));
         }
     }
 
     public function company_logout()
     {
         Auth::guard('company')->logout();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
     
     public function candidate_login_submit(Request $request)
@@ -65,14 +65,14 @@ class LoginController extends Controller
         if(Auth::guard('candidate')->attempt($credential)){
             return redirect()->route('candidate_dashboard');
         } else {
-            return redirect()->route('login')->with('error', __('Information is not correct.'));
+            return redirect()->back()->with('error', __('Information is not correct.'));
         }
     }
 
     public function candidate_logout()
     {
         Auth::guard('candidate')->logout();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
     
     public function redirect($provider)

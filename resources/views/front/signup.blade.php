@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <a href="{{ route('login') }}" class="primary-color">{{ __('Existing User? Login Now') }}</a>
+                        <a href="{{ route('home') }}" class="primary-color">{{ __('Existing User? Login Now') }}</a>
                     </div>
                 </div>
             </div>

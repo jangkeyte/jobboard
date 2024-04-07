@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('username');
             $table->string('email');
             $table->string('password');
+            $table->string('facebook_id')->nullable();
+            $table->tinyInteger('sector_id')->nullable();
             $table->string('token')->nullable();
             $table->string('photo')->nullable();
             $table->text('biography')->nullable();
@@ -31,6 +33,8 @@ return new class extends Migration
             $table->string('marital_status')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->string('website')->nullable();
+            $table->tinyInteger('is_expert');
+            $table->tinyInteger('is_urgent');
             $table->tinyInteger('status');
             $table->timestamps();
         });

@@ -29,6 +29,7 @@ class CandidateFactory extends Factory
             'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
+            'sector_id' => fake()->numberBetween(1, 68),
             'photo' => 'default.png',
             'biography' => fake()->paragraph(10),
             'phone' => fake()->phoneNumber(),

@@ -138,6 +138,10 @@ Route::group(['middleware' => 'locale'], function() {
         Route::get('/company/applicants/{id}', 'applicants')->name('company_applicants');
         Route::get('/company/applicant-resume/{id}', 'applicant_resume')->name('company_applicant_resume');
         Route::post('/company/applicant-status-change', 'applicant_status_change')->name('company_applicant_status_change');
+
+        Route::get('/candidate-listing', [CompanyController::class, 'candidate_listing'])->name('company_candidate_listing');
+        Route::get('/candidate-detail/{id}', [CompanyController::class, 'candidate_detail'])->name('company_candidate_detail');    
+
     });
 
     /* Candidate */

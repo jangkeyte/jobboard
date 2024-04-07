@@ -49,7 +49,7 @@ class SignupController extends Controller
 
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('login')->with('success', __('An email is sent to your email adress. You must have to check that and click on the confimation link to validate your signup.'));
+        return redirect()->back()->with('success', __('An email is sent to your email adress. You must have to check that and click on the confimation link to validate your signup.'));
     }
 
     public function company_signup_verify($token, $email)
@@ -57,14 +57,14 @@ class SignupController extends Controller
         $company_data = Company::where('token', $token)->where('email', $email)->first();
         if(!$company_data)
         {
-            return redirect()->route('login');
+            return redirect()->route('home');
         }
 
         $company_data->token = '';
         $company_data->status = 1;
         $company_data->update();
 
-        return redirect()->route('login')->with('success', __('Your email is verified successfully. You can now login to the system as company.'));
+        return redirect()->route('home')->with('success', __('Your email is verified successfully. You can now login to the system as company.'));
     }
     
     public function candidate_signup_submit(Request $request)
@@ -96,7 +96,7 @@ class SignupController extends Controller
 
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('login')->with('success', __('An email is sent to your email adress. You must have to check that and click on the confimation link to validate your signup.'));
+        return redirect()->back()->with('success', __('An email is sent to your email adress. You must have to check that and click on the confimation link to validate your signup.'));
     }
 
     public function candidate_signup_verify($token, $email)
@@ -104,13 +104,13 @@ class SignupController extends Controller
         $candidate_data = Candidate::where('token', $token)->where('email', $email)->first();
         if(!$candidate_data)
         {
-            return redirect()->route('login');
+            return redirect()->route('home');
         }
 
         $candidate_data->token = '';
         $candidate_data->status = 1;
         $candidate_data->update();
 
-        return redirect()->route('login')->with('success', __('Your email is verified successfully. You can now login to the system as candidate.'));
+        return redirect()->route('home')->with('success', __('Your email is verified successfully. You can now login to the system as candidate.'));
     }
 }
