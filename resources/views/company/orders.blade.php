@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Orders</h2>
+                <h2>{{ __('Orders') }}</h2>
             </div>
         </div>
     </div>
@@ -26,13 +26,13 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>SL</th>
-                                <th>Payment Id</th>
-                                <th>Plan Name</th>
-                                <th>Price</th>
-                                <th>Order Date</th>
-                                <th>Expire Date</th>
-                                <th>Payment Method</th>
+                                <th>#</th>
+                                <th>{{ __('Payment Id') }}</th>
+                                <th>{{ __('Plan Name') }}</th>
+                                <th>{{ __('Price') }}</th>
+                                <th>{{ __('Order Date') }}</th>
+                                <th>{{ __('Expire Date') }}</th>
+                                <th>{{ __('Payment Method') }}</th>
                             </tr>
                             @foreach($orders as $item)
                             <tr>

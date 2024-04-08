@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Candidate Applications</h2>
+                <h2>{{ __('Candidate Applications') }}</h2>
             </div>
         </div>
     </div>
@@ -22,18 +22,18 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-12">                
-                <h3>All Job Posts</h3>
+                <h3>{{ __('All Job Posts') }}</h3>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>SL</th>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Location</th>
-                                <th>Is Featured?</th>
-                                <th>Job Detail</th>
-                                <th>Applicants</th>
+                                <th>#</th>
+                                <th>{{ __('Title') }}</th>
+                                <th>{{ __('Category') }}</th>
+                                <th>{{ __('Location') }}</th>
+                                <th>{{ __('Is Featured') }}?</th>
+                                <th>{{ __('Job Detail') }}</th>
+                                <th>{{ __('Applicants') }}</th>
                             </tr>
                             @foreach($jobs as $item)
                             <tr>
@@ -43,9 +43,9 @@
                                 <td>{{ $item->rJobLocation->name }}</td>
                                 <td>
                                     @if($item->is_featured == 1)
-                                    <span class="badge bg-success">Featured</span>
+                                    <span class="badge bg-success">{{ __('Featured') }}</span>
                                     @else
-                                    <span class="badge bg-danger">Not Featured</span>
+                                    <span class="badge bg-danger">{{ __('Not Featured') }}</span>
                                     @endif
                                 </td>
                                 <td><a href="{{ route('job', $item->id) }}" ><i class="fa fa-eye"></i></a></td>

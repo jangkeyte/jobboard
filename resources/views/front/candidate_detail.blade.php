@@ -10,7 +10,7 @@
         
         <div class="col-md-4 ps-3 pe-0 float-right">
             <div class="container">
-                @include('front/templates/candidate_profile')
+                @include('front/templates/candidate_profile', array('candidate_single' => $candidate_single))
                 {{--
                 <form action="{{ route('candidate_enquery_email') }}" method="post">
                     @csrf

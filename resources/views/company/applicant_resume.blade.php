@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Resume of {{ $candidate_single->name }}</h2>
+                <h2>{{ __('Resume of') . $candidate_single->name }}</h2>
             </div>
         </div>
     </div>
@@ -22,108 +22,108 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-12">                
-                <h4 class="resume">Basic Profile</h4>
+                <h4 class="resume">{{ __('Basic Profile') }}</h4>
                 <div class="table-respnsive">
                     <table class="table table-bordered">
                         <tr>
-                            <th>Photo</th>
+                            <th>{{ __('Photo') }}</th>
                             <td><img src="{{ asset('uploads/' . $candidate_single->photo) }}" style="width:120px"></td>
                         </tr>
 
                         @if($candidate_single->name != null)
                         <tr>
-                            <th>Name</th>
+                            <th>{{ __('Name') }}</th>
                             <td>{{ $candidate_single->name }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->designation != null)
                         <tr>
-                            <th>Designation</th>
+                            <th>{{ __('Designation') }}</th>
                             <td>{{ $candidate_single->designation }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->email != null)
                         <tr>
-                            <th>Email</th>
+                            <th>{{ __('Email') }}</th>
                             <td>{{ $candidate_single->email }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->phone != null)
                         <tr>
-                            <th>Phone</th>
+                            <th>{{ __('Phone') }}</th>
                             <td>{{ $candidate_single->phone }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->country != null)
                         <tr>
-                            <th>Country</th>
+                            <th>{{ __('Country') }}</th>
                             <td>{{ $candidate_single->country }}</td>
                         </tr>
                         @endif
                         
                         @if($candidate_single->address != null)
                         <tr>
-                            <th>Address</th>
+                            <th>{{ __('Address') }}</th>
                             <td>{{ $candidate_single->address }}</td>
                         </tr>
                         @endif
                         
                         @if($candidate_single->state != null)
                         <tr>
-                            <th>State</th>
+                            <th>{{ __('State') }}</th>
                             <td>{{ $candidate_single->state }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->city != null)
                         <tr>
-                            <th>City</th>
+                            <th>{{ __('City') }}</th>
                             <td>{{ $candidate_single->city }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->zip_code != null)
                         <tr>
-                            <th>Zip Code</th>
+                            <th>{{ __('Zip Code') }}</th>
                             <td>{{ $candidate_single->zip_code }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->gender != null)
                         <tr>
-                            <th>Gender</th>
+                            <th>{{ __('Gender') }}</th>
                             <td>{{ $candidate_single->gender }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->marital_status != null)
                         <tr>
-                            <th>Marital Status</th>
+                            <th>{{ __('Marital Status') }}</th>
                             <td>{{ $candidate_single->marital_status }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->date_of_birth != null)
                         <tr>
-                            <th>Date of Birth</th>
+                            <th>{{ __('Date of Birth') }}</th>
                             <td>{{ $candidate_single->date_of_birth }}</td>
                         </tr>
                         @endif
 
                         @if($candidate_single->website != null)
                         <tr>
-                            <th>Website</th>
+                            <th>{{ __('Website') }}</th>
                             <td><a href="{{ $candidate_single->website }}">{{ $candidate_single->website }}</a></td>
                         </tr>
                         @endif
 
                         @if($candidate_single->biography != null)
                         <tr>
-                            <th>Biography</th>
+                            <th>{{ __('Biography') }}</th>
                             <td>{!! $candidate_single->biography !!}</td>
                         </tr>
                         @endif
@@ -131,15 +131,15 @@
                 </div>
 
                 @if($candidate_educations->count())
-                <h4 class="resume">Education</h4>
+                <h4 class="resume">{{ __('Education') }}</h4>
                 <div class="table-respnsive">
                     <table class="table table-bordered">
                         <tr>
-                            <th>SL</th>
-                            <th>Education Level</th>
-                            <th>Institute</th>
-                            <th>Degree</th>
-                            <th>Passing Year</th>
+                            <th>#</th>
+                            <th>{{ __('Education Level') }}</th>
+                            <th>{{ __('Institute') }}</th>
+                            <th>{{ __('Degree') }}</th>
+                            <th>{{ __('Passing Year') }}</th>
                         </tr>
                         @foreach($candidate_educations as $item)
                         <tr>
@@ -155,13 +155,13 @@
                 @endif
                 
                 @if($candidate_skills->count())
-                <h4 class="resume">Skill</h4>
+                <h4 class="resume">{{ __('Skill') }}</h4>
                 <div class="table-respnsive">
                     <table class="table table-bordered">
                         <tr>
-                            <th>SL</th>
-                            <th>Skill Name</th>
-                            <th>Percentage</th>
+                            <th>#</th>
+                            <th>{{ __('Skill Name') }}</th>
+                            <th>{{ __('Percentage') }}</th>
                         </tr>
                         @foreach($candidate_skills as $item)
                         <tr>
@@ -175,15 +175,15 @@
                 @endif
 
                 @if($candidate_work_experiences->count())
-                <h4 class="resume">Experience</h4>
+                <h4 class="resume">{{ __('Experience') }}</h4>
                 <div class="table-respnsive">
                     <table class="table table-bordered">
                         <tr>
-                            <th>SL</th>
-                            <th>Company</th>
-                            <th>Designation</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
+                            <th>#</th>
+                            <th>{{ __('Company') }}</th>
+                            <th>{{ __('Designation') }}</th>
+                            <th>{{ __('Start Date') }}</th>
+                            <th>{{ __('End Date') }}</th>
                         </tr>
                         @foreach($candidate_work_experiences as $item)
                         <tr>
@@ -199,14 +199,14 @@
                 @endif
 
                 @if($candidate_awards->count())
-                <h4 class="resume">Awards</h4>
+                <h4 class="resume">{{ __('Awards') }}</h4>
                 <div class="table-respnsive">
                     <table class="table table-bordered">
                         <tr>
-                            <th>SL</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Date</th>
+                            <th>#</th>
+                            <th>{{ __('Title') }}</th>
+                            <th>{{ __('Description') }}</th>
+                            <th>{{ __('Date') }}</th>
                         </tr>
                         @foreach($candidate_awards as $item)
                         <tr>
@@ -221,13 +221,13 @@
                 @endif
 
                 @if($candidate_resumes->count())
-                <h4 class="resume">Resume</h4>
+                <h4 class="resume">{{ __('Resume') }}</h4>
                 <div class="table-respnsive">
                     <table class="table table-bordered">
                         <tr>
-                            <th>SL</th>
-                            <th>Name</th>
-                            <th>File</th>
+                            <th>#</th>
+                            <th>{{ __('Name') }}</th>
+                            <th>{{ __('File') }}</th>
                         </tr>
                         @foreach($candidate_resumes as $item)
                         <tr>

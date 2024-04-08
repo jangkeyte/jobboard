@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Make Payment</h2>
+                <h2>{{ __('Make Payment') }}</h2>
             </div>
         </div>
     </div>
@@ -22,18 +22,18 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-12">                
-                <h4>Current Plan</h4>
+                <h4>{{ __('Current Plan') }}</h4>
                 <div class="row box-items mb-4">
                     <div class="col-md-4 box1">
                         @if($current_plan == null)
-                        <span class="text-danger">No plan is available</span>
+                        <span class="text-danger">{{ __('No plan is available') }}</span>
                         @else
                         <h4>${{ $current_plan->rPackage->package_price }}</h4>
                         <p>{{ $current_plan->rPackage->package_name }}</p>
                         @endif
                     </div>
                 </div>               
-                <h4>Choose Plan and Make Payment</h4>
+                <h4>{{ __('Choose Plan and Make Payment') }}</h4>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <form action="{{ route('company_paypal') }}" method="post">
@@ -46,7 +46,7 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td><button href="" class="btn btn-primary">Pay with PayPal</button></td>
+                                <td><button href="" class="btn btn-primary">{{ __('Pay with PayPal') }}</button></td>
                             </tr>
                         </form>
                             <tr>
@@ -57,7 +57,7 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td><button href="" class="btn btn-primary">Pay with Stripe</button></td>
+                                <td><button href="" class="btn btn-primary">{{ __('Pay with Stripe') }}</button></td>
                             </tr>
                         </form>
                     </table>

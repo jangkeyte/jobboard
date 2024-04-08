@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>All Jobs</h2>
+                <h2>{{ __('All Jobs') }}</h2>
             </div>
         </div>
     </div>
@@ -26,12 +26,12 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>SL</th>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Location</th>
-                                <th>Is Featured?</th>
-                                <th>Action</th>
+                                <th>#</th>
+                                <th>{{ __('Title') }}</th>
+                                <th>{{ __('Category') }}</th>
+                                <th>{{ __('Location') }}</th>
+                                <th>{{ __('Is Featured') }}?</th>
+                                <th>{{ __('Action') }}</th>
                             </tr>
                             @foreach($jobs as $item)
                             <tr>
@@ -41,14 +41,14 @@
                                 <td>{{ $item->rJobLocation->name }}</td>
                                 <td>
                                     @if($item->is_featured == 1)
-                                    <span class="badge bg-success">Featured</span>
+                                    <span class="badge bg-success">{{ __('Featured') }}</span>
                                     @else
-                                    <span class="badge bg-danger">Not Featured</span>
+                                    <span class="badge bg-danger">{{ __('Not Featured') }}</span>
                                     @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('company_jobs_edit', $item->id) }}" class="btn btn-warning btn-sm text-white"><i class="fas fa-edit"></i></a>
-                                    <a href="{{ route('company_jobs_delete', $item->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');"><i class="fas fa-trash-alt"></i></aa>
+                                    <a href="{{ route('company_jobs_delete', $item->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('{{ __('Are you sure') }}?');"><i class="fas fa-trash-alt"></i></aa>
                                 </td>
                             </tr>
                             @endforeach

@@ -2,16 +2,14 @@
     <div class="jobsearch_candidate_info">
         <span class="promotepof-badge position-absolute top-0 end-0"><i class="fa fa-star" title="Featured"></i></span>
         <div class="urgntpkg-candv2 position-absolute top-0"><span>urgent</span></div>
-        <figure><img src="https://demo.jangkeyte.com/wp-content/uploads/2017/11/candidate-19-150x150.jpg" alt="">
+        <figure>
+            @include('front/templates/image', ['image' => $candidate_single->photo, 'name' => $candidate_single->name])
         </figure>
-        <h2>
-            <a>Wanda Montgomery</a>
-        </h2>
-        <p>Charted Accountant</p>
-        <p>Phone: 0979380948</p>
-        <p>Sector: Construction</p>
-        <p>Salary: $40.00 / Hourly</p>
-        <p>(Age: 64 years)</p> <span>Albert Street, London, United Kingdom</span>
+        <h2><a>{{ $candidate_single->name }}</a></h2>
+        <p>{{ $candidate_single->designation }}</p>
+        <p>Phone: {{ $candidate_single->phone }}</p>
+        <p>Sector: {{ $candidate_single->rCandidateSector->name }}</p>
+        <p>(Age: {{  $candidate_single->date_of_birth->format('Y-m-d H:i:s')->diff(date('Y-m-d H:i:s'))->y; }} years)</p> <span>{{ $candidate_single->address }}</span>
         <small>Member Since, 4 December, 2017</small>
         <ul>
             <li>

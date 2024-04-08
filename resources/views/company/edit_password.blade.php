@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Edit Password</h2>
+                <h2>{{ __('Edit Password') }}</h2>
             </div>
         </div>
     </div>
@@ -26,20 +26,20 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" autofocus>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="{{ __('Password') }}" autofocus>
                             @error('password')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="password" class="form-control @error('retype_password') is-invalid @enderror" name="retype_password" placeholder="Retype Password" autofocus>
+                            <input type="password" class="form-control @error('retype_password') is-invalid @enderror" name="retype_password" placeholder="{{ __('Retype Password') }}" autofocus>
                             @error('retype_password')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror                           
                         </div> 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="Update">
+                                <input type="submit" class="btn btn-primary" value="{{ __('Update') }}">
                             </div>              
                         </div> 
                     </div>

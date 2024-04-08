@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Candidate Applications</h2>
+                <h2>{{ __('Candidate Applications') }}</h2>
             </div>
         </div>
     </div>
@@ -22,19 +22,19 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-12">                
-                <h3>Applicants for {{ $job_single->title }}</h3>
+                <h3>{{ __('Applicants for') }} {{ $job_single->title }}</h3>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>SL</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Mobile</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                                <th>Detail</th>
-                                <th>CV</th>
+                                <th>#</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Email') }}</th>
+                                <th>{{ __('Mobile') }}</th>
+                                <th>{{ __('Status') }}</th>
+                                <th>{{ __('Action') }}</th>
+                                <th>{{ __('Detail') }}</th>
+                                <th>{{ __('CV') }}</th>
                             </tr>
                             
                             @foreach($applicants as $item)
@@ -45,15 +45,15 @@
                                 <td>{{ $item->rCandidate->phone }}</td>
                                 <td>
                                     @if($item->status == 'Applied')
-                                        @php $color="primary"; @endphp
+                                        @php $color="primary"; $status= __('Apply') @endphp
                                     @elseif($item->status == 'Approved')
-                                        @php $color="success"; @endphp
+                                        @php $color="success"; $status= __('Approved') @endphp
                                     @elseif($item->status == 'Rejected')
-                                        @php $color="danger"; @endphp
+                                        @php $color="danger"; $status= __('Rejected') @endphp
                                     @else
-                                        @php $color="warning"; @endphp
+                                        @php $color="warning"; $status= __('Error') @endphp
                                     @endif
-                                    <span class="badge bg-{{ $color }}">{{ $item->status }}</span>
+                                    <span class="badge bg-{{ $color }}">{{ $status }}</span>
                                 </td>
                                 <td>
                                     <form action="{{ route('company_applicant_status_change', $item->id) }}" method="post">
@@ -61,16 +61,16 @@
                                         <input type="hidden" name="job_id" value="{{ $job_single->id }}">
                                         <input type="hidden" name="candidate_id" value="{{ $item->candidate_id }}">
                                         <select name="status" class="form-control select2" onchange="this.form.submit()">
-                                            <option value="">Select</option>
-                                            <option value="Applied">Apply</option>
-                                            <option value="Approved">Approve</option>
-                                            <option value="Rejected">Reject</option>
+                                            <option value="">{{ __('Select') }}</option>
+                                            <option value="Applied">{{ __('Apply') }}</option>
+                                            <option value="Approved">{{ __('Approve') }}</option>
+                                            <option value="Rejected">{{ __('Reject') }}</option>
                                         </select>
                                     </form>
                                 </td>
                                 <td>
-                                    <a href="{{ route('company_applicant_resume', $item->candidate_id) }}" title="Candidate Detail"><i class="bi bi-eye"></i></a>
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#coverLetterModal{{ $item->id }}" title="Cover Letter"><i class="bi bi-envelope"></i></a>
+                                    <a href="{{ route('company_applicant_resume', $item->candidate_id) }}" title="{{ __('Candidate Detail') }}"><i class="bi bi-eye"></i></a>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#coverLetterModal{{ $item->id }}" title="{{ __('Cover Letter') }}"><i class="bi bi-envelope"></i></a>
                             </td>
                             </tr>
 
@@ -79,8 +79,8 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="coverLetterModalLabel">Cover Letter for Job {{ $item->rJob->title }} of {{ $item->rJob->rCompany->company_name }} Company</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <h1 class="modal-title fs-5" id="coverLetterModalLabel">{{ __('Cover Letter for Job') . $item->rJob->title . __('of') . $item->rJob->rCompany->company_name . __('Company') }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('Close') }}"></button>
                                         </div>
                                         <div class="modal-body">
                                             {!! nl2br($item->cover_letter) !!}

@@ -135,11 +135,11 @@
                             <h5 class="modal-title text-danger">{{ __('LOGIN TO YOUR ACCROUNT') }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="signin-form" action="{{ route('company_signup_submit') }}" method="post">
+                        <form class="signin-form" action="{{ route('company_login_submit') }}" method="post">
                             @csrf
                             <div class="mb-3">
                                 <div class="input-group text-center">
-                                    <button type="button" class="btn btn-danger hover-outline w-50" onclick="$('#signin-candidate-tab').click();">{{ __('Candidate') }}</button>
+                                    <button type="button" class="btn btn-danger hover-outline w-50" onclick="$('#signin-company-tab').click();">{{ __('Company') }}</button>
                                     <button type="button" class="btn btn-outline-danger hover-outline w-50">{{ __('Company') }}</button>
                                 </div>
                             </div>

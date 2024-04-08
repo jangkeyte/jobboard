@@ -479,14 +479,16 @@ class CompanyController extends Controller
     {
         $order_data = Order::with('rPackage')->where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->first();
         
+        /* Check số lượng CV đã xem 
         if($order_data->candidate_viewed >= $order_data->rPackage->total_allowed_candidate_view) {
             return redirect()->back()->with('error', __('You already viewed the maximum number of allowed candidate profile. You have to buy a new package to access this page.') );
         } else {
             $candidate_viewed = $order_data->candidate_viewed + 1;
             Order::where('company_id', Auth::guard('company')->user()->id)->where('currently_active', 1)->update(['candidate_viewed' => $candidate_viewed]);
         }
-
-        $candidate_single = Candidate::where('id', $id)->first();
+        */
+        
+        $candidate_single = Candidate::with('rCandidateSector')->where('id', $id)->first();
 
         return view('front.candidate_detail', compact('candidate_single'));
     }
