@@ -14,7 +14,7 @@
             <div class="card-body">   
                 <h4 class="resume">Basic Profile</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>Photo</th>
                             <td><img src="{{ asset('uploads/' . $candidate_single->photo) }}" style="width:120px"></td>
@@ -123,7 +123,7 @@
                 @if($candidate_educations->count())
                 <h4 class="resume">Education</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>SL</th>
                             <th>Education Level</th>
@@ -147,7 +147,7 @@
                 @if($candidate_skills->count())
                 <h4 class="resume">Skill</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>SL</th>
                             <th>Skill Name</th>
@@ -167,7 +167,7 @@
                 @if($candidate_work_experiences->count())
                 <h4 class="resume">Experience</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>SL</th>
                             <th>Company</th>
@@ -191,7 +191,7 @@
                 @if($candidate_awards->count())
                 <h4 class="resume">Awards</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>SL</th>
                             <th>Title</th>
@@ -213,7 +213,7 @@
                 @if($candidate_resumes->count())
                 <h4 class="resume">Resume</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>SL</th>
                             <th>Name</th>

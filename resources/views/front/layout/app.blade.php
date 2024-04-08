@@ -12,8 +12,6 @@
 
     @include('front.layout.styles')
 
-    @include('front.layout.scripts')
-
 </head>
 <body>
     @include('front.layout.header')
@@ -21,6 +19,8 @@
     @yield('main_content')
 
     @include('front.layout.footer')
+
+    @include('front.layout.scripts')
 
 </body>
 </html>

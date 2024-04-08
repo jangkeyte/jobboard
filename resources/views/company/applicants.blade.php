@@ -24,7 +24,7 @@
             <div class="col-lg-9 col-md-12">                
                 <h3>{{ __('Applicants for') }} {{ $job_single->title }}</h3>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tbody>
                             <tr>
                                 <th>#</th>

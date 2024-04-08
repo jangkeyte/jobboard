@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-md-12">
                 @isset($term_page_item)
-                {{ nl2br($term_page_item->content) }}
+                {!! nl2br($term_page_item->content) !!}
                 @endisset
             </div>
         </div>

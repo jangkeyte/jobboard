@@ -45,26 +45,21 @@
          <li class="nav-item"> <a class="nav-link" href="#" data-lte-toggle="fullscreen"> <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i> <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none;"></i> </a> </li> <!--end::Fullscreen Toggle--> <!--begin::User Menu Dropdown-->
          <li class="nav-item dropdown user-menu"> 
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> 
-               <img src="{{ asset('uploads/' . auth()->user()->photo) }}" class="user-image rounded-circle shadow" alt="User Image"> <span class="d-none d-md-inline">{{ auth()->user()->name }}</span> </a>
-               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
-                  <li class="user-header text-bg-primary"> <img src="{{ asset('uploads/' . auth()->user()->photo) }}" class="rounded-circle shadow" alt="User Image">
-                     <p>
-                           {{ auth()->user()->name }} | {{ __('Administrator') }}
-                           <small>Member since {{ auth()->user()->created_at->month }}/{{ auth()->user()->created_at->year }}</small>
-                     </p>
-                  </li> <!--end::User Image--> <!--begin::Menu Body-->
-                  <li class="user-body"> 
-                     <!--begin::Row-->
-                     <div class="row">
-                           <div class="col-4 text-center"> <a href="#">Followers</a> </div>
-                           <div class="col-4 text-center"> <a href="#">Sales</a> </div>
-                           <div class="col-4 text-center"> <a href="#">Friends</a> </div>
-                     </div> <!--end::Row-->
-                  </li> <!--end::Menu Body--> <!--begin::Menu Footer-->
-                  <li class="user-footer"> 
-                     <a href="{!! route('admin_profile') !!}" class="btn btn-default btn-flat">{{ __('Profile') }}</a> 
-                     <a href="{!! route('admin_logout') !!}" class="btn btn-default btn-flat float-end">{{ __('Sign out') }}</a> </li> <!--end::Menu Footer-->
-               </ul>
+               @include('front/templates/image', ['image' => auth()->user()->photo, 'name' => __('User Image'), 'class' => 'user-image rounded-circle showdow'])
+               <span class="d-none d-md-inline">{{ auth()->user()->name }}</span> 
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
+               <li class="user-header text-bg-primary"> 
+                  @include('front/templates/image', ['image' => auth()->user()->photo, 'name' => __('User Image'), 'class' => 'rounded-circle showdow'])
+                  <p>
+                     {{ auth()->user()->name }} | {{ __('Administrator') }}
+                     <small>Member since {{ auth()->user()->created_at->month }}/{{ auth()->user()->created_at->year }}</small>
+                  </p>
+               </li> <!--end::User Image--> <!--begin::Menu Body-->
+               <li class="user-footer"> 
+                  <a href="{!! route('admin_profile') !!}" class="btn btn-default btn-flat">{{ __('Profile') }}</a> 
+                  <a href="{!! route('admin_logout') !!}" class="btn btn-default btn-flat float-end">{{ __('Sign out') }}</a> </li> <!--end::Menu Footer-->
+            </ul>
          </li> <!--end::User Menu Dropdown-->
       </ul> <!--end::End Navbar Links-->
    </div> <!--end::Container-->

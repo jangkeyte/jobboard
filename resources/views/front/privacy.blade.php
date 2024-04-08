@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-md-12">
                 @isset($privacy_page_item)
-                {{ nl2br($privacy_page_item->content) }}
+                {!! nl2br($privacy_page_item->content) !!}
                 @endisset
             </div>
         </div>

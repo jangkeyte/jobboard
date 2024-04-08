@@ -47,8 +47,8 @@
                                         <div class="col-md-6 left-side">
                                             <ul class="header-left ps-0">
                                                 <li class="email-text">
-                                                    <div><span class="fs-5 fw-bolder text-black">{{$companies->count()}} {{ __('Companies Found') }}</span></div>
-                                                    <div class="mt-1"><span class="fs-7 fw-bolder">{{ __('Displayed Here') }}: 1-14 {{ __('Companies') }}</span></div>
+                                                    <div><span class="fs-5 fw-bolder text-black">{{ $companies->count() }} {{ __('Companies Found') }}</span></div>
+                                                    <div class="mt-1"><span class="fs-7 fw-bolder">{{ __('Displayed Here') }}: 1 - {{ $companies->count() }} {{ __('Companies') }}</span></div>
                                                 </li>
                                             </ul>                                            
                                         </div>

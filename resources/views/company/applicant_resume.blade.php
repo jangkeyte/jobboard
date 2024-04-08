@@ -2,16 +2,7 @@
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/' . $global_banner_data->banner_company_panel) }})">
-    <div class="bg"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>{{ __('Resume of') . $candidate_single->name }}</h2>
-            </div>
-        </div>
-    </div>
-</div>
+@include('company/templates/page_heading', array('heading_text' => __('Resume of') . $candidate_single->name, 'background_image' => $global_banner_data->banner_company_panel))
 
 <div class="page-content user-panel">
     <div class="container">
@@ -24,7 +15,7 @@
             <div class="col-lg-9 col-md-12">                
                 <h4 class="resume">{{ __('Basic Profile') }}</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>{{ __('Photo') }}</th>
                             <td><img src="{{ asset('uploads/' . $candidate_single->photo) }}" style="width:120px"></td>
@@ -133,7 +124,7 @@
                 @if($candidate_educations->count())
                 <h4 class="resume">{{ __('Education') }}</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>#</th>
                             <th>{{ __('Education Level') }}</th>
@@ -157,7 +148,7 @@
                 @if($candidate_skills->count())
                 <h4 class="resume">{{ __('Skill') }}</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>#</th>
                             <th>{{ __('Skill Name') }}</th>
@@ -177,7 +168,7 @@
                 @if($candidate_work_experiences->count())
                 <h4 class="resume">{{ __('Experience') }}</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>#</th>
                             <th>{{ __('Company') }}</th>
@@ -201,7 +192,7 @@
                 @if($candidate_awards->count())
                 <h4 class="resume">{{ __('Awards') }}</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>#</th>
                             <th>{{ __('Title') }}</th>
@@ -223,7 +214,7 @@
                 @if($candidate_resumes->count())
                 <h4 class="resume">{{ __('Resume') }}</h4>
                 <div class="table-respnsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tr>
                             <th>#</th>
                             <th>{{ __('Name') }}</th>

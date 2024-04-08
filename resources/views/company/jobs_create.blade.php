@@ -2,16 +2,7 @@
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/' . $global_banner_data->banner_company_panel) }})">
-    <div class="bg"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>{{ __('Create New Job') }}</h2>
-            </div>
-        </div>
-    </div>
-</div>
+@include('company/templates/page_heading', array('heading_text' => __('Create New Job'), 'background_image' => $global_banner_data->banner_company_panel))
 
 <div class="page-content user-panel">
     <div class="container">

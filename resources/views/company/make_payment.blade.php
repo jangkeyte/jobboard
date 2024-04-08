@@ -2,16 +2,7 @@
 
 @section('main_content')
 
-<div class="page-top" style="background-image: url({{ asset('uploads/' . $global_banner_data->banner_company_panel) }})">
-    <div class="bg"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>{{ __('Make Payment') }}</h2>
-            </div>
-        </div>
-    </div>
-</div>
+@include('company/templates/page_heading', array('heading_text' => __('Make Payment'), 'background_image' => $global_banner_data->banner_company_panel))
 
 <div class="page-content user-panel">
     <div class="container">
@@ -35,7 +26,7 @@
                 </div>               
                 <h4>{{ __('Choose Plan and Make Payment') }}</h4>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <form action="{{ route('company_paypal') }}" method="post">
                             @csrf
                             <tr>

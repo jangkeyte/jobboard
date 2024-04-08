@@ -12,8 +12,6 @@
 
         @include('admin.layout.styles')
 
-        @include('admin.layout.scripts')
-
     </head>
     
     <body>
@@ -25,7 +23,7 @@
             </div>
         </div>
 
-        @include('admin.layout.scripts_footer')
+        @include('admin.layout.scripts')
 
     </body>
 </html>

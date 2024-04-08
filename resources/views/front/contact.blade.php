@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $contact_page_item->heading ?? __('SEO Heading') }}</h2>
+                <h2>{{ $contact_page_item->heading ?? __('Contact') }}</h2>
             </div>
         </div>
     </div>
@@ -24,24 +24,24 @@
                     <h2 class="pb-3 fw-bolder">{{ __('Contact Information')}}</h2>
                     <hr/>
                     <p>
-                        N?i dung gi?i thi?u v? công ty
+                        {{ __('Content introducing the company') }}
                     </p>
                     <ul class="list-unstyled">
                         <li class="py-3">
                             <i class="fa fa-location-dot px-1"></i>
-                            {{ __('Ð?a ch?')}}: Nguy?n trãi
+                            {{ __('Address')}}: 85/19, Pham Van Hai, Ward 3, Dist. TÃ¢n BÃ¬nh, Ho Chi Minh City, VietNam
                         </li>
                         <li class="py-3">
                             <i class="fa fa-envelope px-1"></i>
-                            <a class="text-white" href="mailto:info@website.com">{{ __('Email')}}: info@website.com</a>
+                            <a class="text-white" href="mailto:bcps.sme@gmail.com">{{ __('Email')}}: bcps.sme@gmail.com</a>
                         </li>
                         <li class="py-3">
                             <i class="fa fa-phone px-1"></i>
-                            {{ __('Call')}}: 123.456.78910
+                            {{ __('Call')}}: 0963 567 278
                         </li>
                         <li class="py-3">
                             <i class="fa fa-fax px-1"></i>
-                            {{ __('Fax')}}: (800) 123 4567 89
+                            {{ __('Fax')}}: 0978 678 989
                         </li>
                     </ul>
                     <div class="careerfy-contact-media">

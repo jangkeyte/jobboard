@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h5>Basic Infomation</h5>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
+                        <table class="table table-striped table-hover table-sm">
                             <tr>
                                 <th style="width:200px">Logo</th>
                                 <td><img src="{{ asset('uploads/' . $companies_detail?->logo) }}" alt="" class="w-100"></td>

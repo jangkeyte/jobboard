@@ -22,7 +22,7 @@ class CandidateFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
+    {        
         return [
             'name' => fake()->name(),
             'designation' => fake()->jobTitle(),
@@ -35,13 +35,15 @@ class CandidateFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'country' => fake()->country(),
             'address' => fake()->address(),
-            'state' => fake()->randomElement(['Ho Chi Minh', 'Ha Noi', 'Long An', 'Dong Nai', 'Binh Duong', 'Binh Phuoc', 'Vung Tau', 'Tien Giang', 'Vinh Long', 'Can Tho', 'Tra Vinh', 'Kien Giang', 'Dong Thap', 'Dak Lak', 'Kon Tum', 'Long Khanh', 'Tay Ninh', 'Ben Tre', 'Hau Giang', 'Soc Trang', 'Bac Lieu', 'Ca Mau']),
+            'state' => fake()->randomElement(['An Giang', 'Bà Rịa-Vũng Tàu', 'Bắc Giang', 'Bắc Kạn', 'Bạc Liêu', 'Bắc Ninh', 'Bến Tre', 'Bình Định', 'Bình Dương', 'Bình Phước', 'Bình Thuận', 'Cà Mau', 'Cần Thơ', 'Cao Bằng', 'Đà Nẵng', 'Đắk Lắk', 'Đắk Nông', 'Điện Biên', 'Đồng Nai', 'Đồng Tháp', 'Gia Lai', 'Hà Giang', 'Hà Nam', 'Hà Nội', 'Hà Tĩnh', 'Hải Dương', 'Hải Phòng', 'Hậu Giang', 'TP. Hồ Chí Minh', 'Hòa Bình', 'Hưng Yên', 'Khánh Hòa', 'Kiên Giang', 'Kon Tum', 'Lai Châu', 'Lâm Đồng', 'Lạng Sơn', 'Lào Cai', 'Long An', 'Nam Định', 'Nghệ An', 'Ninh Bình', 'Ninh Thuận', 'Phú Thọ', 'Phú Yên', 'Quảng Bình', 'Quảng Nam', 'Quảng Ngãi', 'Quảng Ninh', 'Quảng Trị', 'Sóc Trăng', 'Sơn La', 'Tây Ninh', 'Thái Bình', 'Thái Nguyên', 'Thanh Hóa', 'Thừa Thiên - Huế', 'Tiền Giang', 'Trà Vinh', 'Tuyên Quang', 'Vĩnh Long', 'Vĩnh Phúc', 'Yên Bái']),
             'city' => fake()->city(),
             'zip_code' => fake()->postcode(),
             'gender' => fake()->randomElement(['Male', 'Female']),
             'marital_status' => fake()->randomElement(['Married', 'Unmarried', 'Divorced']),
             'date_of_birth' => fake()->date(),
             'website' => fake()->url(),
+            'is_expert' => fake()->numberBetween(0, 1),
+            'is_urgent' => fake()->numberBetween(0, 1),
             'status' => 1,
         ];
     }

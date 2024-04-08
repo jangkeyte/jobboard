@@ -26,7 +26,7 @@
                     <div class="text-danger">No data found</div>
                 @else
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-hover">
                         <tbody>
                             <tr>
                                 <th>SL</th>

@@ -5,7 +5,7 @@
         <!--begin::Brand Link--> 
         <a class='brand-link' href='{{ route('admin_dashboard') }}'>             
             <!--begin::Brand Image--> 
-            <img src="{{ asset('uploads/' . $global_settings_data->logo) }}" alt="AdminLTE Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image-->             
+            @include('front/templates/image', ['image' => $global_settings_data->logo, 'name' => __('BCPS Logo'), 'class' => 'brand-image opacity-75 shadow'])     
             <!--begin::Brand Text--> 
             <span class="brand-text fw-light"></span> <!--end::Brand Text--> 
         </a> <!--end::Brand Link--> 

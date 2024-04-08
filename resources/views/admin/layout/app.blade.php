@@ -11,9 +11,10 @@
    <meta name="title" content="AdminLTE v4 | Dashboard">
    <meta name="author" content="Jang Keyte - Kha Thiết Giang">
    <meta name="description" content="">
-   <meta name="keywords" content=""><!--end::Primary Meta Tags-->      
-   @include('admin.layout.styles') 
+   <meta name="keywords" content=""><!--end::Primary Meta Tags-->         
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   @include('admin.layout.styles') 
+
 </head> <!--end::Head--> 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <!--begin::App Wrapper-->

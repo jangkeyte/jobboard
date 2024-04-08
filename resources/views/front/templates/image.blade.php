@@ -1,5 +1,5 @@
 @if(isset($image) && file_exists(public_path() . '/uploads/' . $image))
-    <img style="width: 100%; height:100%;" src="{{ asset('uploads/' . $image) }}" alt="{{ $name ?? '' }}">
+    <img src="{{ asset('uploads/' . $image) }}" alt="{{ $name ?? '' }}" @isset($class) class="{{ $class }}" @endif>
 @else
-    <img style="width: 100%; height:100%;" src="{{ asset('assets/images/default.jpg') }}" alt="{{ $name ?? '' }}">
+    <img src="{{ asset('assets/images/default.jpg') }}" alt="{{ $name ?? '' }}">
 @endif
