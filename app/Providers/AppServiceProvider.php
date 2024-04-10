@@ -24,7 +24,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             \App\Repositories\Candidate\CandidateRepositoryInterface::class,
             \App\Repositories\Candidate\CandidateRepository::class
-        );        
+        );
+        
+        foreach (glob(app_path() . '/Helpers/*.php') as $file) {
+            require_once($file);
+        }
     }
 
     public function boot(): void

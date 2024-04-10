@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\MOdels\Company;
+use App\Models\Company;
 use App\Models\CompanyPhoto;
 use App\Models\CompanyVideo;
 use App\Models\Job;

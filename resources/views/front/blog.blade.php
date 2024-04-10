@@ -43,22 +43,22 @@
                             @foreach($posts as $item)
                                 <div class="col-md-12 my-2 border">
                                     <div class="row">
-                                        <div class="col-md-5 py-3 ">
-                                            <a href="{{ route('post', $item->slug) }}" style="width: 365px; height:206px; display: block;">
+                                        <div class="col-md-4 py-3 ">
+                                            <a href="{{ route('post', $item->slug) }}">
                                                 @include('front/templates/image', array('image' => $item->photo, 'name' => $item->heading))
                                             </a>
                                         </div>
-                                        <div class="col-md-7 pt-3">
+                                        <div class="col-md-8 pt-3">
                                             <div>
                                                 <ul class="list-unstyled fs-7">
                                                     <li><a class ="fs-5 fw-bold" href="javascript:void(0);">{{ $item->heading }}</a></li>
                                                     <li class="mt-2">
-                                                        <i class="pe-2 fa fa-user"></i>sysadm
+                                                        <i class="pe-2 fa fa-user"></i>admin
                                                         <i class="ms-1 px-2 fa fa-tag"></i>Blogs
                                                     </li>
                                                     <li class="mt-1">
                                                         <i class="pe-2 fa fa-calendar-days"></i>{{ $item->created_at->format("d F,Y") }}
-                                                        <i class="ms-1 px-2 fa fa-comment"></i>0 Comments
+                                                        <i class="ms-1 px-2 fa fa-comment"></i>{{ $item->total_view . ' ' . __('Viewed') }}
                                                     </li>
                                                     <li class="mt-2"><h7>{{ $item->short_description }}</h7></li>
                                                     <li class="mt-2 text-end"><a class="w-100  fw-bold text-danger" href="{{ route('post', $item->slug) }}">{{ __('CONTINUE READING') }} ≫ </a></li>
@@ -69,6 +69,9 @@
                                 </div>
                             @endforeach
                         @endif
+                    </div>
+                    <div class="col-md-12 my-3 text-center">
+                        {{ $posts->links() }}
                     </div>
                 </div>
             </div>
@@ -104,10 +107,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-12">
-                {{ $posts->links() }}
             </div>
 
         </div>

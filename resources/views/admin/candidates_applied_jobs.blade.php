@@ -37,10 +37,10 @@
                                     <td>{{ $item->rJob->rCompany->company_name }}</td>
                                     <td>
                                         @switch($item->status)
-                                            @case('{{ __('Approved') }}')
+                                            @case('Approved')
                                                 @php $color = 'success'; @endphp
                                                 @break
-                                            @case('{{ __('Rejected') }}')
+                                            @case('Rejected')
                                                 @php $color = 'danger'; @endphp
                                                 @break
                                             @default

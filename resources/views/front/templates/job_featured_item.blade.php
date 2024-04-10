@@ -9,23 +9,7 @@
             <h2 class="" data-job-id="{{ $item->id }}">
                 <a href="{{ route('job', $item->id) }}" title="{{ $item->title }}">{{ $item->title }}</a>
             </h2>
-            @if(!Auth::guard('company')->check())
-            <div class="like-btn careerfy-like-list">
-                @if(Auth::guard('candidate')->check())
-                    @php
-                        $count = \App\Models\CandidateBookmark::where('candidate_id', Auth::guard('candidate')->user()->id)->where('job_id', $item->id)->count();
-                        if($count > 0) {
-                            $bookmark_status = 'active';
-                        } else {
-                            $bookmark_status = '';
-                        }
-                    @endphp
-                @else
-                    @php $bookmark_status = ''; @endphp
-                @endif
-                <a href="{{ route('candidate_bookmark_add', $item->id) }}"><i class="fas fa-bookmark {{ $bookmark_status }}" class="shortlist jobsearch-open-signin-tab careerfy-like-list"></i></a>                    
-            </div>
-            @endif
+            @include('front.templates.bookmark_item', array('id' => $item->id))
             <time datetime="3 December, 2017 12:38 pm">{{ __('Published') }} {{ $item->created_at->diffForHumans() }} </time>
             <div class="careerfy-featured-listing-options">
                 <ul>

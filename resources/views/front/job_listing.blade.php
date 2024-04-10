@@ -69,10 +69,7 @@
                             @if(!$jobs->count())
                                 <div class="text-danger">{{ __('No result found') }}</div>
                             @else
-                                @foreach($jobs as $item)
-                                    @include('front/templates/job_listing_job_item', array('item' => $item))
-                                @endforeach
-
+                                @each('front.templates.job_listing_job_item', $jobs, 'item')
                                 <div class="col-md-12">
                                     {{-- $jobs->links()->appends($_GET) --}}
                                 </div>

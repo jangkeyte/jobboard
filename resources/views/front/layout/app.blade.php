@@ -22,5 +22,6 @@
 
     @include('front.layout.scripts')
 
+    @stack('modals')
 </body>
 </html>
