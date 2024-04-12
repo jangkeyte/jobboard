@@ -61,6 +61,9 @@ Route::group(['middleware' => 'locale'], function() {
     Route::get('/job-categories', [JobCategoryController::class, 'categories'])->name('job_categories');
     Route::get('/terms-of-use', [TermsController::class, 'index'])->name('terms');
     Route::get('/privacy-policy', [PrivacyController::class, 'index'])->name('privacy');
+    Route::get('/remove-data', function(){
+        return '<h1>Remove Data Guide</h1>';
+    });
     Route::get('/blog', [PostController::class, 'index'])->name('blog');
     Route::get('/post/{slug}', [PostController::class, 'detail'])->name('post');
     Route::get('/faq', [FaqController::class, 'index'])->name('faq');
@@ -93,8 +96,8 @@ Route::group(['middleware' => 'locale'], function() {
     Route::post('/reset-password/candidate/submit', [ForgetPasswordController::class, 'candidate_reset_password_submit'])->name('candidate_reset_password_submit');
 
     Route::controller(LoginController::class)->group(function(){
-        Route::get('social/{provider}', 'redirect')->name('auth_social');
-        Route::get('callback/{provider}', 'callback')->name('auth_callback');
+        Route::get('social/{provider}', 'redirect')->name('social_redirect');
+        Route::get('social/{provider}/callback', 'callback')->name('social_callback');
     });
 
     /* Company */

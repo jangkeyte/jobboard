@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('username');
             $table->string('email');
             $table->string('password');
-            $table->string('facebook_id')->nullable();
             $table->tinyInteger('sector_id')->nullable();
-            $table->string('token')->nullable();
+            $table->string('facebook_id')->nullable();
+            $table->string('token', 80)->unique()->nullable()->default(null);
             $table->string('photo')->nullable();
             $table->text('biography')->nullable();
             $table->string('phone')->nullable();
@@ -36,6 +36,7 @@ return new class extends Migration
             $table->tinyInteger('is_expert');
             $table->tinyInteger('is_urgent');
             $table->tinyInteger('status');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

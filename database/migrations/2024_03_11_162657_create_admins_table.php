@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('photo');
-            $table->string('token');
+            $table->string('facebook_id')->nullable();
+            $table->string('token', 80)->unique()->nullable()->default(null);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

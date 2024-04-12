@@ -37,7 +37,7 @@ class LoginController extends Controller
             'username' => $request->username,
             'password' => $request->password,
             'status' => 1
-        ];
+        ]; 
         if(Auth::guard('company')->attempt($credential)){
             return redirect()->route('company_dashboard');
         } else {
@@ -87,9 +87,9 @@ class LoginController extends Controller
     {
         $getInfo = Socialite::driver($provider)->user();
         $link = $_COOKIE['link_file'] ?? '';
+
         // Nếu thông tin facebook trả về không có Email thì thông báo
-        if(!$getInfo->email) {
-            
+        if(!$getInfo->email) {            
             return redirect(session()->get('back_url','/'))->with(['flash_level'=>'danger','flash_message'=> 'Tài khoản của bạn không hoạt động.']);
                 
         } else {
@@ -98,26 +98,37 @@ class LoginController extends Controller
             // nếu tồn tại user trong DB thì đăng nhập còn không thì đăng ký
             if($findUser != null){
                 if ($findUser->status == 1) {
-                    Auth::login($findUser, true);
+                    Auth::guard('company')->login($findUser, true);
                     return redirect()->to($link);
                 } else {
                     return redirect(session()->get('back_url','/'))->with(['flash_level'=>'danger','flash_message'=> 'Tài khoản của bạn không hoạt động.']);
                 }
             } else {
-                $created_at = $updated_at = date('Y-m-d H:i:s');
                 $user = [
-                    'username' => $getInfo->id,
+                    'id' => $getInfo->id,
+                    'username' => $getInfo->nickname ?? $getInfo->email,
+                    'company_name' => $getInfo->name ?? $getInfo->email,
+                    'person_name' => $getInfo->name ?? $getInfo->email,
                     'email' => $getInfo->email,
-                    'name' => $getInfo->name??$getInfo->email,
-                    'password' => bcrypt('*******'),
+                    'token' => $getInfo->token,
+                    'password' => bcrypt('123456'),
                     'status' => 1,
-                    'created_at' => $created_at,
-                    'updated_at' => $updated_at,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ];
                 $user_id = Company::insertGetId($user);
-                Auth::login(Company::find($user_id), true);
-               return redirect()->to($link);
+                Auth::guard('company')->login(Company::find($user_id), true);
+                return redirect()->to($link);
             }
+
+            /*
+            $credential = array(['username' => ($getInfo->nickname ?? $getInfo->email), 'password' => bcrypt('123456')]);
+            if(Auth::guard('company')->attempt($credential)){
+                return redirect()->route('company_dashboard');
+            } else {
+                return redirect()->back()->with('error', __('Information is not correct.'));
+            }
+            */
         }        
     }
 }

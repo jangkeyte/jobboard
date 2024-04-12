@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('username');
             $table->string('email');
             $table->string('password');
-            $table->string('token')->nullable();
+            $table->string('facebook_id')->nullable();
+            $table->string('token', 80)->unique()->nullable()->default(null);
             $table->string('logo')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
@@ -41,6 +42,7 @@ return new class extends Migration
             $table->text('linkedin')->nullable();
             $table->text('instagram')->nullable();
             $table->tinyInteger('status');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

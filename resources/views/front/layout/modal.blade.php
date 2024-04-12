@@ -252,10 +252,10 @@
                 <div class="text-center">
                     <p class="text-danger">{{ __('Or Sign In With') }}</p>
                     <div class="d-grid gap-2">
-                        <a href="{{ route('auth_social', 'facebook') }}" class="btn btn-outline-primary"><i class="fab fa-facebook-f"></i> {{ __('Login with Facebook') }}</a>
-                        <!-- <a href="{{ route('auth_social', 'twitter') }}" class="btn btn-outline-info"><i class="fab fa-twitter"></i> {{ __('Login with Twitter') }}</a>
-                        <a href="{{ route('auth_social', 'google') }}" class="btn btn-outline-danger"><i class="fab fa-google"></i> {{ __('Login with Google') }}</a> -->
-                        <a href="{{ route('auth_social', 'linkedin') }}" class="btn btn-outline-dark"><i class="fab fa-linkedin-in"></i> {{ __('Login with Linkedin') }}</a>
+                        <a href="{{ route('social_redirect', 'facebook') }}" class="btn btn-outline-primary"><i class="fab fa-facebook-f"></i> {{ __('Login with Facebook') }}</a>
+                        <!-- <a href="{{ route('social_redirect', 'twitter') }}" class="btn btn-outline-info"><i class="fab fa-twitter"></i> {{ __('Login with Twitter') }}</a>
+                        <a href="{{ route('social_redirect', 'google') }}" class="btn btn-outline-danger"><i class="fab fa-google"></i> {{ __('Login with Google') }}</a> -->
+                        <a href="{{ route('social_redirect', 'linkedin') }}" class="btn btn-outline-dark"><i class="fab fa-linkedin-in"></i> {{ __('Login with Linkedin') }}</a>
                     </div>
                 </div>
             </div>

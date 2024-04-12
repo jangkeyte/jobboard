@@ -177,4 +177,3 @@
         perPage: 2,
     }
 </script>
-@stack('scripts')
